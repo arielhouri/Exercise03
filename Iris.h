@@ -4,8 +4,9 @@
 
 #ifndef EXERCISE1_IRIS_H
 #define EXERCISE1_IRIS_H
+#include <string>
 
-
+using namespace std;
 class Iris {
 private:
     std::string type;
@@ -14,23 +15,24 @@ private:
     double bottomLength;
     double bottomWidth;
 public:
-    Iris(const std::string& type, double topLength, double topWidth, double bottomLength, double bottomWidth) {}
 
-    std::string getType() const {}
+    Iris(const std::string& type, double topLength, double topWidth, double bottomLength, double bottomWidth);
 
-    double getTopLength() const {}
+    string getType() const;
 
-    double getTopWidth() const {}
+    double getTopLength() const;
 
-    double getBottomLength() const {}
+    double getTopWidth() const;
 
-    double getBottomWidth() const {}
+    double getBottomLength() const;
 
-    double euclideanDistance(Iris other) const {}
+    double getBottomWidth() const;
 
-    double manhattanDistance(Iris other) const {}
+    double euclideanDistance(const Iris& other) const;
 
-    double ChebyshevDistance(Iris other) const {}
+    double manhattanDistance(const Iris& other) const;
+
+    double chebyshevDistance(const Iris& other) const;
 };
 
 
