@@ -39,7 +39,8 @@ double Iris::getBottomWidth() const {
 }
 
 double Iris::euclideanDistance(const Iris& other) const {
-    return 0;
+    return sqrt(pow(this->getTopLength() - other.getTopLength(),2) + pow(this->getTopWidth() - other.getTopWidth(),2)
+    + pow(this->getBottomWidth() - other.getBottomWidth(),2) + pow(this->getBottomLength() - other.getBottomLength(),2));
 }
 
 double Iris::manhattanDistance(const Iris& other) const {
