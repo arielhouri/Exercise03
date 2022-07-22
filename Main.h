@@ -20,7 +20,8 @@ class Main {
     int k;
 
 public:
-    static vector<Iris> setup(fstream data);
+    static vector<Iris> setup();
+    static Iris getIris(string& line);
 };
 
 

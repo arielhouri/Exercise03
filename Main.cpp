@@ -5,20 +5,27 @@
 #include "Main.h"
 #include <fstream>
 #include <string>
+#include <sstream>
 
 vector<Iris> setup(fstream fstream);
 
 int main(int argc, char *argv[]) {
     int k = stoi(argv[argc - 1]); // The amount of elements that the classifier will use.
-    fstream fin;
-    fin.open("classified.csv", ios::in); // Opens the data-file.
-    vector<Iris> flowers = Main::setup(fin);
-
+    fstream fin2;
+    fin2.open("unclassified.csv", ios::in); // Opens the unclassified-irises file.
+    vector<Iris> flowers = Main::setup();
+    string line;
+    string word;
+    while(getline(fin2, line)) {
+        Iris i = Main::getIris(line); // The Iris that we need to classify.
+    }
 
 }
 
 
-vector<Iris> Main::setup(fstream fin) {
+vector<Iris> Main::setup() {
+    fstream fin;
+    fin.open("classified.csv", ios::in); // Opens the classified-data file.
     string type; // The type of the flower.
     double topLength; // The length of the top leafs.
     double topWidth; // The width of the top leafs.
@@ -49,9 +56,40 @@ vector<Iris> Main::setup(fstream fin) {
                     break;
                 default:
                     break;
-                }
+            }
         }
         Iris i(type, topLength, topWidth, bottomLength, bottomWidth);
         flowers.push_back(i);
     }
+    return flowers;
+}
+
+Iris Main::getIris(string& line) {
+    stringstream str(line);
+    double topLength; // The length of the top leafs.
+    double topWidth; // The width of the top leafs.
+    double bottomLength; // The length of the bottom leafs.
+    double bottomWidth; // The width of the bottom leafs.
+    string word;
+    for(int i = 0; i < 4; i++) {
+        getline(str, word, ',');
+        switch (i + 1) {
+            case 1:
+                bottomWidth = stoi(word);
+                break;
+            case 2:
+                bottomLength = stoi(word);
+                break;
+            case 3:
+                topWidth = stoi(word);
+                break;
+            case 4:
+                topLength = stoi(word);
+                break;
+            default:
+                break;
+        }
+    }
+    Iris ir("Unclassified", topLength, topWidth, bottomLength, bottomWidth);
+    return ir;
 }
