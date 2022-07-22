@@ -9,29 +9,21 @@
 using namespace std;
 class Iris {
 private:
-    std::string type;
-    double topLength;
-    double topWidth;
-    double bottomLength;
-    double bottomWidth;
+    string type;
+    double topLength; // The length of the top leafs.
+    double topWidth; // The width of the top leafs.
+    double bottomLength; // The length of the bottom leafs.
+    double bottomWidth; // The width of the bottom leafs.
 public:
-
-    Iris(const std::string& type, double topLength, double topWidth, double bottomLength, double bottomWidth);
-
+    Iris();
+    Iris(const string type, double topLength, double topWidth, double bottomLength, double bottomWidth);
     string getType() const;
-
     double getTopLength() const;
-
     double getTopWidth() const;
-
     double getBottomLength() const;
-
     double getBottomWidth() const;
-
     double euclideanDistance(const Iris& other) const;
-
     double manhattanDistance(const Iris& other) const;
-
     double chebyshevDistance(const Iris& other) const;
 };
 

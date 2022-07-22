@@ -10,7 +10,7 @@
 
 using namespace std;
 
-IrisAndDistance::IrisAndDistance(Iris flower, double distance) {
+IrisAndDistance::IrisAndDistance(Iris& flower, double distance) {
     this->flower = flower;
     this->distance = distance;
 }
@@ -35,6 +35,8 @@ IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
     this->flower = p->getFlower();
     this->distance = p->getDistance();
 }
+
+
 string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     std::sort(v.begin(), v.end(), comparator());
     int versicolor = 0;

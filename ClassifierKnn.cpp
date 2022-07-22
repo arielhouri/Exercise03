@@ -11,7 +11,7 @@
 
 using namespace std;
 
-ClassifierKnn::ClassifierKnn(vector<Iris> flowers, Iris toClassifier, int k){
+ClassifierKnn::ClassifierKnn(vector<Iris>& flowers, Iris& toClassifier, int k){
     this->flowers = flowers;
     this->toClassifier = toClassifier;
     this->k = k;

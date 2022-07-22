@@ -14,10 +14,10 @@ class ClassifierKnn {
 private:
     vector<Iris> flowers; // flowers.
     Iris toClassifier; // flower to class (unknown type).
-    int k; // for finding k closest neighbors.
+    int k; // the amount of flowers that the classifier will use.
 
 public:
-    ClassifierKnn(vector<Iris> flowers, Iris toClassifier, int k);
+    ClassifierKnn(vector<Iris>& flowers, Iris& toClassifier, int k);
     string classifierEuclidean();
     string classifierManhattan();
     string classifierChebyshev();
