@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
     string word;
     while(getline(fin2, line)) {
         Iris i = Main::getIris(line); // The Iris that we need to classify.
+        //
+        // Your Code...
+        //
     }
 
 }
