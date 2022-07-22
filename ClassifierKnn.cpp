@@ -3,21 +3,45 @@
 //
 
 #include "ClassifierKnn.h"
+#include "IrisAndDistance.h"
+#include <algorithm>
 #include <string>
+#include <vector>
 
-using namespace std2;
 
-ClassifierKnn:: ClassifierKnn(Iris[] flowers, Iris toClassifier, int k){
+using namespace std;
+
+ClassifierKnn::ClassifierKnn(vector<Iris> flowers, Iris toClassifier, int k){
     this->flowers = flowers;
     this->toClassifier = toClassifier;
     this->k = k;
 }
-string classifierEuclidean(){
-    int length = sizeof(this->flowes)/sizeof(*this->flowes);
 
+string ClassifierKnn::classifierEuclidean(){
+    int length = (this->flowers).size();
+    vector<IrisAndDistance> distances;
     for (int i = 0; i < length; i++){
-
+        distances.push_back(new IrisAndDistance((this->flowers)[i],
+                                     (this->toClassifier).euclideanDistance((this->flowers)[i])));
     }
+    return IrisAndDistance::kNearest(distances,this->k);
 }
-string classifierManhattan();
-string classifierChebyshev();
+
+string ClassifierKnn::classifierManhattan(){
+    int length = (this->flowers).size();
+    vector<IrisAndDistance> distances;
+    for (int i = 0; i < length; i++){
+        distances.push_back(new IrisAndDistance((this->flowers)[i],
+                                                (this->toClassifier).manhattanDistance((this->flowers)[i])));
+    }
+    return IrisAndDistance::kNearest(distances,this->k);
+}
+string ClassifierKnn::classifierChebyshev(){
+    int length = (this->flowers).size();
+    vector<IrisAndDistance> distances;
+    for (int i = 0; i < length; i++){
+        distances.push_back(new IrisAndDistance((this->flowers)[i],
+                                                (this->toClassifier).chebyshevDistance((this->flowers)[i])));
+    }
+    return IrisAndDistance::kNearest(distances,this->k);
+}
