@@ -1,11 +1,12 @@
 //
-// Created by ariel on 7/22/2022.
+// Created by ariel and yonatan on 7/22/2022.
 //
 
 #include "Main.h"
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "ClassifierKnn.h"
 
 vector<Iris> setup(fstream fstream);
 
@@ -16,11 +17,18 @@ int main(int argc, char *argv[]) {
     vector<Iris> flowers = Main::setup();
     string line;
     string word;
+    fstream file1out;
+    file1out.open("euclidean_output.csv");
+    fstream file2out;
+    file2out.open("chebyshev_output.csv");
+    fstream file3out;
+    file3out.open("manhattan_output.csv");
     while(getline(fin2, line)) {
         Iris i = Main::getIris(line); // The Iris that we need to classify.
-        //
-        // Your Code...
-        //
+        ClassifierKnn toClass = new ClassifierKnn(flowers,i,k);
+        file1out << toClass.classifierEuclidean() << endl;
+        file2out << toClass.classifierChebyshev() << endl;
+        file3out << toClass.classifierManhattan() << endl;
     }
 
 }
