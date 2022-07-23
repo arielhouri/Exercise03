@@ -16,7 +16,7 @@ private:
     double bottomWidth; // The width of the bottom leafs.
 public:
     Iris();
-    Iris(const string type, double topLength, double topWidth, double bottomLength, double bottomWidth);
+    Iris(string type, double topLength, double topWidth, double bottomLength, double bottomWidth);
     string getType() const;
     double getTopLength() const;
     double getTopWidth() const;

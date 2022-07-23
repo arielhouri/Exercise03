@@ -19,7 +19,7 @@ Iris::Iris() {
 }
 
 // A constructor for an Iris that gets its type and measurements for the leafs.
-Iris::Iris(const string type, double topLength, double topWidth, double bottomLength, double bottomWidth) {
+Iris::Iris(string type, double topLength, double topWidth, double bottomLength, double bottomWidth) {
     this->type = type;
     this->topLength = topLength;
     this->topWidth = topWidth;

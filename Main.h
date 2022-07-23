@@ -17,7 +17,6 @@ using namespace std;
 
 class Main {
     vector<Iris> flowerVector;
-    int k;
 
 public:
     static vector<Iris> setup();
