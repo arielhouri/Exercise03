@@ -43,25 +43,25 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     int virginica = 0;
     int setosa = 0;
     for (int i = 1; i <= k; i++) {
-        if (v[i].getFlower().getType() == "versicolor") {
+        if (v[i].getFlower().getType() == "Iris-versicolor") {
             versicolor++;
         }
-        if (v[i].getFlower().getType() == "virginica") {
+        if (v[i].getFlower().getType() == "Iris-virginica") {
             virginica++;
         }
-        if (v[i].getFlower().getType() == "setosa") {
+        if (v[i].getFlower().getType() == "Iris-setosa") {
             setosa++;
         }
     }
     if (versicolor >= virginica) {
         if (versicolor >= setosa)
-            return "versicolor";
+            return "Iris-versicolor";
         else
-            return "setosa";
+            return "Iris-setosa";
     } else {
         if (setosa >= virginica)
-            return "setosa";
+            return "Iris-setosa";
         else
-            return "virginica";
+            return "Iris-virginica";
     }
 }
