@@ -24,10 +24,10 @@ int main(int argc, char *argv[]) {
     string word;
     while(getline(fin2, line)) {
         Iris i = Main::getIris(line); // The Iris that we need to classify.
-        auto* toClass = new ClassifierKnn(flowers,i,k);
-        file1out << toClass->classifierEuclidean() << endl; // Creates the Euclidean-output file.
-        file2out << toClass->classifierChebyshev() << endl; // Creates the Chebyshev-output file.
-        file3out << toClass->classifierManhattan() << endl; // Creates the Manhattan-output file.
+        ClassifierKnn toClass(flowers,i,k);
+        file1out << toClass.classifierEuclidean() << endl; // Creates the Euclidean-output file.
+        file2out << toClass.classifierChebyshev() << endl; // Creates the Chebyshev-output file.
+        file3out << toClass.classifierManhattan() << endl; // Creates the Manhattan-output file.
     }
     // Closing the File Streams:
     fin2.close();
