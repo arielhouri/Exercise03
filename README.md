@@ -1,26 +1,27 @@
 # Exercise01
-# Ariel Houri & Yonatan Semidubersky
+### by Ariel Houri & Yonatan Semidubersky
 
-the classification k-nearest neighbors algorithm (k-NN),
+>The classification k-nearest neighbors algorithm (k-NN),
 return a class membership.
 An object is classified by a plurality vote of its neighbors,
-with the object being assigned to the class most common among its k nearest neighbors. (wikipedia)
+with the object being assigned to the class most common among its k nearest neighbors. [wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)
 
-In this assignment, we implemented Classifier KNN for Iris,
-given unclassified iris and k (number),
-we evaluate his type.
+In this assignment, we implemented KNN Classifier for irises.
+Given a set of data for an unclassified iris and and natural number k,
+we determine his type using the KNN algorithm.
 
-# Instruction:
+## Instruction:
 The data must be arranged in this formation in the project's directory:
-- classified.csv will be the data of irises
-- Unclassified.csv will be the irises to classify.
-- The output will be in: euclidean_output.csv, manhattan_output.csv, chebyshev_output.csv 
-(according to the metric).
-- The program must ber executed from Main.cpp
-# The Algorithm:
-- The main class is in charge of setting the data, writing and reading from files.
-- The flower class store data on specific flower.
-- The ClassifierKNN is in charge of arranging the data,
-and process input for finding the algorithm.
-- IrisAndDistance is an object to store iris and his distance from the unclassified iris.
-Also, it has a function that implement "quick-select" for the KNN.
+- classified.csv will contain the data of classified irises (The data and then the type of the iris).
+- Unclassified.csv will contain the irises that we need to classify (only their data).
+- The output will be in the following files: euclidean_output.csv, manhattan_output.csv, chebyshev_output.csv 
+(according to the metric that was used in the algorithm). These files don't have to be cleared before starting the 
+  algorithm (THey are cleared automatically).
+- The program will be executed from the Main.cpp file.
+## The Algorithm:
+- The Main class is in charge of setting up the data, writing and reading from files.
+- The Iris class stores data of specific flower.
+- The ClassifierKNN class is in charge of arranging the data,
+and process the input for the algorithm.
+- IrisAndDistance is an object that stores an iris and his distance from the unclassified iris.
+Also, it has a "quick-select" function for the KNN algorithm.
