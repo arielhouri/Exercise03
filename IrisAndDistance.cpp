@@ -66,7 +66,7 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     int versicolor = 0;
     int virginica = 0;
     int setosa = 0;
-    for (int i = 0; i <= v.size(); i++) {
+    for (int i = 0; i < v.size(); i++) {
         // if the element isn't in the k nearest neighbors.
         if (v[i].getDistance() > v[index].getDistance()){
             continue;
