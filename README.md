@@ -7,7 +7,7 @@ An object is classified by a plurality vote of its neighbors,
 with the object being assigned to the class most common among its k nearest neighbors. [wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)
 
 In this assignment, we implemented KNN Classifier for irises.
-Given a set of data for an unclassified iris and and natural number k,
+Given a set of data for an unclassified iris and a natural number k,
 we determine his type using the KNN algorithm.
 
 ## Instruction:
