@@ -40,7 +40,7 @@ int arrange(vector<IrisAndDistance> v, int l, int r)
             temp++;
         }
     }
-    swap(v[temp], v[r-1]);
+    swap(v[temp], v[r]);
     return temp;
 }
 
