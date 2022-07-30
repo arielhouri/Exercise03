@@ -32,7 +32,7 @@ IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
 // greater will be in the right and smaller in the left.
 int arrange(vector<IrisAndDistance> *v, int l, int r)
 {
-    int x = (*v)[r].getDistance();
+    double x = (*v)[r].getDistance();
     int temp = l;
     for (int j = l; j <= r - 1; j++) {
         if ((*v)[j].getDistance() <= x) {
@@ -46,7 +46,7 @@ int arrange(vector<IrisAndDistance> *v, int l, int r)
     return temp;
 }
 
-// quick select algorithm - finding the k smallest element.
+// quick select algorithm - finding the k-smallest element.
 int kElement(vector<IrisAndDistance> *v, int l, int r, int k)
 {
     if (k >= 0 && k <= r - l + 1) {
@@ -87,7 +87,7 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
             setosa++;
         }
     }
-    if (versicolor >= virginica) {
+    if (versicolor >= virginica) { // The return value according to the data.
         if (versicolor >= setosa)
             return "Iris-versicolor";
         else
