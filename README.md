@@ -13,8 +13,7 @@ we determine his type using the KNN algorithm.
 ## Instruction:
 1. The first thing is to set the database with a list of already-classified Irises. In order to do that, you need to
    put the data in the file named: `classified.csv`. The data will be in this formation:
-   `bottomwidth,bottomlength,topwidth,topLength,type`
-   for example: `5.4,3.9,1.7,0.4,Iris-setosa`.
+   `bottomwidth,bottomlength,topwidth,topLength,type`, for example: `5.4,3.9,1.7,0.4,Iris-setosa`.
 2. There is a default database inside the file.
 3. After that, You need to push the data of the Irises that you want to classify in the file named: `unclassified.csv`.
    The data will be in this formation:
