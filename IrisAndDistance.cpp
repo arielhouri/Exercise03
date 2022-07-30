@@ -36,7 +36,9 @@ int arrange(vector<IrisAndDistance> v, int l, int r)
     int temp = l;
     for (int j = l; j <= r - 1; j++) {
         if (v[j].getDistance() <= x) {
-            swap(v[temp], v[j]);
+            IrisAndDistance v1 = v[temp];
+            v[temp] = v[j];
+            v[j] = v1;
             temp++;
         }
     }
@@ -59,7 +61,7 @@ int kElement(vector<IrisAndDistance> v, int l, int r, int k)
         if (index - l > k)
             return kElement(v, l, index - 1, k);
         return kElement(v, index + 1, r,
-                           k - (index - l + 1));
+                        k - (index - l + 1));
     } else{
         return -1; // wrong value for k. Incorrect input!
     }
@@ -72,7 +74,6 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     int virginica = 0;
     int setosa = 0;
     for (int i = 0; i < v.size(); i++) {
-        // if the element isn't in the k nearest neighbors.
         if (v[i].getDistance() > v[index].getDistance()){
             continue;
         }
