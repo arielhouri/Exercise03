@@ -12,13 +12,13 @@
 int main(int argc, char *argv[]) {
     int k = stoi(argv[argc - 1]); // The amount of elements that the classifier will use.
     fstream file1out;
-    file1out.open("../euclidean_output.csv", fstream::out | ofstream::trunc);
+    file1out.open("euclidean_output.csv", fstream::out | ofstream::trunc);
     fstream file2out;
-    file2out.open("../chebyshev_output.csv", fstream::out | ofstream::trunc);
+    file2out.open("chebyshev_output.csv", fstream::out | ofstream::trunc);
     fstream file3out;
-    file3out.open("../manhattan_output.csv", fstream::out | ofstream::trunc);
+    file3out.open("manhattan_output.csv", fstream::out | ofstream::trunc);
     fstream fin2;
-    fin2.open("../unclassified.csv", fstream::in); // Opens the unclassified-irises file.
+    fin2.open("unclassified.csv", fstream::in); // Opens the unclassified-irises file.
     vector<Iris> flowers = Main::setup();
     string line;
     string word;
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
 vector<Iris> Main::setup() {
     fstream fin;
-    fin.open("../classified.csv", fstream::in); // Opens the classified-data file.
+    fin.open("classified.csv", fstream::in); // Opens the classified-data file.
     string type; // The type of the flower.
     double topLength; // The length of the top leafs.
     double topWidth; // The width of the top leafs.
