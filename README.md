@@ -24,7 +24,7 @@ we determine his type using the KNN algorithm.
    command `./a.out k` where `k` is an integer, which will be used for the algorithm itself. Note that if the value
    of `k` is too large/small, an error message will be written into the console and the program will stop.
 5. The output of the program will be in the files named: `euclidean_output.csv`, `manhattan_output.csv` and
-   `chebyshev_output.csv` (Every files will have the types sorting according to a different metric, which is also
+   `chebyshev_output.csv` (Every files will have the types determined according to a different metric, which is also
    mentioned at the name of the file).
 6. Note that if you want to use the classified again, you don't have to clear the output files, they will be emptied
    automatically.
