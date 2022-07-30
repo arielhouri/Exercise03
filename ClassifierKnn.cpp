@@ -2,8 +2,8 @@
 // Created by yonat on 21/07/2022.
 //
 
-#include "ClassifierKnn.h"
-#include "IrisAndDistance.h"
+#include "ClassifierKnn.hpp"
+#include "IrisAndDistance.hpp"
 #include <algorithm>
 #include <string>
 #include <vector>

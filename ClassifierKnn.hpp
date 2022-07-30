@@ -6,8 +6,8 @@
 #define EX1_CLASSIFIERKNN_H
 #include <string>
 #include <vector>
-#include "Iris.h"
-#include "IrisAndDistance.h"
+#include "Iris.hpp"
+#include "IrisAndDistance.hpp"
 
 using namespace std;
 class ClassifierKnn {

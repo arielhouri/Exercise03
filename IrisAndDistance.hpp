@@ -7,7 +7,7 @@
 #define EXERCISE01_IRISANDDISTANCE_H
 
 #include <vector>
-#include "Iris.h"
+#include "Iris.hpp"
 
 using namespace std;
 class IrisAndDistance {

@@ -5,7 +5,7 @@
 #ifndef EX01_MAIN_H
 #define EX01_MAIN_H
 
-#include "Iris.h"
+#include "Iris.hpp"
 #include <string>
 #include <algorithm>
 #include <iostream>

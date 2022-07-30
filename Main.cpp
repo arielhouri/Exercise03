@@ -2,11 +2,11 @@
 // Created by Ariel Houri and yonatan on 7/22/2022.
 //
 
-#include "Main.h"
+#include "Main.hpp"
 #include <fstream>
 #include <string>
 #include <sstream>
-#include "ClassifierKnn.h"
+#include "ClassifierKnn.hpp"
 
 
 int main(int argc, char *argv[]) {

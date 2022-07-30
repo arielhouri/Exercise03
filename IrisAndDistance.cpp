@@ -2,8 +2,8 @@
 // Created by Yonatan Semidubersky on 22/07/2022.
 //
 
-#include "IrisAndDistance.h"
-#include "Iris.h"
+#include "IrisAndDistance.hpp"
+#include "Iris.hpp"
 #include <algorithm>
 #include <string>
 #include <vector>

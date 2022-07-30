@@ -2,7 +2,7 @@
 // Created by ariel on 7/21/2022.
 //
 
-#include "Iris.h"
+#include "Iris.hpp"
 #include <string>
 #include <algorithm>
 #include <iostream>
@@ -68,7 +68,7 @@ double Iris::manhattanDistance(const Iris &other) const {
 
 // A function that measures the distance between the flower and another according to Chebyshev Distance.
 double Iris::chebyshevDistance(const Iris &other) const {
-    return max(this->getTopWidth() - other.getTopWidth(), max(this->getBottomWidth() - other.getBottomWidth(),
-                                                              max(this->getBottomLength() - other.getBottomLength(),
-                                                                  (this->getTopLength() - other.getTopLength()))));
+    return max(abs(this->getTopWidth() - other.getTopWidth()), max(abs(this->getBottomWidth() - other.getBottomWidth()),
+                                                              max(abs(this->getBottomLength() - other.getBottomLength
+                                                              ()),abs((this->getTopLength() - other.getTopLength())))));
 }
