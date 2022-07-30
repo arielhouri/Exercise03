@@ -53,19 +53,21 @@ double Iris::getBottomWidth() const {
 }
 
 // A function that measures the distance between the flower and another according to Euclidean Distance.
-double Iris::euclideanDistance(const Iris& other) const {
-    return sqrt(pow(this->getTopLength() - other.getTopLength(),2) + pow(this->getTopWidth() - other.getTopWidth(),2)
-    + pow(this->getBottomWidth() - other.getBottomWidth(),2) + pow(this->getBottomLength() - other.getBottomLength(),2));
+double Iris::euclideanDistance(const Iris &other) const {
+    return sqrt(pow(this->getTopLength() - other.getTopLength(), 2) + pow(this->getTopWidth() - other.getTopWidth(), 2)
+                + pow(this->getBottomWidth() - other.getBottomWidth(), 2) +
+                pow(this->getBottomLength() - other.getBottomLength(), 2));
 }
 
 // A function that measures the distance between the flower and another according to Manhattan Distance.
-double Iris::manhattanDistance(const Iris& other) const {
+double Iris::manhattanDistance(const Iris &other) const {
     return abs(this->getTopLength() - other.getTopLength()) + abs(this->getTopWidth() - other.getTopWidth()) +
-    abs(this->getBottomWidth() - other.getBottomWidth()) + abs(this->getBottomLength() - other.getBottomLength());
+           abs(this->getBottomWidth() - other.getBottomWidth()) +
+           abs(this->getBottomLength() - other.getBottomLength());
 }
 
 // A function that measures the distance between the flower and another according to Chebyshev Distance.
-double Iris::chebyshevDistance(const Iris& other) const {
+double Iris::chebyshevDistance(const Iris &other) const {
     return max(this->getTopWidth() - other.getTopWidth(), max(this->getBottomWidth() - other.getBottomWidth(),
                                                               max(this->getBottomLength() - other.getBottomLength(),
                                                                   (this->getTopLength() - other.getTopLength()))));

@@ -32,7 +32,7 @@ IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
 // greater will be in the right and smaller in the left.
 int arrange(vector<IrisAndDistance> v, int l, int r)
 {
-    int x = v[r];
+    int x = v[r].getDistance();
     int temp = l;
     for (int j = l; j <= r - 1; j++) {
         if (v[j].getDistance() <= x) {
