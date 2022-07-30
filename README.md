@@ -18,7 +18,7 @@ we determine his type using the KNN algorithm.
    The data will be in this formation:
    `bottomwidth,bottomlength,topwidth,topLength`.
    There is also a default set of data inside the file.
-3. Then, you compile the code using the following command: `g++ *.cpp -std=c++11` and run it using the following
+3. Then, you compile the code using the following command: `g++ -std=c++11 *.cpp` and run it using the following
    command `./a.out k` where `k` is an integer, which will be used for the algorithm itself. Note that if the value
    of `k` is too large/small, an error message will be written into the console and the program will stop.
 4. The output of the program will be in the files named: `euclidean_output.csv`, `manhattan_output.csv` and
