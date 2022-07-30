@@ -30,24 +30,24 @@ IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
 
 // help method: sorting the vector by r index -
 // greater will be in the right and smaller in the left.
-int arrange(vector<IrisAndDistance> v, int l, int r)
+int arrange(vector<IrisAndDistance> *v, int l, int r)
 {
-    int x = v[r].getDistance();
+    int x = (*v)[r].getDistance();
     int temp = l;
     for (int j = l; j <= r - 1; j++) {
-        if (v[j].getDistance() <= x) {
-            IrisAndDistance v1 = v[temp];
-            v[temp] = v[j];
-            v[j] = v1;
+        if ((*v)[j].getDistance() <= x) {
+            IrisAndDistance v1 = (*v)[temp];
+            (*v)[temp] = (*v)[j];
+            (*v)[j] = v1;
             temp++;
         }
     }
-    swap(v[temp], v[r]);
+    swap((*v)[temp], (*v)[r]);
     return temp;
 }
 
 // quick select algorithm - finding the k smallest element.
-int kElement(vector<IrisAndDistance> v, int l, int r, int k)
+int kElement(vector<IrisAndDistance> *v, int l, int r, int k)
 {
     if (k >= 0 && k <= r - l + 1) {
         if (l == r){
@@ -69,7 +69,7 @@ int kElement(vector<IrisAndDistance> v, int l, int r, int k)
 
 string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     // we search for the k-1 element in V[0,...,n] (easier to understand)
-    int index = kElement(v,0,v.size() - 1,k - 1);
+    int index = kElement(&v,0,v.size() - 1,k - 1);
     int versicolor = 0;
     int virginica = 0;
     int setosa = 0;
