@@ -47,7 +47,10 @@ int arrange(vector<IrisAndDistance> v, int l, int r)
 // quick select algorithm - finding the k smallest element.
 int kElement(vector<IrisAndDistance> v, int l, int r, int k)
 {
-    if (k >= 0 && k <= r) {
+    if (k >= 0 && k <= r - l + 1) {
+        if (l == r){
+            return l;
+        }
         // arrange around l.
         int index = arrange(v, l, r);
         if (index - l == k)
@@ -56,14 +59,15 @@ int kElement(vector<IrisAndDistance> v, int l, int r, int k)
         if (index - l > k)
             return kElement(v, l, index - 1, k);
         return kElement(v, index + 1, r,
-                           k - index + l - 1);
+                           k - (index - l + 1));
     } else{
         return -1; // wrong value for k. Incorrect input!
     }
 }
 
 string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
-    int index = kElement(v,0,v.size() - 1,k);
+    // we search for the k-1 element in V[0,...,n] (easier to understand)
+    int index = kElement(v,0,v.size() - 1,k - 1);
     int versicolor = 0;
     int virginica = 0;
     int setosa = 0;
