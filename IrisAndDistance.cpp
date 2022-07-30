@@ -33,17 +33,17 @@ IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
 int arrange(vector<IrisAndDistance> *v, int l, int r)
 {
     double x = (*v)[r].getDistance();
-    int temp = l;
+    int pivot1 = l;
     for (int j = l; j <= r - 1; j++) {
         if ((*v)[j].getDistance() <= x) {
-            IrisAndDistance v1 = (*v)[temp];
-            (*v)[temp] = (*v)[j];
+            IrisAndDistance v1 = (*v)[pivot1];
+            (*v)[pivot1] = (*v)[j];
             (*v)[j] = v1;
-            temp++;
+            pivot1++;
         }
     }
-    swap((*v)[temp], (*v)[r]);
-    return temp;
+    swap((*v)[pivot1], (*v)[r]);
+    return pivot1;
 }
 
 // quick select algorithm - finding the k-smallest element.
