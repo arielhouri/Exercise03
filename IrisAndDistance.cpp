@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -73,17 +74,20 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     int versicolor = 0;
     int virginica = 0;
     int setosa = 0;
+    string versi("Iris-versicolor");
+    string virgi("Iris-virginica");
+    string setos("Iris-setosa");
     for (int i = 0; i < v.size(); i++) {
         if (v[i].getDistance() > v[index].getDistance()){
             continue;
         }
-        if (v[i].getFlower().getType() == "Iris-versicolor") {
+        if (versi.size() + 1 == v[i].getFlower().getType().size()) {
             versicolor++;
         }
-        if (v[i].getFlower().getType() == "Iris-virginica") {
+        if (virgi.size() + 1 == v[i].getFlower().getType().size()) {
             virginica++;
         }
-        if (v[i].getFlower().getType() == "Iris-setosa") {
+        if (setos.size() + 1 == v[i].getFlower().getType().size()) {
             setosa++;
         }
     }
