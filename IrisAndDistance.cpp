@@ -9,20 +9,20 @@
 #include <vector>
 
 using namespace std;
-
+// constructor
 IrisAndDistance::IrisAndDistance(Iris& flower, double distance) {
     this->flower = flower;
     this->distance = distance;
 }
-
+// getter function
 Iris IrisAndDistance::getFlower() const {
     return this->flower;
 }
-
+// getter function
 double IrisAndDistance::getDistance() const {
     return this->distance;
 }
-
+// copy constructor
 IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
     this->flower = p->getFlower();
     this->distance = p->getDistance();
@@ -66,7 +66,7 @@ int kElement(vector<IrisAndDistance> *v, int l, int r, int k)
         return -1; // wrong value for k. Incorrect input!
     }
 }
-
+// classifier by kNearest irises
 string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     // we search for the k-1 element in V[0,...,n] (easier to understand)
     int index = kElement(&v,0,v.size() - 1,k - 1);
@@ -100,5 +100,5 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
             return "Iris-setosa";
         else
             return "Iris-virginica";
-    }
+            }
 }
