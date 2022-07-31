@@ -57,7 +57,7 @@ vector<Iris> Main::setup() {
     string word;
     while(getline(fin, line)){
         stringstream str(line);
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++) { // A loop that gathers the data about the iris from a sting.
             getline(str, word, ',');
             switch (i + 1) {
                 case 5:
@@ -79,6 +79,7 @@ vector<Iris> Main::setup() {
                     break;
             }
         }
+        // The creation of the iris.
         Iris i(type, topLength, topWidth, bottomLength, bottomWidth);
         flowers.push_back(i);
     }
@@ -96,7 +97,7 @@ Iris Main::getIris(string& line) {
     double bottomLength; // The length of the bottom leafs.
     double bottomWidth; // The width of the bottom leafs.
     string word;
-    for(int i = 0; i < 4; i++) { // Gather the data about the flower from a sting.
+    for(int i = 0; i < 4; i++) { // A loop that gathers the data about the flower from a sting.
         getline(str, word, ',');
         switch (i + 1) {
             case 1:
@@ -115,7 +116,7 @@ Iris Main::getIris(string& line) {
                 break;
         }
     }
-    // The creation of the Iris that we need to classify.
+    // The creation of the iris that we need to classify.
     Iris ir("Unclassified", topLength, topWidth, bottomLength, bottomWidth);
     return ir;
 }

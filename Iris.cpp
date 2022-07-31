@@ -11,7 +11,7 @@ using namespace std;
 
 // A constructor for an Iris that doesn't get any parameters.
 Iris::Iris() {
-    this->type = "Unclassified";
+    this->type = "Unclassified"; // Default type.
     this->topLength = 0;
     this->topWidth = 0;
     this->bottomLength = 0;
