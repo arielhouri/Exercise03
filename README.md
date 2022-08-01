@@ -32,5 +32,5 @@ we determine his type using the KNN algorithm.
 - The ClassifierKNN class is in charge of arranging the data, and process the input for the algorithm.
 - IrisAndDistance is an object that stores an iris and his distance from the unclassified iris.
 Also, the algorithm uses "quick-select" in order to find the closest irises. We used Quick-Select algorithm instead of sorting because we don't need to know what is the exact order of the irises, and the time complexity of the Select algorithm is lower than the Sorting algorithm.
-## note:
+### note:
 if there will be a few points in same distance from the main point, the algorithm will *count* them all (even if it's more then k).
