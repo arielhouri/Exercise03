@@ -1,11 +1,11 @@
 //
-// Created by ariel on 7/21/2022.
+// Created by Ariel Houri on 7/21/2022.
 //
 
 #include "Iris.hpp"
 #include <string>
 #include <algorithm>
-#include <iostream>
+#include <cmath>
 
 using namespace std;
 

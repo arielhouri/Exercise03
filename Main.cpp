@@ -7,46 +7,48 @@
 #include <string>
 #include <sstream>
 #include "ClassifierKnn.hpp"
+#include "ClassificationServer.hpp"
 
 
 int main(int argc, char *argv[]) {
-    int k = stoi(argv[argc - 1]); // The amount of elements that the classifier will use.
-    // Opening the files for writing:
-    fstream file1out;
-    file1out.open("euclidean_output.csv", fstream::out | ofstream::trunc);
-    fstream file2out;
-    file2out.open("chebyshev_output.csv", fstream::out | ofstream::trunc);
-    fstream file3out;
-    file3out.open("manhattan_output.csv", fstream::out | ofstream::trunc);
-    // Opening the file "unclassified.csv" for reading.
-    fstream fin2;
-    fin2.open("unclassified.csv", fstream::in); // Opens the unclassified-irises file.
-    vector<Iris> flowers = Main::setup();
-    if (k > flowers.size() || k <= 0) {
-        cout << "Invalid value of k" << endl;
-        cout << "There aren't enough irises in the database for this value of k." << endl;
-        return 0;
-    }
-    string line;
-    string word;
-    while(getline(fin2, line)) {
-        Iris i = Main::getIris(line); // The Iris that we need to classify.
-        ClassifierKnn toClass(flowers,i,k);
-        file1out << toClass.classifierEuclidean() << endl; // Creates the Euclidean-output file.
-        file2out << toClass.classifierChebyshev() << endl; // Creates the Chebyshev-output file.
-        file3out << toClass.classifierManhattan() << endl; // Creates the Manhattan-output file.
-    }
-    // Closing the input and output file streams:
-    fin2.close();
-    file3out.close();
-    file1out.close();
-    file2out.close();
+//    int k = stoi(argv[argc - 1]); // The amount of elements that the classifier will use.
+//    // Opening the files for writing:
+//    fstream file1out;
+//    file1out.open("../euclidean_output.csv", fstream::out | ofstream::trunc);
+//    fstream file2out;
+//    file2out.open("../chebyshev_output.csv", fstream::out | ofstream::trunc);
+//    fstream file3out;
+//    file3out.open("../manhattan_output.csv", fstream::out | ofstream::trunc);
+//    // Opening the file "unclassified.csv" for reading.
+//    fstream fin2;
+//    fin2.open("../unclassified.csv", fstream::in); // Opens the unclassified-irises file.
+//    vector<Iris> flowers = Main::setup();
+//    if (k > flowers.size() || k <= 0) {
+//        cout << "Invalid value of k" << endl;
+//        cout << "There aren't enough irises in the database for this value of k." << endl;
+//        return 0;
+//    }
+//    string line;
+//    string word;
+//    while(getline(fin2, line)) {
+//        Iris i = Main::getIris(line); // The Iris that we need to classify.
+//        ClassifierKnn toClass(flowers,i,k);
+//        file1out << toClass.classifierEuclidean() << endl; // Creates the Euclidean-output file.
+//        file2out << toClass.classifierChebyshev() << endl; // Creates the Chebyshev-output file.
+//        file3out << toClass.classifierManhattan() << endl; // Creates the Manhattan-output file.
+//    }
+//    // Closing the input and output file streams:
+//    fin2.close();
+//    file3out.close();
+//    file1out.close();
+//    file2out.close();
+    ClassificationServer cs = new ClassificationServer();
 }
 
 
 vector<Iris> Main::setup() {
     fstream fin;
-    fin.open("classified.csv", fstream::in); // Opens the classified-data file.
+    fin.open("../classified.csv", fstream::in); // Opens the classified-data file.
     string type; // The type of the flower.
     double topLength; // The length of the top leafs.
     double topWidth; // The width of the top leafs.
