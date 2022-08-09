@@ -6,13 +6,11 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
 #include <unistd.h>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include "ClassifierKnn.hpp"
-#include <cstdio>
 #include <cstring>
 
 using namespace std;
@@ -47,6 +45,9 @@ int main(int argc, char *argv[]) {
         Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
         ClassifierKnn classifier(flowers, i, k);
         string result = classifier.classifierEuclidean();
+        for (int j = 0; j < result.length(); j++) {
+            cs.getBuffer()[j] = '^';
+        }
         char *arr = new char[result.length() + 1];
         strcpy(arr, result.c_str());
         int sent_bytes = send(client_sock, arr, result.length() + 1, 0); // Sending the type back to the client.
@@ -94,6 +95,7 @@ int ClassificationServer::getSizeBuffer() const {
     return this->sizeBuffer;
 };
 
+// A function that converts a string into an Iris object.
 Iris ClassificationServer::stringToIris(string str) const {
     string type; // The type of the flower.
     double topLength; // The length of the top leafs.
@@ -172,9 +174,13 @@ vector<Iris> ClassificationServer::setup() {
     return flowers;
 }
 
+// A function that gets a pointer to a character and converts into a string, it ends when it reaches a '\n'.
 string ClassificationServer::convertToString(char* txt) {
     string s = "";
     for (int i = 0; txt[i] != '\n'; i++) {
+        if(txt[i] == '^' || txt[i] == '\n') {
+            continue;
+        }
         s = s + txt[i];
     }
     return s;
