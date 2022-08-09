@@ -16,7 +16,7 @@
 using namespace std;
 
 
-int main(int argc, char *argv[]) {
+int main() {
     int k = 5; // The amount of elements that the classifier will use.
     ClassificationServer cs;
     vector<Iris> flowers = cs.setup(); // The creation of the database of classified flowers.
@@ -83,17 +83,17 @@ ClassificationServer::ClassificationServer() {
 // A getter for the buffer.
 char* ClassificationServer::getBuffer() {
     return this->buffer;
-};
+}
 
 // A getter for the socket.
 int ClassificationServer::getSocketInt() const {
     return this->socketInt;
-};
+}
 
 // A getter for the size of the buffer.
 int ClassificationServer::getSizeBuffer() const {
     return this->sizeBuffer;
-};
+}
 
 // A function that converts a string into an Iris object.
 Iris ClassificationServer::stringToIris(string str) const {
@@ -176,7 +176,7 @@ vector<Iris> ClassificationServer::setup() {
 
 // A function that gets a pointer to a character and converts into a string, it ends when it reaches a '\n'.
 string ClassificationServer::convertToString(char* txt) {
-    string s = "";
+    string s;
     for (int i = 0; txt[i] != '\n'; i++) {
         if(txt[i] == '^' || txt[i] == '\n') {
             continue;
@@ -184,4 +184,4 @@ string ClassificationServer::convertToString(char* txt) {
         s = s + txt[i];
     }
     return s;
-};
+}
