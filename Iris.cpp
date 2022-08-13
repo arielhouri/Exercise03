@@ -3,7 +3,6 @@
 //
 
 #include "Iris.hpp"
-#include <string>
 #include <algorithm>
 #include <cmath>
 

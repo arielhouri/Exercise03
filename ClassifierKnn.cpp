@@ -3,10 +3,7 @@
 //
 
 #include "ClassifierKnn.hpp"
-#include "IrisAndDistance.hpp"
 #include <algorithm>
-#include <string>
-#include <vector>
 
 
 using namespace std;

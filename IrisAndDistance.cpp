@@ -3,10 +3,7 @@
 //
 
 #include "IrisAndDistance.hpp"
-#include "Iris.hpp"
 #include <algorithm>
-#include <string>
-#include <vector>
 
 using namespace std;
 // constructor

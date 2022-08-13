@@ -3,12 +3,7 @@
 //
 
 #include "ClassificationServer.hpp"
-#include <iostream>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
 #include <fstream>
-#include <string>
 #include <sstream>
 #include "ClassifierKnn.hpp"
 #include <cstring>
@@ -42,36 +37,38 @@ int main() {
         cout << "Error reading input." << endl;
         return -1;
     }
-
     cout << cs.getBuffer() << endl;
     string irisString = cs.convertToString(cs.getBuffer());
-    while(irisString.length() != 0 && irisString.length() != 1) { // Classifing the irises and sending the results to the client.
+    string finalResult;
+    while(irisString.length() != 0 && irisString.length() != 1) { // Classifying the irises and sending the results to the client.
         cout << irisString << endl;
-        cout << "recieved DATA!" << endl;
+        cout << "received DATA!" << endl;
         Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
         cout << "Converted to an Iris!" << endl;
         ClassifierKnn classifier(flowers, i, k);
         string result = classifier.classifierEuclidean();
-        for (int j = 0; j < irisString.length() + 1; j++) {
+        for (int j = 0; j < irisString.length() + 1; j++) { // Replaces the already-read data with a neutral character (^).
             cs.getBuffer()[j] = '^';
         }
-        char arr[result.length() + 1];
-        strcpy(arr, result.c_str());
-        int sent_bytes = send(client_sock, arr, result.length() + 1, 0); // Sending the type back to the client.
-        if (sent_bytes < 0) {
-            cout << "Error sending data to the client." << endl;
-            return -1;
-        }
+        finalResult += result; // Adds the type to the list of classified Irises.
+        finalResult += "\n";
         irisString = cs.convertToString(cs.getBuffer());
     }
-    close(cs.getSocketInt());
+    char arr[finalResult.length() + 1]; // Creating the array that sends the data to the Client.
+    strcpy(arr, finalResult.c_str());
+    int sent_bytes = send(client_sock, arr, finalResult.length() + 1, 0); // Sending the type back to the client.
+    if (sent_bytes < 0) { // Checking for errors.
+        cout << "Error sending data to the client." << endl;
+        return -1;
+    }
+    close(cs.getSocketInt()); // Closes the Socket.
     return 0;
 }
 
 // A constructor for a ClassificationServer.
 ClassificationServer::ClassificationServer() {
     this->sizeBuffer = 4096;
-    this->server_port = 6789;
+    this->server_port = 56789;
     this->socketInt = socket(AF_INET, SOCK_STREAM, 0);
     if (socketInt < 0) {
         cout << "Error creating socket";
@@ -131,7 +128,7 @@ Iris ClassificationServer::stringToIris(string str) const {
             default:
                 break;
         }
-        size_t pos = str.find(delimiter);
+        pos = str.find(delimiter);
     }
     // The creation of the iris that we need to classify.
     Iris ir("Unclassified", topLength, topWidth, bottomLength, bottomWidth);
@@ -143,13 +140,9 @@ vector<Iris> ClassificationServer::setup() {
     fstream fin;
     fin.open("../classified.csv", fstream::in); // Opens the classified-data file.
     string type; // The type of the flower.
-    double topLength; // The length of the top leafs.
-    double topWidth; // The width of the top leafs.
-    double bottomLength; // The length of the bottom leafs.
-    double bottomWidth; // The width of the bottom leafs.
+    double topLength, topWidth, bottomLength, bottomWidth; // The length and width of the top and bottom leafs.
     vector<Iris> flowers;
-    string line;
-    string word;
+    string line, word;
     while(getline(fin, line)){
         stringstream str(line);
         for(int i = 0; i < 5; i++) { // A loop that gathers the data about the iris from a sting.
@@ -191,7 +184,7 @@ string ClassificationServer::convertToString(char* txt) {
         } else if(txt[i] == '\n' || txt[i] == '\r' || txt[i] == '\0') {
             break;
         }
-        s = s + txt[i];
+        s += txt[i];
     }
     return s;
 }
