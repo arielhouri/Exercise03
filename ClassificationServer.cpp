@@ -1,5 +1,5 @@
 //
-// Created by ariel on 8/6/2022.
+// Created by Ariel HOuri on 8/6/2022.
 //
 
 #include "ClassificationServer.hpp"
@@ -12,7 +12,7 @@ using namespace std;
 
 
 int main() {
-    int k = 5; // The amount of elements that the classifier will use.
+    int k = 7; // The amount of elements that the classifier will use.
     ClassificationServer cs;
     vector<Iris> flowers = cs.setup(); // The creation of the database of classified flowers.
     struct sockaddr_in client_sin; // The connection between the server and the client.
