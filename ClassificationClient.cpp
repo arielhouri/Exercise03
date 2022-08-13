@@ -15,7 +15,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
     // Connecting to the server socket
-    const char* ip_address = "?.?.?.?";
+    const char* ip_address = "127.0.0.1";
     const int port_no = 6789;
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
@@ -33,29 +33,31 @@ int main(int argc, char* argv[]){
     }
     string path = argv[argc - 1];
     fstream fin;
-    fin.open(path, fstream::in); // Opens the unclassified-irises file.
+    fin.open("../unclassified.csv", fstream::in); // Opens the unclassified-irises file.
     fstream fileout;
-    fileout.open("euclidean_output.csv", fstream::out | ofstream::trunc);
+    fileout.open("../euclidean_output.csv", fstream::out | ofstream::trunc);
     string line;
     while(getline(fin, line)) {
-        char data_addr[] = line;
+        cout << line << endl;
+        char data_addr[line.length() + 1];
+        strcpy(data_addr, line.c_str());
         int data_len = strlen(data_addr);
         int sent_bytes = send(sock, data_addr, data_len, 0);
         if (sent_bytes < 0) {
             // error
         }
-        char buffer[4096];
-        int expected_data_len = sizeof(buffer);
-        int read_bytes = recv(sock, buffer, expected_data_len, 0);
-        if (read_bytes == 0) {
-            // connection is closed
-        }
-        else if (read_bytes < 0) {
-            // error
-        }
-        else {
-            fileout << buffer << endl;
-        }
+    }
+    char buffer[4096];
+    int expected_data_len = sizeof(buffer);
+    int read_bytes = recv(sock, buffer, expected_data_len, 0);
+    if (read_bytes == 0) {
+        cout << "Connectino is closed." << endl;
+    }
+    else if (read_bytes < 0) {
+        cout << "Error reading input from the server!" << endl;
+    }
+    else {
+        fileout << buffer << endl;
     }
     close(sock);
     fin.close();

@@ -26,7 +26,9 @@ int main() {
         cout << "Error listening to a socket" << endl;
         return -1;
     }
+    cout << "waiting for clients" << endl;
     int client_sock = accept(cs.getSocketInt(),  (struct sockaddr *) &client_sin,  &addr_len);
+    cout << "A client was accepted!" << endl;
     if (client_sock < 0) { // Checking for errors in the connection.
         cout << "Error accepting client" << endl;
         return -1;
@@ -40,15 +42,20 @@ int main() {
         cout << "Error reading input." << endl;
         return -1;
     }
+
+    cout << cs.getBuffer() << endl;
     string irisString = cs.convertToString(cs.getBuffer());
     while(irisString.length() != 0 && irisString.length() != 1) { // Classifing the irises and sending the results to the client.
+        cout << irisString << endl;
+        cout << "recieved DATA!" << endl;
         Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
+        cout << "Converted to an Iris!" << endl;
         ClassifierKnn classifier(flowers, i, k);
         string result = classifier.classifierEuclidean();
-        for (int j = 0; j < result.length(); j++) {
+        for (int j = 0; j < irisString.length() + 1; j++) {
             cs.getBuffer()[j] = '^';
         }
-        char *arr = new char[result.length() + 1];
+        char arr[result.length() + 1];
         strcpy(arr, result.c_str());
         int sent_bytes = send(client_sock, arr, result.length() + 1, 0); // Sending the type back to the client.
         if (sent_bytes < 0) {
@@ -63,7 +70,7 @@ int main() {
 
 // A constructor for a ClassificationServer.
 ClassificationServer::ClassificationServer() {
-    this->sizeBuffer = 2000;
+    this->sizeBuffer = 4096;
     this->server_port = 6789;
     this->socketInt = socket(AF_INET, SOCK_STREAM, 0);
     if (socketInt < 0) {
@@ -103,8 +110,8 @@ Iris ClassificationServer::stringToIris(string str) const {
     double bottomLength; // The length of the bottom leafs.
     double bottomWidth; // The width of the bottom leafs.
     string token;
-    size_t pos = 0;
     string delimiter = ",";
+    size_t pos = str.find(delimiter);
     for(int i = 0; i < 4; i++) { // A loop that gathers the data about the flower from a sting.
         token = str.substr(0, pos);
         str.erase(0, pos + delimiter.length());
@@ -124,6 +131,7 @@ Iris ClassificationServer::stringToIris(string str) const {
             default:
                 break;
         }
+        size_t pos = str.find(delimiter);
     }
     // The creation of the iris that we need to classify.
     Iris ir("Unclassified", topLength, topWidth, bottomLength, bottomWidth);
@@ -178,8 +186,10 @@ vector<Iris> ClassificationServer::setup() {
 string ClassificationServer::convertToString(char* txt) {
     string s;
     for (int i = 0; txt[i] != '\n'; i++) {
-        if(txt[i] == '^' || txt[i] == '\n') {
+        if(txt[i] == '^') {
             continue;
+        } else if(txt[i] == '\n' || txt[i] == '\r' || txt[i] == '\0') {
+            break;
         }
         s = s + txt[i];
     }
