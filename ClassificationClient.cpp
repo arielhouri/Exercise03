@@ -3,13 +3,7 @@
 //
 
 #include "ClassificationClient.hpp"
-#include <iostream>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
 #include <fstream>
-#include <string>
 
 using namespace std;
 
