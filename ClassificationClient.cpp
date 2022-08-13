@@ -31,15 +31,18 @@ int main(int argc, char* argv[]){
     fstream fileout;
     fileout.open("../euclidean_output.csv", fstream::out | ofstream::trunc);
     string line;
+    string toServer = "";
     while(getline(fin, line)) {
         cout << line << endl;
-        char data_addr[line.length() + 1];
-        strcpy(data_addr, line.c_str());
-        int data_len = strlen(data_addr);
-        int sent_bytes = send(sock, data_addr, data_len, 0);
-        if (sent_bytes < 0) {
-            // error
-        }
+        toServer += line;
+        toServer += "\n";
+    }
+    char data_addr[toServer.length() + 1];
+    strcpy(data_addr, toServer.c_str());
+    int data_len = strlen(data_addr);
+    int sent_bytes = send(sock, data_addr, data_len, 0);
+    if (sent_bytes < 0) {
+        // error
     }
     char buffer[4096];
     int expected_data_len = sizeof(buffer);
