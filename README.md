@@ -14,7 +14,7 @@ This program is separated into two parts, The Server and the Client. You need tw
 4. The output of the program will be in the given file (That was given in the arguments of the Client).
 - If an error occurs while working with the sockets, an error massage will be printed into the console.
 ## The Algorithm:
-The classification itself  and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01). In this section we will explain only how the Server and the Client work and the relationship between them.
+The classification itself  and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01#readme). In this section we will explain only how the Server and the Client work and the relationship between them.
 When the Server initializes, it creates its database (from a file named `classified.csv`) and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-flowers from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the flowers using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. 
 ### notes:
 - The sizes of the buffers for the transferred data is `4096 bytes`.
