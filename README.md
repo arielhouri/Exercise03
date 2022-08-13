@@ -7,11 +7,12 @@ The Server's task is to get the data from the Client (using TCP that we implemen
 
 
 ## Instruction:
-The program is separated  into two parts, The Server and the Client. You need two run them separately.
+This program is separated into two parts, The Server and the Client. You need two run them separately and simultaneously.
 1. Compile the code using the following command: `g++ -std=c++11 *.cpp`
-2. Run the Server. To do that you need to use the command: ``.
-3. Run the Client using the command: ``. The two arguments that you need to send in this command are the address of the file that contain the Irises that need to be classified and the address of the file that you want to output to be in.
+2. Run the Server, The server does not get any arguments.
+3. Run the Client. You need to send two arguments, The first is the address of the file that contains the Irises' data that need to be classified and the second is the address of the file that you want to output to be in.
 4. The output of the program will be in the given file (That was given in the arguments of the Client).
+- If an error occurs while working with the sockets, an error massage will be printed into the console.
 ## The Algorithm:
 The classification itself  and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01). In this section we will explain only how the Server and the Client work and the relationship between them.
 When the Server initializes, it creates its database (from a file named `classified.csv`) and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-flowers from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the flowers using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. 
