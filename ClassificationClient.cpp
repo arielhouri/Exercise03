@@ -54,7 +54,7 @@ int main(int argc, char* argv[]){
             // error
         }
         else {
-            fileou << buffer << endl;
+            fileout << buffer << endl;
         }
     }
     close(sock);
