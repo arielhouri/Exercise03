@@ -18,7 +18,7 @@ class ClassificationServer {
     int socketInt;
     int sizeBuffer;
     struct sockaddr_in sin;
-    char buffer[2000];
+    char buffer[4096];
 public:
     ClassificationServer();
     char* getBuffer();

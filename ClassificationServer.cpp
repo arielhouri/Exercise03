@@ -21,33 +21,30 @@ int main() {
         cout << "Error listening to a socket" << endl;
         return -1;
     }
-    cout << "waiting for clients" << endl;
     int client_sock = accept(cs.getSocketInt(),  (struct sockaddr *) &client_sin,  &addr_len);
-    cout << "A client was accepted!" << endl;
     if (client_sock < 0) { // Checking for errors in the connection.
         cout << "Error accepting client" << endl;
         return -1;
     }
     int read_bytes = recv(client_sock, cs.getBuffer(), cs.getSizeBuffer(), 0);
     if (read_bytes == 0) {
-        cout << "Connection is closed." << endl;
+        cout << "The connection is closed." << endl;
         return -1;
     }
     else if (read_bytes < 0) {
         cout << "Error reading input." << endl;
         return -1;
     }
-    cout << cs.getBuffer() << endl;
     string irisString = cs.convertToString(cs.getBuffer());
     string finalResult;
+    int j = 0;
     while(irisString.length() != 0 && irisString.length() != 1) { // Classifying the irises and sending the results to the client.
-        cout << irisString << endl;
-        cout << "received DATA!" << endl;
+        int d = j;
         Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
-        cout << "Converted to an Iris!" << endl;
         ClassifierKnn classifier(flowers, i, k);
         string result = classifier.classifierEuclidean();
-        for (int j = 0; j < irisString.length() + 1; j++) { // Replaces the already-read data with a neutral character (^).
+        for (j; j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral
+            // character (^).
             cs.getBuffer()[j] = '^';
         }
         finalResult += result; // Adds the type to the list of classified Irises.

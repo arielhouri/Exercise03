@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char* argv[]){
     // Connecting to the server socket
     const char* ip_address = "127.0.0.1";
-    const int port_no = 6789;
+    const int port_no = 56789;
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
         cout << "Error creating socket" << endl;
@@ -33,7 +33,6 @@ int main(int argc, char* argv[]){
     string line;
     string toServer = "";
     while(getline(fin, line)) {
-        cout << line << endl;
         toServer += line;
         toServer += "\n";
     }
@@ -48,7 +47,7 @@ int main(int argc, char* argv[]){
     int expected_data_len = sizeof(buffer);
     int read_bytes = recv(sock, buffer, expected_data_len, 0);
     if (read_bytes == 0) {
-        cout << "Connectino is closed." << endl;
+        cout << "Connection is closed." << endl;
     }
     else if (read_bytes < 0) {
         cout << "Error reading input from the server!" << endl;
