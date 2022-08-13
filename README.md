@@ -21,4 +21,3 @@ When the Server initializes, it creates its database (from a file named `classif
 - The port that the server used for its socket is `56789`.
 - The Communication Protocol that we used is [`TCP`](https://he.wikipedia.org/wiki/Transmission_Control_Protocol).
 - The value that we chose for the classifier is `k=7`.
-- The ....
