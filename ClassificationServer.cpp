@@ -135,7 +135,7 @@ Iris ClassificationServer::stringToIris(string str) const {
 // A function that creates the database of classified irises.
 vector<Iris> ClassificationServer::setup() {
     fstream fin;
-    fin.open("../classified.csv", fstream::in); // Opens the classified-data file.
+    fin.open("classified.csv", fstream::in); // Opens the classified-data file.
     string type; // The type of the flower.
     double topLength, topWidth, bottomLength, bottomWidth; // The length and width of the top and bottom leafs.
     vector<Iris> flowers;

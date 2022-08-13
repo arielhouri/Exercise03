@@ -25,13 +25,14 @@ int main(int argc, char* argv[]){
         cout << "Error connecting to the server" << endl;
         return -1;
     }
-    string path = argv[argc - 1];
+    string path2 = argv[argc - 1];
+    string path = argv[argc - 2];
     fstream fin;
-    fin.open("../unclassified.csv", fstream::in); // Opens the unclassified-irises file.
+    fin.open(path, fstream::in); // Opens the unclassified-irises file.
     fstream fileout;
-    fileout.open("../euclidean_output.csv", fstream::out | ofstream::trunc);
+    fileout.open(path2, fstream::out | ofstream::trunc);
     string line;
-    string toServer = "";
+    string toServer;
     while(getline(fin, line)) {
         toServer += line;
         toServer += "\n";
