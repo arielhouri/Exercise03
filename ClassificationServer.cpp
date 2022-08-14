@@ -41,14 +41,14 @@ int main() {
     while(irisString.length() != 0 && irisString.length() != 1) { // Classifying the irises and sending the results to the client.
         int d = j;
         Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
-        ClassifierKnn classifier(flowers, i, k);
-        string result = classifier.classifierEuclidean();
+        ClassifierKnn classifier(flowers, i, k); // Creates the classifier for the iris i.
+        string result = classifier.classifierEuclidean(); // Gets the type of the Iris according to Euclidean metric.
         for (j; j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral character (^).
             cs.getBuffer()[j] = '^';
         }
         finalResult += result; // Adds the type to the list of classified Irises.
         finalResult += "\n";
-        irisString = cs.convertToString(cs.getBuffer());
+        irisString = cs.convertToString(cs.getBuffer()); // Converts the next data of an Iris to a string.
     }
     char arr[finalResult.length() + 1]; // Creating the array that sends the data to the Client.
     strcpy(arr, finalResult.c_str());
@@ -65,7 +65,7 @@ int main() {
 ClassificationServer::ClassificationServer() {
     this->sizeBuffer = 4096;
     this->server_port = 56789;
-    this->socketInt = socket(AF_INET, SOCK_STREAM, 0);
+    this->socketInt = socket(AF_INET, SOCK_STREAM, 0); // Creates the socket for the server.
     if (socketInt < 0) {
         cout << "Error creating socket";
         return;
