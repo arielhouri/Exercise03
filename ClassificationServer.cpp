@@ -1,5 +1,5 @@
 //
-// Created by Ariel HOuri on 8/6/2022.
+// Created by Ariel Houri on 8/6/2022.
 //
 
 #include "ClassificationServer.hpp"
@@ -26,7 +26,7 @@ int main() {
         cout << "Error accepting client" << endl;
         return -1;
     }
-    int read_bytes = recv(client_sock, cs.getBuffer(), cs.getSizeBuffer(), 0);
+    int read_bytes = recv(client_sock, cs.getBuffer(), cs.getSizeBuffer(), 0); // Receiving data from the Client.
     if (read_bytes == 0) {
         cout << "The connection is closed." << endl;
         return -1;
@@ -43,8 +43,7 @@ int main() {
         Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
         ClassifierKnn classifier(flowers, i, k);
         string result = classifier.classifierEuclidean();
-        for (j; j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral
-            // character (^).
+        for (j; j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral character (^).
             cs.getBuffer()[j] = '^';
         }
         finalResult += result; // Adds the type to the list of classified Irises.
