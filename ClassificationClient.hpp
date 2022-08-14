@@ -14,7 +14,7 @@
 
 
 class ClassificationClient {
-
+    void communicateServer();
 };
 
 

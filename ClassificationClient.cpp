@@ -1,13 +1,13 @@
 //
 // Created by Yonatan Semidubersky on 12/08/2022.
 //
-
+// The client class read from unclassified irises-file
+// and class them to output file (given as arguments to main).
 #include "ClassificationClient.hpp"
 #include <fstream>
 
 using namespace std;
-
-int main(int argc, char* argv[]){
+void communicateServer(fromFile, toFile){
     const char* ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
     const int port_no = 56789; // The port number.
     int sock = socket(AF_INET, SOCK_STREAM, 0); // Creating the socket.
@@ -24,8 +24,6 @@ int main(int argc, char* argv[]){
         cout << "Error connecting to the server" << endl;
         return -1;
     }
-    string path = argv[argc - 2]; // The path for the unclassified data.
-    string path2 = argv[argc - 1]; // The path for the destination for the data.
     fstream fin;
     fin.open(path, fstream::in); // Opens the unclassified-irises file.
     fstream fileout;
@@ -58,4 +56,9 @@ int main(int argc, char* argv[]){
     close(sock);
     fin.close();
     fileout.close();
+}
+int main(int argc, char* argv[]){
+    string path = argv[argc - 2]; // The path for the unclassified data.
+    string path2 = argv[argc - 1]; // The path for the destination for the data.
+    communicateServer(path,path2);
 }
