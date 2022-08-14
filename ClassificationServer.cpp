@@ -15,44 +15,46 @@ int main() {
     int k = 7; // The amount of elements that the classifier will use.
     ClassificationServer cs;
     vector<Iris> flowers = cs.setup(); // The creation of the database of classified flowers.
-    struct sockaddr_in client_sin; // The connection between the server and the client.
-    unsigned int addr_len = sizeof(client_sin);
-    if (listen(cs.getSocketInt(), 5) < 0) { // Listening to the socket.
-        cout << "Error listening to a socket" << endl;
-        return -1;
-    }
-    int client_sock = accept(cs.getSocketInt(),  (struct sockaddr *) &client_sin,  &addr_len);
-    if (client_sock < 0) { // Checking for errors in the connection.
-        cout << "Error accepting client" << endl;
-        return -1;
-    }
-    if (cs.receiveData(client_sock) < 0) { // Receiving data from the Client's socket.
-        return -1;
-    }
-    string irisString = cs.convertToString(cs.getBuffer());
-    string finalResult;
-    int j = 0;
-    while(irisString.length() != 0 && irisString.length() != 1) { // Classifying the irises and sending the results to the client.
-        int d = j;
-        Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
-        ClassifierKnn classifier(flowers, i, k); // Creates the classifier for the iris i.
-        string result = classifier.classifierEuclidean(); // Gets the type of the Iris according to Euclidean metric.
-        for (j; j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral character (^).
-            cs.getBuffer()[j] = '^';
+    while(true) { // Infinite loop - when a client finishes, it waits for a new client.
+        struct sockaddr_in client_sin; // The connection between the server and the client.
+        unsigned int addr_len = sizeof(client_sin);
+        if (listen(cs.getSocketInt(), 5) < 0) { // Listening to the socket.
+            cout << "Error listening to a socket" << endl;
+            return -1;
         }
-        finalResult += result; // Adds the type to the list of classified Irises.
-        finalResult += "\n";
-        irisString = cs.convertToString(cs.getBuffer()); // Converts the next data of an Iris to a string.
+        int client_sock = accept(cs.getSocketInt(), (struct sockaddr *) &client_sin, &addr_len);
+        if (client_sock < 0) { // Checking for errors in the connection.
+            cout << "Error accepting client" << endl;
+            return -1;
+        }
+        if (cs.receiveData(client_sock) < 0) { // Receiving data from the Client's socket.
+            return -1;
+        }
+        string irisString = cs.convertToString(cs.getBuffer());
+        string finalResult;
+        int j = 0;
+        while (irisString.length() != 0 &&
+               irisString.length() != 1) { // Classifying the irises and sending the results to the client.
+            int d = j;
+            Iris i = cs.stringToIris(irisString); // The Iris that we need to classify.
+            ClassifierKnn classifier(flowers, i, k); // Creates the classifier for the iris i.
+            string result = classifier.classifierEuclidean(); // Gets the type of the Iris according to Euclidean metric.
+            for (j;
+                 j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral character (^).
+                cs.getBuffer()[j] = '^';
+            }
+            finalResult += result; // Adds the type to the list of classified Irises.
+            finalResult += "\n";
+            irisString = cs.convertToString(cs.getBuffer()); // Converts the next data of an Iris to a string.
+        }
+        char arr[finalResult.length() + 1]; // Creating the array that sends the data to the Client.
+        strcpy(arr, finalResult.c_str());
+        int sent_bytes = send(client_sock, arr, finalResult.length() + 1, 0); // Sending the type back to the client.
+        if (sent_bytes < 0) { // Checking for errors.
+            cout << "Error sending data to the client." << endl;
+            return -1;
+        }
     }
-    char arr[finalResult.length() + 1]; // Creating the array that sends the data to the Client.
-    strcpy(arr, finalResult.c_str());
-    int sent_bytes = send(client_sock, arr, finalResult.length() + 1, 0); // Sending the type back to the client.
-    if (sent_bytes < 0) { // Checking for errors.
-        cout << "Error sending data to the client." << endl;
-        return -1;
-    }
-    close(cs.getSocketInt()); // Closes the Socket.
-    return 0;
 }
 
 // A constructor for a ClassificationServer.
