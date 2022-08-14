@@ -21,6 +21,7 @@ class ClassificationServer {
     char buffer[4096];
 public:
     ClassificationServer();
+    int receiveData(int clientSocket);
     char* getBuffer();
     int getSocketInt() const;
     int getSizeBuffer() const;

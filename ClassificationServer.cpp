@@ -26,13 +26,7 @@ int main() {
         cout << "Error accepting client" << endl;
         return -1;
     }
-    int read_bytes = recv(client_sock, cs.getBuffer(), cs.getSizeBuffer(), 0); // Receiving data from the Client.
-    if (read_bytes == 0) {
-        cout << "The connection is closed." << endl;
-        return -1;
-    }
-    else if (read_bytes < 0) {
-        cout << "Error reading input." << endl;
+    if (cs.receiveData(client_sock) < 0) { // Receiving data from the Client's socket.
         return -1;
     }
     string irisString = cs.convertToString(cs.getBuffer());
@@ -62,9 +56,7 @@ int main() {
 }
 
 // A constructor for a ClassificationServer.
-ClassificationServer::ClassificationServer() {
-    this->sizeBuffer = 4096;
-    this->server_port = 56789;
+ClassificationServer::ClassificationServer() : sizeBuffer(4096), server_port(56789) {
     this->socketInt = socket(AF_INET, SOCK_STREAM, 0); // Creates the socket for the server.
     if (socketInt < 0) {
         cout << "Error creating socket";
@@ -74,10 +66,24 @@ ClassificationServer::ClassificationServer() {
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(server_port);
-    if (bind(socketInt, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+    if (bind(socketInt, (struct sockaddr *) &sin, sizeof(sin)) < 0) { // Binding the socket.
         cout << "Error binding socket" << endl;
         return;
     }
+}
+
+// A function that receives data from a given socket.
+int ClassificationServer::receiveData(int clientSock) {
+    int read_bytes = recv(clientSock, buffer, sizeBuffer, 0); // Receiving data from the Client.
+    if (read_bytes == 0) { // Checking for errors.
+        cout << "The connection is closed." << endl;
+        return -1;
+    }
+    else if (read_bytes < 0) {
+        cout << "Error reading input." << endl;
+        return -1;
+    }
+    return 1;
 }
 
 // A getter for the buffer.
