@@ -5,15 +5,30 @@
 // and class them to output file (given as arguments to main).
 #include "ClassificationClient.hpp"
 #include <fstream>
+#include <string>
 
 using namespace std;
-void communicateServer(fromFile, toFile){
+// reading from file in given path
+string readingFromFile(string path){
+    fstream fin;
+    fin.open(path, fstream::in); // Opens the unclassified-irises file.
+    string line, toServer;
+    while(getline(fin, line)) { // Creates a string for the data.
+        toServer += line;
+        toServer += "\n";
+    }
+    fin.close();
+    return toServer;
+}
+
+void communicateServer(string path, string path2){
+    // connecting to a socket
     const char* ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
     const int port_no = 56789; // The port number.
     int sock = socket(AF_INET, SOCK_STREAM, 0); // Creating the socket.
     if (sock < 0) {
         cout << "Error creating socket" << endl;
-        return -1;
+        return;
     }
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
@@ -22,24 +37,19 @@ void communicateServer(fromFile, toFile){
     sin.sin_port = htons(port_no);
     if (connect(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) { // Connecting to the Server.
         cout << "Error connecting to the server" << endl;
-        return -1;
+        return;
     }
-    fstream fin;
-    fin.open(path, fstream::in); // Opens the unclassified-irises file.
+    string toServer = readingFromFile(path);
+    // writing to file the output
     fstream fileout;
     fileout.open(path2, fstream::out | ofstream::trunc);
-    string line, toServer;
-    while(getline(fin, line)) { // Creates a string for the data.
-        toServer += line;
-        toServer += "\n";
-    }
     char data_addr[toServer.length() + 1];
     strcpy(data_addr, toServer.c_str()); // Copies the data to an array.
     int data_len = strlen(data_addr);
     int sent_bytes = send(sock, data_addr, data_len, 0); // Sends the data to the Server.
     if (sent_bytes < 0) { // Checks for errors.
         cout << "Error sending data." << endl;
-        return -1;
+        return;
     }
     char buffer[4096];
     int expected_data_len = sizeof(buffer);
@@ -54,7 +64,6 @@ void communicateServer(fromFile, toFile){
         fileout << buffer << endl;
     }
     close(sock);
-    fin.close();
     fileout.close();
 }
 int main(int argc, char* argv[]){

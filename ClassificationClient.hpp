@@ -14,7 +14,8 @@
 
 
 class ClassificationClient {
-    void communicateServer();
+    void readingFromFile(string path);
+    void communicateServer(string path1, string path2);
 };
 
 
