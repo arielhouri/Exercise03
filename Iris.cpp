@@ -11,19 +11,13 @@ using namespace std;
 // A constructor for an Iris that doesn't get any parameters.
 Iris::Iris() {
     this->type = "Unclassified"; // Default type.
-    this->topLength = 0;
-    this->topWidth = 0;
-    this->bottomLength = 0;
-    this->bottomWidth = 0;
+    this->traits = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 }
 
 // A constructor for an Iris that gets its type and measurements for the leafs.
-Iris::Iris(string type, double topLength, double topWidth, double bottomLength, double bottomWidth) {
+Iris::Iris(string type, double traits[10]) {
     this->type = type;
-    this->topLength = topLength;
-    this->topWidth = topWidth;
-    this->bottomLength = bottomLength;
-    this->bottomWidth = bottomWidth;
+    this->traits = traits;
 }
 
 // A function that returns the type of the Iris.
@@ -31,43 +25,35 @@ string Iris::getType() const {
     return this->type;
 }
 
-// A function that returns the length of the top leafs.
-double Iris::getTopLength() const {
-    return this->topLength;
-}
-
-// A function that returns the width of the top leafs.
-double Iris::getTopWidth() const {
-    return this->topWidth;
-}
-
-// A function that returns the length of the bottom leafs.
-double Iris::getBottomLength() const {
-    return this->bottomLength;
-}
-
-// A function that returns the width of the bottom leafs.
-double Iris::getBottomWidth() const {
-    return this->bottomWidth;
+double Iris::getTraits() const {
+    return this->traits;
 }
 
 // A function that measures the distance between the flower and another according to Euclidean Distance.
 double Iris::euclideanDistance(const Iris &other) const {
-    return sqrt(pow(this->getTopLength() - other.getTopLength(), 2) + pow(this->getTopWidth() - other.getTopWidth(), 2)
-                + pow(this->getBottomWidth() - other.getBottomWidth(), 2) +
-                pow(this->getBottomLength() - other.getBottomLength(), 2));
+    double sum = 0;
+    for (int i = 0; i < 10; ++i) {
+        sum += pow(this->getTraits()[i] - other.getTraits()[i], 2);
+    }
+    return sqrt(sum);
 }
 
 // A function that measures the distance between the flower and another according to Manhattan Distance.
 double Iris::manhattanDistance(const Iris &other) const {
-    return abs(this->getTopLength() - other.getTopLength()) + abs(this->getTopWidth() - other.getTopWidth()) +
-           abs(this->getBottomWidth() - other.getBottomWidth()) +
-           abs(this->getBottomLength() - other.getBottomLength());
+    double sum = 0;
+    for (int i = 0; i < 10; ++i) {
+        sum += abs(this->getTraits()[i] - other.getTraits()[i]);
+    }
+    return sum;
 }
 
 // A function that measures the distance between the flower and another according to Chebyshev Distance.
 double Iris::chebyshevDistance(const Iris &other) const {
-    return max(abs(this->getTopWidth() - other.getTopWidth()), max(abs(this->getBottomWidth() - other.getBottomWidth()),
-                                                              max(abs(this->getBottomLength() - other.getBottomLength
-                                                              ()),abs((this->getTopLength() - other.getTopLength())))));
+    double max = 0;
+    for (int i = 0; i < 10; ++i) {
+        if (abs(this->getTraits()[i] - other.getTraits()[i]) > max) {
+            max = abs(this->getTraits()[i] - other.getTraits()[i]);
+        }
+    }
+    return max;
 }

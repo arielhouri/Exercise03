@@ -10,18 +10,12 @@ using namespace std;
 class Iris {
 private:
     string type;
-    double topLength; // The length of the top leafs.
-    double topWidth; // The width of the top leafs.
-    double bottomLength; // The length of the bottom leafs.
-    double bottomWidth; // The width of the bottom leafs.
+    double traits[10];
 public:
     Iris();
-    Iris(string type, double topLength, double topWidth, double bottomLength, double bottomWidth);
+    Iris(string type, double traits[10]);
     string getType() const;
-    double getTopLength() const;
-    double getTopWidth() const;
-    double getBottomLength() const;
-    double getBottomWidth() const;
+    double getTraits() const;
     double euclideanDistance(const Iris& other) const;
     double manhattanDistance(const Iris& other) const;
     double chebyshevDistance(const Iris& other) const;
