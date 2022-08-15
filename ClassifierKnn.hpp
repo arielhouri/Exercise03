@@ -7,17 +7,17 @@
 #include <string>
 #include <vector>
 #include "Classifiable.hpp"
-#include "IrisAndDistance.hpp"
+#include "ClassifiableAndDistance.hpp"
 
 using namespace std;
 class ClassifierKnn {
 private:
-    vector<Classifiable> flowers; // flowers.
-    Classifiable toClassifier; // flower to class (unknown type).
-    int k; // the amount of flowers that the classifier will use.
+    vector<Classifiable> classifiableObjectsVector; // classifiableObjectsVector.
+    Classifiable toClassifier; // classifiableObj to class (unknown type).
+    int k; // the amount of classifiableObjectsVector that the classifier will use.
 
 public:
-    ClassifierKnn(vector<Classifiable>& flowers, Classifiable& toClassifier, int k);
+    ClassifierKnn(vector<Classifiable>& classifiableObjectsVector, Classifiable& toClassifier, int k);
     string classifierEuclidean();
     string classifierManhattan();
     string classifierChebyshev();

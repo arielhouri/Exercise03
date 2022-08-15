@@ -2,38 +2,38 @@
 // Created by Yonatan Semidubersky on 22/07/2022.
 //
 
-#include "IrisAndDistance.hpp"
+#include "ClassifiableAndDistance.hpp"
 #include <algorithm>
 
 using namespace std;
 // constructor
-IrisAndDistance::IrisAndDistance(Classifiable& flower, double distance) {
-    this->flower = flower;
+ClassifiableAndDistance::ClassifiableAndDistance(Classifiable& classifiable, double distance) {
+    this->classifiableObj = classifiable;
     this->distance = distance;
 }
 // getter function
-Classifiable IrisAndDistance::getFlower() const {
-    return this->flower;
+Classifiable ClassifiableAndDistance::getClassifiableObj() const {
+    return this->classifiableObj;
 }
 // getter function
-double IrisAndDistance::getDistance() const {
+double ClassifiableAndDistance::getDistance() const {
     return this->distance;
 }
 // copy constructor
-IrisAndDistance::IrisAndDistance(IrisAndDistance *p) {
-    this->flower = p->getFlower();
+ClassifiableAndDistance::ClassifiableAndDistance(ClassifiableAndDistance *p) {
+    this->classifiableObj = p->getClassifiableObj();
     this->distance = p->getDistance();
 }
 
 // help method: sorting the vector by r index -
 // greater will be in the right and smaller in the left.
-int arrange(vector<IrisAndDistance> *v, int l, int r)
+int arrange(vector<ClassifiableAndDistance> *v, int l, int r)
 {
     double x = (*v)[r].getDistance();
     int pivot1 = l;
     for (int j = l; j <= r - 1; j++) {
         if ((*v)[j].getDistance() <= x) {
-            IrisAndDistance v1 = (*v)[pivot1];
+            ClassifiableAndDistance v1 = (*v)[pivot1];
             (*v)[pivot1] = (*v)[j];
             (*v)[j] = v1;
             pivot1++;
@@ -44,7 +44,7 @@ int arrange(vector<IrisAndDistance> *v, int l, int r)
 }
 
 // quick select algorithm - finding the k-smallest element.
-int kElement(vector<IrisAndDistance> *v, int l, int r, int k)
+int kElement(vector<ClassifiableAndDistance> *v, int l, int r, int k)
 {
     if (k >= 0 && k <= r - l + 1) {
         if (l == r){
@@ -63,8 +63,8 @@ int kElement(vector<IrisAndDistance> *v, int l, int r, int k)
         return -1; // wrong value for k. Incorrect input!
     }
 }
-// classifier by kNearest irises
-string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
+// classifier by kNearest objects.
+string ClassifiableAndDistance::kNearest(vector<ClassifiableAndDistance> v, int k) {
     // we search for the k-1 element in V[0,...,n] (easier to understand)
     int index = kElement(&v, 0, v.size() - 1, k - 1);
     int versicolor = 0;
@@ -77,13 +77,13 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
         if (v[i].getDistance() > v[index].getDistance()) {
             continue;
         }
-        if (versi.size() + 1 == v[i].getFlower().getType().size()) {
+        if (versi.size() + 1 == v[i].getClassifiableObj().getType().size()) {
             versicolor++;
         }
-        if (virgi.size() + 1 == v[i].getFlower().getType().size()) {
+        if (virgi.size() + 1 == v[i].getClassifiableObj().getType().size()) {
             virginica++;
         }
-        if (setos.size() + 1 == v[i].getFlower().getType().size()) {
+        if (setos.size() + 1 == v[i].getClassifiableObj().getType().size()) {
             setosa++;
         }
     }

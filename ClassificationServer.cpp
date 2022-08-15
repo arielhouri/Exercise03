@@ -52,7 +52,7 @@ int ClassificationServer::receiveData(int clientSock) {
 }
 
 // The function that runs the program.
-int ClassificationServer::run(vector<Classifiable> flowers, int k) {
+int ClassificationServer::run(vector<Classifiable> classifiableObjectsVector, int k) {
     while(true) { // Infinite loop - when a client finishes, it waits for a new client.
         struct sockaddr_in client_sin; // The connection between the server and the client.
         unsigned int addr_len = sizeof(client_sin);
@@ -71,7 +71,7 @@ int ClassificationServer::run(vector<Classifiable> flowers, int k) {
         int j = 0; // Classifying the irises and sending the results to the client:
         while (irisString.length() != 0 && irisString.length() != 1) {
             Classifiable i = stringToIris(irisString); // The Classifiable that we need to classify.
-            ClassifierKnn classifier(flowers, i, k); // Creates the classifier for the iris i.
+            ClassifierKnn classifier(classifiableObjectsVector, i, k); // Creates the classifier for the iris i.
             string result = classifier.classifierEuclidean(); // Gets the type of the Classifiable according to Euclidean metric.
             int d = j;
             for (j;
@@ -103,7 +103,7 @@ int ClassificationServer::listenToSocket() {
 
 // A function that converts a string into a Classifiable object.
 Classifiable ClassificationServer::stringToIris(string str) const {
-    string type; // The type of the flower.
+    string type; // The type of the object.
     double topLength; // The length of the top leafs.
     double topWidth; // The width of the top leafs.
     double bottomLength; // The length of the bottom leafs.
@@ -111,7 +111,7 @@ Classifiable ClassificationServer::stringToIris(string str) const {
     string token;
     string delimiter = ",";
     size_t pos = str.find(delimiter);
-    for(int i = 0; i < 4; i++) { // A loop that gathers the data about the flower from a sting.
+    for(int i = 0; i < 4; i++) { // A loop that gathers the data about the classifiableObj from a sting.
         token = str.substr(0, pos);
         str.erase(0, pos + delimiter.length());
         switch (i + 1) {
@@ -141,7 +141,7 @@ Classifiable ClassificationServer::stringToIris(string str) const {
 vector<Classifiable> ClassificationServer::setup(string& path) {
     fstream fin;
     fin.open(path, fstream::in); // Opens the classified-data file.
-    string type; // The type of the classifiable-object.
+    string type; // The type of the classifiableObj-object.
     vector<Classifiable> classifiableObjectsVector;
     string line, word;
     const char delimiter = ',';

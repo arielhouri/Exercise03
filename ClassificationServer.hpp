@@ -25,7 +25,7 @@ class ClassificationServer {
     string convertToString(char* txt);
 public:
     ClassificationServer();
-    int run(vector<Classifiable> irises, int k);
+    int run(vector<Classifiable> classifiableObjectsVector, int k);
     static vector<Classifiable> setup(string& path);
 };
 

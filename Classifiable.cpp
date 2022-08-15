@@ -33,7 +33,7 @@ double* Classifiable::getTraits() {
     return traits;
 }
 
-// A function that measures the distance between the flower and another according to Euclidean Distance.
+// A function that measures the distance between the classifiableObj and another according to Euclidean Distance.
 double Classifiable::euclideanDistance(Classifiable &other) {
     double sum = 0;
     for (int i = 0; i < 10; ++i) {
@@ -42,7 +42,7 @@ double Classifiable::euclideanDistance(Classifiable &other) {
     return sqrt(sum);
 }
 
-// A function that measures the distance between the flower and another according to Manhattan Distance.
+// A function that measures the distance between the classifiableObj and another according to Manhattan Distance.
 double Classifiable::manhattanDistance(Classifiable &other) {
     double sum = 0;
     for (int i = 0; i < 10; ++i) {
@@ -51,7 +51,7 @@ double Classifiable::manhattanDistance(Classifiable &other) {
     return sum;
 }
 
-// A function that measures the distance between the flower and another according to Chebyshev Distance.
+// A function that measures the distance between the classifiableObj and another according to Chebyshev Distance.
 double Classifiable::chebyshevDistance(Classifiable &other) {
     double max = 0;
     for (int i = 0; i < 10; ++i) {

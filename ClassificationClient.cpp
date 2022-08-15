@@ -1,8 +1,8 @@
 //
 // Created by Yonatan Semidubersky on 12/08/2022.
 //
-// The client class read from unclassified irises-file
-// and class them to output file (given as arguments to main).
+// The client class read from unclassified-objects file
+// and classify them to an output file (given as arguments to main).
 #include "ClassificationClient.hpp"
 #include <fstream>
 #include <string>
@@ -11,7 +11,7 @@ using namespace std;
 // reading from file in given path
 string ClassificationClient::readingFromFile(string path){
     fstream fin;
-    fin.open(path, fstream::in); // Opens the unclassified-irises file.
+    fin.open(path, fstream::in); // Opens the unclassified-objects file.
     string line, toServer;
     while(getline(fin, line)) { // Creates a string for the data.
         toServer += line;
