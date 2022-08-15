@@ -14,20 +14,19 @@
 
 
 class ClassificationServer {
-    int server_port;
-    int socketInt;
+    int const server_port; // Const because the Server uses a single port.
+    int const socketInt; // Const because the Server uses a single socket.
     int sizeBuffer;
     struct sockaddr_in sin;
     char buffer[4096];
-public:
-    ClassificationServer();
     int receiveData(int clientSocket);
-    char* getBuffer();
-    int getSocketInt() const;
-    int getSizeBuffer() const;
-    vector<Iris> setup();
+    int listenToSocket();
     Iris stringToIris(string str) const;
     string convertToString(char* txt);
+public:
+    ClassificationServer();
+    int run(vector<Iris> irises, int k);
+    vector<Iris> setup();
 };
 
 

@@ -9,7 +9,7 @@
 
 using namespace std;
 // reading from file in given path
-string readingFromFile(string path){
+string ClassificationClient::readingFromFile(string path){
     fstream fin;
     fin.open(path, fstream::in); // Opens the unclassified-irises file.
     string line, toServer;
@@ -21,7 +21,7 @@ string readingFromFile(string path){
     return toServer;
 }
 
-void communicateServer(string path, string path2){
+void ClassificationClient::communicateServer(string path, string path2){
     // connecting to a socket
     const char* ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
     const int port_no = 56789; // The port number.
@@ -69,5 +69,6 @@ void communicateServer(string path, string path2){
 int main(int argc, char* argv[]){
     string path = argv[argc - 2]; // The path for the unclassified data.
     string path2 = argv[argc - 1]; // The path for the destination for the data.
-    communicateServer(path,path2);
+    ClassificationClient cc;
+    cc.communicateServer(path,path2);
 }

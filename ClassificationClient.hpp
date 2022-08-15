@@ -14,8 +14,9 @@
 
 
 class ClassificationClient {
-    void readingFromFile(string path);
-    void communicateServer(string path1, string path2);
+    std::string readingFromFile(std::string path);
+public:
+    void communicateServer(std::string path1, std::string path2);
 };
 
 
