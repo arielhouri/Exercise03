@@ -18,9 +18,9 @@ This program is separated into two parts, The Server and the Client. You need tw
 The classification itself  and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01#readme). In this section we will explain only how the Server and the Client work and the relationship between them.
 When the Server initializes, it creates its database (from a file named `classified.csv`) and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-flowers from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the flowers using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. After the Client disconnects, the Server waits for another Client to connect.
 ### notes:
-- The server supports multiple clients but not in the same time!
-- We chose to let the server run and wait for new clients until we shut it down.
+- The Server supports multiple Clients but not at the same time, after a Client finishes, a new Client can connecot to the Sever.
+- We decided to let the Server run and wait for new Clients until the user shut it down.
 - The sizes of the buffers for the transferred data is `4096 bytes`.
-- The port that is being used in the program is `56789`. (If you stop the code and wants to re-run you have to wait a few moments so the data of the port and socket will cleaned by the carnal).
+- The port that is being used in the program is `56789`. (If you stop the code and want to re-run you have to wait a few moments so the data of the port and socket will cleaned by the kernel).
 - The Communication Protocol that we used is [`TCP`](https://he.wikipedia.org/wiki/Transmission_Control_Protocol).
 - The value that we chose for the KNN-classifier is `k=7` (because it's efficient and also good enough statistical estimate that KNN is based of).
