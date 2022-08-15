@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// A constructor for an Classifiable that doesn't get any parameters.
+// A constructor for a Classifiable that doesn't get any parameters.
 Classifiable::Classifiable() {
     this->type = "Unclassified"; // Default type.
     for ( int i = 0; i < 10; i++) {
@@ -16,7 +16,7 @@ Classifiable::Classifiable() {
     }
 }
 
-// A constructor for an Classifiable that gets its type and measurements for the leafs.
+// A constructor for a Classifiable that gets its type and measurements for the leafs.
 Classifiable::Classifiable(string type, const double newTraits[10]) {
     this->type = type;
     for ( int i = 0; i < 10; i++) {

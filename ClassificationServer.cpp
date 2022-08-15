@@ -7,15 +7,16 @@
 #include <sstream>
 #include "ClassifierKnn.hpp"
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
-
 
 int main() {
     int k = 7; // The amount of elements that the classifier will use.
     ClassificationServer cs;
-    vector<Classifiable> flowers = cs.setup(); // The creation of the database of classified flowers.
-    if(cs.run(flowers, k) < 0) { // Runs the program.
+    string path = "../classified.csv";
+    vector<Classifiable> objs = ClassificationServer::setup(path); // The creation of the database of classified objects.
+    if(cs.run(objs, k) < 0) { // Runs the program.
         return -1;
     }
 }
@@ -79,7 +80,7 @@ int ClassificationServer::run(vector<Classifiable> flowers, int k) {
             }
             finalResult += result; // Adds the type to the list of classified Irises.
             finalResult += "\n";
-            irisString = convertToString(buffer); // Converts the next data of an Classifiable to a string.
+            irisString = convertToString(buffer); // Converts the next data of a Classifiable to a string.
         }
         char arr[finalResult.length() + 1]; // Creating the array that sends the data to the Client.
         strcpy(arr, finalResult.c_str());
@@ -100,7 +101,7 @@ int ClassificationServer::listenToSocket() {
     return 1;
 }
 
-// A function that converts a string into an Classifiable object.
+// A function that converts a string into a Classifiable object.
 Classifiable ClassificationServer::stringToIris(string str) const {
     string type; // The type of the flower.
     double topLength; // The length of the top leafs.
@@ -136,44 +137,31 @@ Classifiable ClassificationServer::stringToIris(string str) const {
     return ir;
 }
 
-// A function that creates the database of classified irises.
-vector<Classifiable> ClassificationServer::setup() {
+// A function that creates the database of already-classified objects.
+vector<Classifiable> ClassificationServer::setup(string& path) {
     fstream fin;
-    fin.open("classified.csv", fstream::in); // Opens the classified-data file.
-    string type; // The type of the flower.
-    double topLength, topWidth, bottomLength, bottomWidth; // The length and width of the top and bottom leafs.
-    vector<Classifiable> flowers;
+    fin.open(path, fstream::in); // Opens the classified-data file.
+    string type; // The type of the classifiable-object.
+    vector<Classifiable> classifiableObjectsVector;
     string line, word;
+    const char delimiter = ',';
+    double traits[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     while(getline(fin, line)){
         stringstream str(line);
-        for(int i = 0; i < 5; i++) { // A loop that gathers the data about the iris from a sting.
+        int amountOfArgs = count(line.begin(), line.end(), delimiter);
+        for(int i = 0; i < amountOfArgs; i++) { // A loop that gathers the data about the object from a sting.
             getline(str, word, ',');
-            switch (i + 1) {
-                case 5:
-                    type = word;
-                    break;
-                case 1:
-                    bottomWidth = stod(word);
-                    break;
-                case 2:
-                    bottomLength = stod(word);
-                    break;
-                case 3:
-                    topWidth = stod(word);
-                    break;
-                case 4:
-                    topLength = stod(word);
-                    break;
-                default:
-                    break;
+            if (i <= amountOfArgs) {
+                traits[i] = stod(word);
+            } else {
+                type = word;
             }
         }
-        // The creation of the iris.
-        Classifiable i(type, topLength, topWidth, bottomLength, bottomWidth);
-        flowers.push_back(i);
+        Classifiable cObj(type, traits); // The creation of the object.
+        classifiableObjectsVector.push_back(cObj);
     }
     fin.close();
-    return flowers;
+    return classifiableObjectsVector;
 }
 
 // A function that gets a pointer to a character and converts into a string, it ends when it reaches a '\n'.

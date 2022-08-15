@@ -26,7 +26,7 @@ class ClassificationServer {
 public:
     ClassificationServer();
     int run(vector<Classifiable> irises, int k);
-    vector<Classifiable> setup();
+    static vector<Classifiable> setup(string& path);
 };
 
 
