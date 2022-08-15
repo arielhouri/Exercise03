@@ -91,6 +91,7 @@ int ClassificationServer::run(vector<Iris> flowers, int k) {
     }
 }
 
+// A function that listens to a socket.
 int ClassificationServer::listenToSocket() {
     if (listen(socketInt, 5) < 0) { // Listening to the socket.
         cout << "Error listening to a socket" << endl;
