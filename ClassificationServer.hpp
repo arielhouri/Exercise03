@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <vector>
-#include "Iris.hpp"
+#include "Classifiable.hpp"
 
 
 class ClassificationServer {
@@ -21,12 +21,12 @@ class ClassificationServer {
     char buffer[4096];
     int receiveData(int clientSocket);
     int listenToSocket();
-    Iris stringToIris(string str) const;
+    Classifiable stringToIris(string str) const;
     string convertToString(char* txt);
 public:
     ClassificationServer();
-    int run(vector<Iris> irises, int k);
-    vector<Iris> setup();
+    int run(vector<Classifiable> irises, int k);
+    vector<Classifiable> setup();
 };
 
 

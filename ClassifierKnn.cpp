@@ -8,7 +8,7 @@
 
 using namespace std;
 // constructor
-ClassifierKnn::ClassifierKnn(vector<Iris>& flowers, Iris& toClassifier, int k){
+ClassifierKnn::ClassifierKnn(vector<Classifiable>& flowers, Classifiable& toClassifier, int k){
     this->flowers = flowers;
     this->toClassifier = toClassifier;
     this->k = k;

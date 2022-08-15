@@ -2,35 +2,39 @@
 // Created by Ariel Houri on 7/21/2022.
 //
 
-#include "Iris.hpp"
+#include "Classifiable.hpp"
 #include <algorithm>
 #include <cmath>
 
 using namespace std;
 
-// A constructor for an Iris that doesn't get any parameters.
-Iris::Iris() {
+// A constructor for an Classifiable that doesn't get any parameters.
+Classifiable::Classifiable() {
     this->type = "Unclassified"; // Default type.
-    this->traits = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    for ( int i = 0; i < 10; i++) {
+        traits[i] = 0;
+    }
 }
 
-// A constructor for an Iris that gets its type and measurements for the leafs.
-Iris::Iris(string type, double traits[10]) {
+// A constructor for an Classifiable that gets its type and measurements for the leafs.
+Classifiable::Classifiable(string type, const double newTraits[10]) {
     this->type = type;
-    this->traits = traits;
+    for ( int i = 0; i < 10; i++) {
+        this->traits[i] = newTraits[i];
+    }
 }
 
-// A function that returns the type of the Iris.
-string Iris::getType() const {
+// A function that returns the type of the Classifiable.
+string Classifiable::getType() const {
     return this->type;
 }
 
-double Iris::getTraits() const {
-    return this->traits;
+double* Classifiable::getTraits() {
+    return traits;
 }
 
 // A function that measures the distance between the flower and another according to Euclidean Distance.
-double Iris::euclideanDistance(const Iris &other) const {
+double Classifiable::euclideanDistance(Classifiable &other) {
     double sum = 0;
     for (int i = 0; i < 10; ++i) {
         sum += pow(this->getTraits()[i] - other.getTraits()[i], 2);
@@ -39,7 +43,7 @@ double Iris::euclideanDistance(const Iris &other) const {
 }
 
 // A function that measures the distance between the flower and another according to Manhattan Distance.
-double Iris::manhattanDistance(const Iris &other) const {
+double Classifiable::manhattanDistance(Classifiable &other) {
     double sum = 0;
     for (int i = 0; i < 10; ++i) {
         sum += abs(this->getTraits()[i] - other.getTraits()[i]);
@@ -48,7 +52,7 @@ double Iris::manhattanDistance(const Iris &other) const {
 }
 
 // A function that measures the distance between the flower and another according to Chebyshev Distance.
-double Iris::chebyshevDistance(const Iris &other) const {
+double Classifiable::chebyshevDistance(Classifiable &other) {
     double max = 0;
     for (int i = 0; i < 10; ++i) {
         if (abs(this->getTraits()[i] - other.getTraits()[i]) > max) {

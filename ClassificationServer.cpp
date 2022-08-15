@@ -14,7 +14,7 @@ using namespace std;
 int main() {
     int k = 7; // The amount of elements that the classifier will use.
     ClassificationServer cs;
-    vector<Iris> flowers = cs.setup(); // The creation of the database of classified flowers.
+    vector<Classifiable> flowers = cs.setup(); // The creation of the database of classified flowers.
     if(cs.run(flowers, k) < 0) { // Runs the program.
         return -1;
     }
@@ -51,7 +51,7 @@ int ClassificationServer::receiveData(int clientSock) {
 }
 
 // The function that runs the program.
-int ClassificationServer::run(vector<Iris> flowers, int k) {
+int ClassificationServer::run(vector<Classifiable> flowers, int k) {
     while(true) { // Infinite loop - when a client finishes, it waits for a new client.
         struct sockaddr_in client_sin; // The connection between the server and the client.
         unsigned int addr_len = sizeof(client_sin);
@@ -69,9 +69,9 @@ int ClassificationServer::run(vector<Iris> flowers, int k) {
         string finalResult, irisString = this->convertToString(buffer);
         int j = 0; // Classifying the irises and sending the results to the client:
         while (irisString.length() != 0 && irisString.length() != 1) {
-            Iris i = stringToIris(irisString); // The Iris that we need to classify.
+            Classifiable i = stringToIris(irisString); // The Classifiable that we need to classify.
             ClassifierKnn classifier(flowers, i, k); // Creates the classifier for the iris i.
-            string result = classifier.classifierEuclidean(); // Gets the type of the Iris according to Euclidean metric.
+            string result = classifier.classifierEuclidean(); // Gets the type of the Classifiable according to Euclidean metric.
             int d = j;
             for (j;
                  j < d + irisString.length() + 2; j++) { // Replaces the already-read data with a neutral character (^).
@@ -79,7 +79,7 @@ int ClassificationServer::run(vector<Iris> flowers, int k) {
             }
             finalResult += result; // Adds the type to the list of classified Irises.
             finalResult += "\n";
-            irisString = convertToString(buffer); // Converts the next data of an Iris to a string.
+            irisString = convertToString(buffer); // Converts the next data of an Classifiable to a string.
         }
         char arr[finalResult.length() + 1]; // Creating the array that sends the data to the Client.
         strcpy(arr, finalResult.c_str());
@@ -100,8 +100,8 @@ int ClassificationServer::listenToSocket() {
     return 1;
 }
 
-// A function that converts a string into an Iris object.
-Iris ClassificationServer::stringToIris(string str) const {
+// A function that converts a string into an Classifiable object.
+Classifiable ClassificationServer::stringToIris(string str) const {
     string type; // The type of the flower.
     double topLength; // The length of the top leafs.
     double topWidth; // The width of the top leafs.
@@ -132,17 +132,17 @@ Iris ClassificationServer::stringToIris(string str) const {
         pos = str.find(delimiter);
     }
     // The creation of the iris that we need to classify.
-    Iris ir("Unclassified", topLength, topWidth, bottomLength, bottomWidth);
+    Classifiable ir("Unclassified", topLength, topWidth, bottomLength, bottomWidth);
     return ir;
 }
 
 // A function that creates the database of classified irises.
-vector<Iris> ClassificationServer::setup() {
+vector<Classifiable> ClassificationServer::setup() {
     fstream fin;
     fin.open("classified.csv", fstream::in); // Opens the classified-data file.
     string type; // The type of the flower.
     double topLength, topWidth, bottomLength, bottomWidth; // The length and width of the top and bottom leafs.
-    vector<Iris> flowers;
+    vector<Classifiable> flowers;
     string line, word;
     while(getline(fin, line)){
         stringstream str(line);
@@ -169,7 +169,7 @@ vector<Iris> ClassificationServer::setup() {
             }
         }
         // The creation of the iris.
-        Iris i(type, topLength, topWidth, bottomLength, bottomWidth);
+        Classifiable i(type, topLength, topWidth, bottomLength, bottomWidth);
         flowers.push_back(i);
     }
     fin.close();

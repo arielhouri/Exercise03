@@ -7,12 +7,12 @@
 
 using namespace std;
 // constructor
-IrisAndDistance::IrisAndDistance(Iris& flower, double distance) {
+IrisAndDistance::IrisAndDistance(Classifiable& flower, double distance) {
     this->flower = flower;
     this->distance = distance;
 }
 // getter function
-Iris IrisAndDistance::getFlower() const {
+Classifiable IrisAndDistance::getFlower() const {
     return this->flower;
 }
 // getter function
@@ -70,9 +70,9 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     int versicolor = 0;
     int virginica = 0;
     int setosa = 0;
-    string versi("Iris-versicolor");
-    string virgi("Iris-virginica");
-    string setos("Iris-setosa");
+    string versi("Classifiable-versicolor");
+    string virgi("Classifiable-virginica");
+    string setos("Classifiable-setosa");
     for (int i = 0; i < v.size(); i++) {
         if (v[i].getDistance() > v[index].getDistance()) {
             continue;
@@ -89,13 +89,13 @@ string IrisAndDistance::kNearest(vector<IrisAndDistance> v, int k) {
     }
     if (versicolor >= virginica) { // The return value according to the data.
         if (versicolor >= setosa)
-            return "Iris-versicolor";
+            return "Classifiable-versicolor";
         else
-            return "Iris-setosa";
+            return "Classifiable-setosa";
     } else {
         if (setosa >= virginica)
-            return "Iris-setosa";
+            return "Classifiable-setosa";
         else
-            return "Iris-virginica";
+            return "Classifiable-virginica";
     }
 }
