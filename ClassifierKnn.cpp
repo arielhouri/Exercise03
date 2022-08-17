@@ -13,6 +13,7 @@ ClassifierKnn::ClassifierKnn(vector<Classifiable>& classifiableObjectsVector, Cl
     this->toClassifier = toClassifier;
     this->k = k;
 }
+
 // classifier by euclidean metric
 string ClassifierKnn::classifierEuclidean(){
     int length = (this->classifiableObjectsVector).size();
@@ -23,6 +24,7 @@ string ClassifierKnn::classifierEuclidean(){
     }
     return ClassifiableAndDistance::kNearest(distances, this->k);
 }
+
 // classifier by manhattan metric
 string ClassifierKnn::classifierManhattan(){
     int length = (this->classifiableObjectsVector).size();
@@ -33,6 +35,7 @@ string ClassifierKnn::classifierManhattan(){
     }
     return ClassifiableAndDistance::kNearest(distances, this->k);
 }
+
 // classifier by chebyshev metric
 string ClassifierKnn::classifierChebyshev(){
     int length = (this->classifiableObjectsVector).size();
@@ -42,4 +45,17 @@ string ClassifierKnn::classifierChebyshev(){
                                                     (this->toClassifier).chebyshevDistance((this->classifiableObjectsVector)[i])));
     }
     return ClassifiableAndDistance::kNearest(distances, this->k);
+}
+
+string ClassifierKnn::classify(ClassifierParameters cp) {
+    this->k = cp.getK();
+    if (cp.getMetric() == "EUC") {
+        return classifierEuclidean();
+    }
+    if (cp.getMetric() == "MAN") {
+        return classifierManhattan();
+    }
+    if (cp.getMetric() == "CHE") {
+        return classifierChebyshev();
+    }
 }

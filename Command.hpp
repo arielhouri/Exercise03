@@ -9,9 +9,12 @@
 
 
 class Command {
+protected:
     std::string description;
     DefaultIO* dio;
 public:
+    std::string getDescription();
+    DefaultIO* getDefaultIO();
     virtual void execute() = 0; // An abstract function.
 };
 

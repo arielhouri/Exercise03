@@ -8,6 +8,7 @@
 #include <vector>
 #include "Classifiable.hpp"
 #include "ClassifiableAndDistance.hpp"
+#include "ClassifierParameters.hpp"
 
 using namespace std;
 class ClassifierKnn {
@@ -21,6 +22,7 @@ public:
     string classifierEuclidean();
     string classifierManhattan();
     string classifierChebyshev();
+    string classify(ClassifierParameters cp);
 };
 
 #endif //EX1_CLASSIFIERKNN_H
