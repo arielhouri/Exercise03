@@ -10,7 +10,7 @@
 class DefaultIO {
 public:
     virtual std::string read() = 0; // An abstract function.
-    virtual void write(std::string) = 0; // An abstract function.
+    virtual void write(std::string toWrite) = 0; // An abstract function.
 };
 
 
