@@ -4,6 +4,8 @@
 
 #include "ClassifiableAndDistance.hpp"
 #include <algorithm>
+#include <iterator>
+#include <map>
 
 using namespace std;
 // constructor
@@ -67,35 +69,30 @@ int kElement(vector<ClassifiableAndDistance> *v, int l, int r, int k)
 string ClassifiableAndDistance::kNearest(vector<ClassifiableAndDistance> v, int k) {
     // we search for the k-1 element in V[0,...,n] (easier to understand)
     int index = kElement(&v, 0, v.size() - 1, k - 1);
-    int versicolor = 0;
-    int virginica = 0;
-    int setosa = 0;
-    string versi("Classifiable-versicolor");
-    string virgi("Classifiable-virginica");
-    string setos("Classifiable-setosa");
+    // create map of all the types and num of shows.
+    map<string, int> types;
+    for (int i = 0; i < v.size(); i++){
+        types.insert(pair<string, int>(v[index].getClassifiableObj().getType(),0));
+    }
+    map<string, int>::iterator itr;
+    // scanning the vector, search for elements in the radius.
     for (int i = 0; i < v.size(); i++) {
         if (v[i].getDistance() > v[index].getDistance()) {
-            continue;
+            continue; // not in range
         }
-        if (versi.size() + 1 == v[i].getClassifiableObj().getType().size()) {
-            versicolor++;
-        }
-        if (virgi.size() + 1 == v[i].getClassifiableObj().getType().size()) {
-            virginica++;
-        }
-        if (setos.size() + 1 == v[i].getClassifiableObj().getType().size()) {
-            setosa++;
+        for (itr = types.begin(); itr != types.end(); ++itr) {
+            if (itr->first == v[i].getClassifiableObj().getType()){
+                itr->second = itr->second + 1; // increasing num shows of this type
+            }
         }
     }
-    if (versicolor >= virginica) { // The return value according to the data.
-        if (versicolor >= setosa)
-            return "Classifiable-versicolor";
-        else
-            return "Classifiable-setosa";
-    } else {
-        if (setosa >= virginica)
-            return "Classifiable-setosa";
-        else
-            return "Classifiable-virginica";
+    int maxShows = 0; // the maximum shows of type
+    string type = ""; // the type
+    for (itr = types.begin(); itr != types.end(); ++itr) {
+        if (itr -> second > maxShows){
+            maxShows = itr -> second;
+            type = itr -> first;
+        }
     }
+    return type;
 }
