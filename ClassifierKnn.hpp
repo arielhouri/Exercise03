@@ -16,13 +16,14 @@ private:
     vector<Classifiable> classifiableObjectsVector; // classifiableObjectsVector.
     Classifiable toClassifier; // classifiableObj to class (unknown type).
     int k; // the amount of classifiableObjectsVector that the classifier will use.
-
 public:
     ClassifierKnn(vector<Classifiable>& classifiableObjectsVector, Classifiable& toClassifier, int k);
     string classifierEuclidean();
     string classifierManhattan();
     string classifierChebyshev();
     string classify(ClassifierParameters cp);
+    static vector<Classifiable> setupDatabase(std::string* path);
+    static Classifiable stringToClassifiable(std::string* line);
 };
 
 #endif //EX1_CLASSIFIERKNN_H

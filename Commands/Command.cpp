@@ -2,7 +2,7 @@
 // Created by Ariel Houri on 8/16/2022.
 //
 
-#include "Command.hpp"
+#include "Commands/Command.hpp"
 
 // A function that returns the command's description.
 std::string Command::getDescription() {
