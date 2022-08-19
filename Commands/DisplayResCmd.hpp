@@ -7,7 +7,7 @@
 
 #include "Command.hpp"
 
-class DisplayResCmd : Command{
+class DisplayResCmd : public Command{
     std::string resultsPath;
 public:
     void execute() override;

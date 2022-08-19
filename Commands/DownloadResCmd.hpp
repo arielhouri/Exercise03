@@ -8,7 +8,7 @@
 
 #include "Command.hpp"
 
-class DownloadResCmd : Command {
+class DownloadResCmd : public Command {
     std::string printPath;
     std::string resPath;
 public:

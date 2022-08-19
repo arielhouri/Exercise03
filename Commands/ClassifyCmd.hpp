@@ -10,7 +10,7 @@
 #include "ClassifierParameters.hpp"
 #include "Classifiable.hpp"
 
-class ClassifyCmd : Command {
+class ClassifyCmd : public Command {
     ClassifierParameters cp;
     std::string classifiedData;
     std::string unclassifiedData;

@@ -8,7 +8,7 @@
 #include "Command.hpp"
 #include "ClassifierParameters.hpp"
 
-class AlgoSettingsCmd : Command {
+class AlgoSettingsCmd : public Command {
     ClassifierParameters& classParams;
 public:
     AlgoSettingsCmd(ClassifierParameters& newClassParams, DefaultIO* dio);
