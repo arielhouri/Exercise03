@@ -5,7 +5,7 @@
 #ifndef IRIS_CPP_CLI_HPP
 #define IRIS_CPP_CLI_HPP
 
-#include "Command.hpp"
+#include "Commands/Command.hpp"
 
 class CLI {
     Command** commands;
