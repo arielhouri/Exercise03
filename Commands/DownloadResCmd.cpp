@@ -8,6 +8,7 @@
 // A constructor for DownloadResCmd Command.
 DownloadResCmd::DownloadResCmd(std::string& outputPath, std::string& resPath, DefaultIO* dio) : resPath(resPath),
                                                                                                 printPath(outputPath){
+    this->description = "download results";
     this->dio = dio;
 }
 

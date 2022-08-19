@@ -5,10 +5,7 @@
 #include "AlgoSettingsCmd.hpp"
 
 void AlgoSettingsCmd::execute() {
-    std::string msg = "The current KNN parameters are: K = "; // Building the msg.
-    msg += std::to_string(classParams.getK());
-    msg += ", distance metric = ";
-    msg += classParams.getMetric();
+    std::string msg = classParams.getStringRepresentation();
     dio->write(msg); // Printing the algorithm's settings.
     std::string ans = dio->read();
     if (ans.empty() || ans == "\n") { // Checking if the user wants to change the settings.

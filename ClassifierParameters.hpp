@@ -17,6 +17,7 @@ public:
     int getK();
     int setMetric(std::string metric);
     std::string getMetric();
+    std::string getStringRepresentation();
 };
 
 
