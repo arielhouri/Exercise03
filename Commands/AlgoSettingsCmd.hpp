@@ -8,10 +8,10 @@
 #include "Command.hpp"
 #include "ClassifierParameters.hpp"
 
-class AlgoSettingsCmd : Command {
-    ClassifierParameters* classParams;
+class AlgoSettingsCmd : public Command {
+    ClassifierParameters& classParams;
 public:
-    AlgoSettingsCmd(ClassifierParameters* newClassParams, DefaultIO* dio);
+    AlgoSettingsCmd(ClassifierParameters& newClassParams, DefaultIO* dio);
     void execute() override;
 };
 

@@ -10,13 +10,13 @@
 #include "ClassifierParameters.hpp"
 #include "Classifiable.hpp"
 
-class ClassifyCmd : Command {
-    ClassifierParameters* cp;
-    std::string* classifiedData;
-    std::string* unclassifiedData;
+class ClassifyCmd : public Command {
+    ClassifierParameters cp;
+    std::string classifiedData;
+    std::string unclassifiedData;
 public:
     void execute() override;
-    ClassifyCmd(std::string* classifiedData, std::string* unclassifiedData, ClassifierParameters* cp, DefaultIO* dio);
+    ClassifyCmd(std::string& classifiedData, std::string& unclassifiedData, ClassifierParameters& cp, DefaultIO* dio);
 };
 
 

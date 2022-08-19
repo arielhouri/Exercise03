@@ -7,11 +7,11 @@
 
 #include "Command.hpp"
 
-class DisplayResCmd : Command{
-    std::string* resultsPath;
+class DisplayResCmd : public Command{
+    std::string resultsPath;
 public:
     void execute() override;
-    DisplayResCmd(std::string* resultsPath, DefaultIO* dio);
+    DisplayResCmd(std::string& resultsPath, DefaultIO* dio);
 };
 
 

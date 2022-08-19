@@ -6,15 +6,18 @@
 #include "Commands/DisplayResCmd.hpp"
 
 // A constructor for the Display-Results-Command.
-DisplayResCmd::DisplayResCmd(std::string* resultsPath, DefaultIO* dio) {
+DisplayResCmd::DisplayResCmd(std::string& resultsPath, DefaultIO* dio) : resultsPath(resultsPath) {
     this->description = "display results";
     this->dio = dio;
-    this->resultsPath = resultsPath;
 }
 
 void DisplayResCmd::execute() {
     std::fstream fin; // Opens the results file.
-    fin.open(*this->resultsPath, std::fstream::in);
+    if (resultsPath.empty()) {
+        this->dio->write("Error!");
+        return;
+    }
+    fin.open(this->resultsPath, std::fstream::in);
     std::string line;
     while(getline(fin, line)){ // Loop over all the lines of the results file.
         this->dio->write(line); // Prints the lines.
