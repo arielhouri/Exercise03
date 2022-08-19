@@ -11,11 +11,12 @@ class CLI {
     Command** commands;
     DefaultIO* io;
     std::string pathFile;
+    std::string pathClassified;
     ClassifierParameters parameters;
     std::string results;
     bool shouldStop;
 public:
-    CLI(DefaultIO io);
+    CLI(DefaultIO io,std::string classifiedPath);
     void start();
 };
 

@@ -9,9 +9,10 @@
 #include "ClassifierParameters.hpp"
 #include "CLI.hpp"
 
-CLI::CLI(DefaultIO io){
+CLI::CLI(DefaultIO io, string classifiedPath){
     // initialize the fields (empty string stands for uninitialized field)
     this->pathFile = "";
+    this->pathClassified = classifiedPath;
     this->parameters = ClassifierParameters();
     this-> results = "";
     this-> shouldStop = false;
@@ -19,9 +20,9 @@ CLI::CLI(DefaultIO io){
     Command** pCommands = new Command*[7];
     pCommands[0] = // upload an unclassified csv data file
     pCommands[1] = new AlgoSettingsCmd(this->parameters,this->io); // algorithm settings
-    commands[2] = new ClassifyCmd(this->pathFile, this->parameters, this->io); // classify data
+    commands[2] = new ClassifyCmd(this->pathClassified,this->pathFile, this->parameters, this->io); // classify data
     commands[3] = new DisplayResCmd(this->results, this->io);// display Results
-    commands[4] = new DownloadResCmd(this->results, this->pathFile); // download results
+    commands[4] = new DownloadResCmd(this->results, this->pathFile, this->io); // download results
     // Waiting for finish of the Commands...
     this->commands = pCommands;
 }
@@ -30,7 +31,7 @@ void CLI::start() {
     while(!this->shouldStop){
         // printing the menu
         for (int i = 0; i < 7; i++){
-            (this->io)->write((this->commands)[i]->getDescription());
+            (this->io)->write(to_string(i+1) + ". " +(this->commands)[i]->getDescription());
         }
         commandChoose = stoi((this->io)->read());
         if (commandChoose < 1 || commandChoose > 8){
@@ -39,4 +40,5 @@ void CLI::start() {
         }
         commands[commandChoose - 1]->execute();
     }
+    delete(this->commands);
 }
