@@ -10,6 +10,7 @@
 #include "ClassifierKnn.hpp"
 
 void ClassifyCmd::execute() {
+    currentResults = ""; // Empties the results-string.
     vector<Classifiable> database = ClassifierKnn::setupDatabase(&(this->classifiedData));
     fstream fin; // Opens the unclassified-data file.
     fin.open(this->unclassifiedData, fstream::in);

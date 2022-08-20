@@ -19,6 +19,6 @@ void DownloadResCmd::execute() {
         return;
     }
     fout.open(this->printPath, std::fstream::out | std::fstream::trunc);
-    fout << results << std::endl << "Done." << std::endl;
+    fout << results << std::endl << "Done." << std::endl; // Prints the results.
     fout.close(); // Closes the output file-stream.
-} // Need to add a part!!!!
+}
