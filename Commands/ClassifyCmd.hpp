@@ -13,10 +13,12 @@
 class ClassifyCmd : public Command {
     ClassifierParameters cp;
     std::string classifiedData;
+    std::string currentResults;
     std::string unclassifiedData;
 public:
     void execute() override;
-    ClassifyCmd(std::string& classifiedData, std::string& unclassifiedData, ClassifierParameters& cp, DefaultIO* dio);
+    ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string& unclassifiedData,
+                ClassifierParameters& cp, DefaultIO* dio);
 };
 
 

@@ -8,10 +8,10 @@
 #include "Command.hpp"
 
 class DisplayResCmd : public Command{
-    std::string resultsPath;
+    std::string results;
 public:
     void execute() override;
-    DisplayResCmd(std::string& resultsPath, DefaultIO* dio);
+    DisplayResCmd(std::string& results, DefaultIO* dio);
 };
 
 

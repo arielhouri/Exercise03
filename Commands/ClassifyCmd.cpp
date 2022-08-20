@@ -11,8 +11,6 @@
 
 void ClassifyCmd::execute() {
     vector<Classifiable> database = ClassifierKnn::setupDatabase(&(this->classifiedData));
-    fstream fRes; // Opens a file to save the results.
-    fRes.open("../res.csv", fstream::in | fstream::out | fstream::trunc);
     fstream fin; // Opens the unclassified-data file.
     fin.open(this->unclassifiedData, fstream::in);
     string line;
@@ -21,18 +19,21 @@ void ClassifyCmd::execute() {
         Classifiable obj = ClassifierKnn::stringToClassifiable(&line); // Gets the object to classify,
         ClassifierKnn classifier(database, obj, 1); // Creates its classifier.
         // Prints the number, and then the type of the object, from the result the classifier gave.
-        fRes << to_string(i) << "   " << classifier.classify(this->cp) << endl;
+        currentResults += to_string(i);
+        currentResults += "   ";
+        currentResults += classifier.classify(this->cp);
+        currentResults += "\n";
         i++; // Adds one to the counter.
     }
-    fRes.close();
     fin.close();
     this->dio->write("Classifying data complete!"); // Notifying that the classification is over.
 }
 
 
 // A constructor for the Classify Command.
-ClassifyCmd::ClassifyCmd(std::string& classifiedData, std::string& unclassifiedData, ClassifierParameters& cp,
-                         DefaultIO* dio) : classifiedData(classifiedData), unclassifiedData(unclassifiedData), cp(cp){
+ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string& unclassifiedData,
+                         ClassifierParameters& cp,DefaultIO* dio) : classifiedData(classifiedData),
+                         unclassifiedData(unclassifiedData), cp(cp), currentResults(currentResults) {
     this->description = "classify data";
     this->dio = dio;
 }
