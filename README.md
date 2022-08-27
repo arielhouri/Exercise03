@@ -29,12 +29,12 @@ When the Server initializes, it creates its database (from a file named `classif
 ### note anout implemntion 
 - In order to support reading from files, writing to file and standard input and output, we send two messages from the server each time.
 The first one is instruction and the other is the message.
-'$exit$' - stops the communication.
-'$print$' - print the message.
-'$print&Num$' - printing the message and reciving a number from the client.
-'$print&upload$' - printing the message and upload a file (the client recive path from the user and send the data).
-'$print&string$' - printing the message and sending string from user.
-'$print&download$' - printing the message to download to file (given path from the user).
+`$exit$` - stops the communication.
+`$print$` - print the message.
+`$print&Num$` - printing the message and reciving a number from the client.
+`$print&upload$` - printing the message and upload a file (the client recive path from the user and send the data).
+`$print&string$` - printing the message and sending string from user.
+`$print&download$` - printing the message to download to file (given path from the user).
 ### notes: - Need to be updated.
 - The sizes of the buffers for the transferred data is `4096 bytes`.
 - The port that is being used in the program is `56789`. (If you stop the code and want to re-run you have to wait a 
