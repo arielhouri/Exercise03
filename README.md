@@ -10,7 +10,7 @@ arguments from type Double). As mentioned earlier, the server has a CLI and supp
 3. Classify the data. 
 4. Print the classified objects' types to the screen.
 5. Save the classified objects' types to a file on the client's computer.
-6. Print the confusion matrix of the classifier.
+6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier.
 7. Exit the program.
 
 

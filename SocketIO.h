@@ -21,7 +21,7 @@ public:
     SocketIO(int port,char* id);
     std::string read() override;
     std::string readFromFile(std::string address) override;
-    std::string writeToFile(std::string address, std::string msg) override; // need to open the file as: std::fstream::out | std::fstream::trunc
+    void writeToFile(std::string address, std::string msg) override; // need to open the file as: std::fstream::out | std::fstream::trunc
     void write(std::string toWrite) override;
 };
 
