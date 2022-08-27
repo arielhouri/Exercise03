@@ -91,7 +91,7 @@ using namespace std;
                 cout << message << endl;
             }
             // choosing an option.
-            if (messageCommand == "$print&Num$"){
+            if (messageCommand == "$print&num$"){
                 cout << message << endl;
                 cin >> num;
                 write(sock, to_string(num));
@@ -103,7 +103,7 @@ using namespace std;
                 write(sock,readingFromFile(pathReadFrom));
             }
             // changing the parameter (command 2)
-            if (messageCommand == "$print&giveNewArgs$"){
+            if (messageCommand == "$print&string$"){
                 cout << message << endl;
                 cin >> toServer;
                 write(sock, toServer);

@@ -6,7 +6,7 @@
 
 void AlgoSettingsCmd::execute() {
     std::string msg = classParams.getStringRepresentation();
-    dio->write("$print&giveNewArgs$");
+    dio->write("$print&string$");
     dio->write(msg); // Printing the algorithm's settings.
     std::string ans = dio->read();
     if (ans.empty() || ans == "\n") { // Checking if the user wants to change the settings.

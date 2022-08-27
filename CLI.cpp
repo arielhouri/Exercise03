@@ -35,7 +35,7 @@ void CLI::start() {
     }
     while(!this->shouldStop){
         // printing the menu
-        (this->io)->write("$print&Num$"); // print and read option to Choose
+        (this->io)->write("$print&num$"); // print and read option to Choose
         (this->io)->write(menu);
         commandChoose = stoi((this->io)->read());
         if (commandChoose < 1 || commandChoose > 8){
