@@ -6,7 +6,7 @@
 
 void AlgoSettingsCmd::execute() {
     std::string msg = classParams.getStringRepresentation();
-    dio->write("$print&giveNewArgs$\n");
+    dio->write("$print&giveNewArgs$");
     dio->write(msg); // Printing the algorithm's settings.
     std::string ans = dio->read();
     if (ans.empty() || ans == "\n") { // Checking if the user wants to change the settings.
@@ -16,21 +16,21 @@ void AlgoSettingsCmd::execute() {
     std::string token = ans.substr(0, pos);
     ans.erase(0, pos + 1);
     if (classParams.setK(stoi(token)) != 0 && classParams.setMetric(ans) != 0) {
-        dio->write("$print$\n");
+        dio->write("$print$");
         dio->write("Both arguments are invalid!");
         return;
     }
     if (classParams.setK(stoi(token)) != 0) { // Setting the new value of K.
-        dio->write("$print$\n");
+        dio->write("$print$");
         dio->write("Invalid value of K, The new metric was set.");
         return;
     }
     if (classParams.setMetric(ans) != 0) { // Setting the new Metric.
-        dio->write("$print$\n");
+        dio->write("$print$");
         dio->write("Invalid metric, The new value of K was set.");
         return;
     }
-    dio->write("$print$\n");
+    dio->write("$print$");
     dio->write("The new values were set.");
 }
 

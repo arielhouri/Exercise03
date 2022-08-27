@@ -6,17 +6,19 @@
 #define EXERCISE02_CLASSIFICATIONCLIENT_H
 #include <iostream>
 #include <sys/socket.h>
-#include <stdio.h>
+#include <cstdio>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include <string.h>
+#include <cstring>
 
 
 class ClassificationClient {
-    std::string readingFromFile(std::string path);
+    static std::string readingFromFile(const std::string& path);
+    static std::string read(int sock);
+    static void write(int sock, const std::string& toWrite);
 public:
-    void communicateServer(std::string path1, std::string path2);
+    static void communicateServer();
 };
 
 

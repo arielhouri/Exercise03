@@ -12,8 +12,8 @@ DownloadResCmd::DownloadResCmd(std::string& results, DefaultIO* dio) : results(r
 }
 
 void DownloadResCmd::execute() {
-    dio->write("$print&download$\n");
+    dio->write("$print&download$");
     dio->write(results);
-    dio->write("$print$\n");
-    dio->write("Done.\n");
+    dio->write("$print$");
+    dio->write("Done.");
 }
