@@ -12,12 +12,12 @@
 
 class ClassifyCmd : public Command {
     ClassifierParameters cp;
-    std::string classifiedDataAddress;
+    std::string classifiedData;
     std::string currentResults;
-    std::string unclassifiedDataAddress;
+    std::string unclassifiedData;
 public:
     void execute() override;
-    ClassifyCmd(std::string& currentResults, std::string& classifiedDataAddress, std::string unclassifiedDataAddress,
+    ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string unclassifiedData,
                 ClassifierParameters& cp, DefaultIO* dio);
 };
 

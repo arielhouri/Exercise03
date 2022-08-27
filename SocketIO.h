@@ -19,8 +19,6 @@ private:
 public:
     SocketIO(int sock);
     std::string read() override;
-    std::string readFromFile(std::string address) override;
-    void writeToFile(std::string address, std::string msg) override; // need to open the file as: std::fstream::out | std::fstream::trunc
     void write(std::string toWrite) override;
 };
 

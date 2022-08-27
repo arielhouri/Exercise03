@@ -11,8 +11,7 @@
 
 void ClassifyCmd::execute() {
     currentResults = ""; // Empties the results-string.
-    vector<Classifiable> database = ClassifierKnn::setupDatabase(dio->readFromFile(classifiedDataAddress));
-    std::string unclassifiedData = dio->readFromFile(unclassifiedDataAddress);
+    vector<Classifiable> database = ClassifierKnn::setupDatabase(classifiedData);
     int i = 1;
     std::string delimiter = "\n";
     size_t pos = 0;
@@ -29,14 +28,15 @@ void ClassifyCmd::execute() {
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
+    dio->write("$print$\n");
     this->dio->write("Classifying data complete!"); // Notifying that the classification is over.
 }
 
 
 // A constructor for the Classify Command.
-ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedDataAddress, std::string unclassifiedDataAddress,
-                         ClassifierParameters& cp, DefaultIO* dio) : classifiedDataAddress(classifiedDataAddress),
-                         unclassifiedDataAddress(unclassifiedDataAddress), cp(cp), currentResults(currentResults) {
+ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string unclassifiedData,
+                         ClassifierParameters& cp, DefaultIO* dio) : classifiedData(classifiedData),
+                         unclassifiedData(unclassifiedData), cp(cp), currentResults(currentResults) {
     this->description = "classify data";
     this->dio = dio;
 }

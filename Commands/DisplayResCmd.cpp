@@ -12,6 +12,8 @@ DisplayResCmd::DisplayResCmd(std::string& results, DefaultIO* dio) : results(res
 }
 
 void DisplayResCmd::execute() {
+    dio->write("$print$\n");
     this->dio->write(results);
-    this->dio->write("Done.");
+    dio->write("$print$\n");
+    this->dio->write("Done.\n");
 }

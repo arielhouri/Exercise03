@@ -9,10 +9,9 @@
 #include "Command.hpp"
 
 class DownloadResCmd : public Command {
-    std::string printPath;
     std::string results;
 public:
-    DownloadResCmd(std::string& outputPath, std::string& results, DefaultIO* dio);
+    DownloadResCmd(std::string& results, DefaultIO* dio);
     void execute() override;
 };
 

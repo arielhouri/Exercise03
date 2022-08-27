@@ -6,13 +6,14 @@
 #include "Commands/DownloadResCmd.hpp"
 
 // A constructor for DownloadResCmd Command.
-DownloadResCmd::DownloadResCmd(std::string& outputPath, std::string& results, DefaultIO* dio) : results(results),
-                                                                                                printPath(outputPath){
+DownloadResCmd::DownloadResCmd(std::string& results, DefaultIO* dio) : results(results){
     this->description = "download results";
     this->dio = dio;
 }
 
 void DownloadResCmd::execute() {
-    dio->writeToFile(printPath,results);
-    dio->writeToFile(printPath, "Done.");
+    dio->write("$print&download$\n");
+    dio->write(results);
+    dio->write("$print$\n");
+    dio->write("Done.\n");
 }
