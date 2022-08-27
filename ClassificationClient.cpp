@@ -71,7 +71,6 @@ using namespace std;
         }
         string messageCommand; // "$command$"
         string message; // message after command
-        char buffer[4096]; // reading from server
         int num; // choosing an option
         string toServer; // send to server
         string pathReadFrom; // for upload a file
@@ -115,7 +114,7 @@ using namespace std;
                 cin >> pathToWrite;
                 fstream fileout;
                 fileout.open(pathToWrite, fstream::out | ofstream::trunc);
-                fileout << buffer << endl;
+                fileout << message << endl;
                 fileout.close();
             }
         }
