@@ -28,13 +28,18 @@ CLI::CLI(DefaultIO io, string classifiedPath){
 }
 void CLI::start() {
     int commandChoose;
+    // menu to print
+    string menu = "";
+    for (int i = 0; i < 7; i++){
+        menu += (to_string(i+1) + ". " +(this->commands)[i]->getDescription());
+    }
     while(!this->shouldStop){
         // printing the menu
-        for (int i = 0; i < 7; i++){
-            (this->io)->write(to_string(i+1) + ". " +(this->commands)[i]->getDescription());
-        }
+        (this->io)->write("$print&Num$"); // print and read option to Choose
+        (this->io)->write(menu);
         commandChoose = stoi((this->io)->read());
         if (commandChoose < 1 || commandChoose > 8){
+            this->io->write("$print$");
             this->io->write("invalid input");
             continue;
         }
