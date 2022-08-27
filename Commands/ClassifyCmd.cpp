@@ -11,13 +11,16 @@
 
 void ClassifyCmd::execute() {
     currentResults = ""; // Empties the results-string.
-    vector<Classifiable> database = ClassifierKnn::setupDatabase(&(this->classifiedData));
-    fstream fin; // Opens the unclassified-data file.
-    fin.open(this->unclassifiedData, fstream::in);
-    string line;
+    vector<Classifiable> database = ClassifierKnn::setupDatabase(dio->readFromFile(classifiedDataAddress));
+    std::string unclassifiedData = dio->readFromFile(unclassifiedDataAddress);
     int i = 1;
-    while(getline(fin, line)){ // Classifies every object and prints it into the file.
-        Classifiable obj = ClassifierKnn::stringToClassifiable(&line); // Gets the object to classify,
+    std::string delimiter = "\n";
+    size_t pos = 0;
+    std::string token = unclassifiedData.substr(pos, unclassifiedData.find(delimiter));
+    while ((pos = unclassifiedData.find(delimiter)) != std::string::npos) {
+        token = unclassifiedData.substr(0, unclassifiedData.find(delimiter));
+        unclassifiedData.erase(0, pos + delimiter.length());
+        Classifiable obj = ClassifierKnn::stringToClassifiable(&token); // Gets the object to classify,
         ClassifierKnn classifier(database, obj, 1); // Creates its classifier.
         // Prints the number, and then the type of the object, from the result the classifier gave.
         currentResults += to_string(i);
@@ -26,15 +29,14 @@ void ClassifyCmd::execute() {
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
-    fin.close();
     this->dio->write("Classifying data complete!"); // Notifying that the classification is over.
 }
 
 
 // A constructor for the Classify Command.
-ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string& unclassifiedData,
-                         ClassifierParameters& cp,DefaultIO* dio) : classifiedData(classifiedData),
-                         unclassifiedData(unclassifiedData), cp(cp), currentResults(currentResults) {
+ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedDataAddress, std::string unclassifiedDataAddress,
+                         ClassifierParameters& cp, DefaultIO* dio) : classifiedDataAddress(classifiedDataAddress),
+                         unclassifiedDataAddress(unclassifiedDataAddress), cp(cp), currentResults(currentResults) {
     this->description = "classify data";
     this->dio = dio;
 }

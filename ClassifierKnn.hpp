@@ -22,7 +22,7 @@ public:
     string classifierManhattan();
     string classifierChebyshev();
     string classify(ClassifierParameters cp);
-    static vector<Classifiable> setupDatabase(std::string* path);
+    static vector<Classifiable> setupDatabase(std::string data);
     static Classifiable stringToClassifiable(std::string* line);
 };
 

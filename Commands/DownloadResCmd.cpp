@@ -13,12 +13,6 @@ DownloadResCmd::DownloadResCmd(std::string& outputPath, std::string& results, De
 }
 
 void DownloadResCmd::execute() {
-    std::fstream fout; // Opens the output file.
-    if (printPath.empty()) {
-        this->dio->write("Error!");
-        return;
-    }
-    fout.open(this->printPath, std::fstream::out | std::fstream::trunc);
-    fout << results << std::endl << "Done." << std::endl; // Prints the results.
-    fout.close(); // Closes the output file-stream.
+    dio->writeToFile(printPath,results);
+    dio->writeToFile(printPath, "Done.");
 }

@@ -85,14 +85,15 @@ Classifiable ClassifierKnn::stringToClassifiable(std::string* line) {
 }
 
 // A public static function that creates a database of Classifiable objects with their type.
-vector<Classifiable> ClassifierKnn::setupDatabase(std::string* path) {
-    fstream fin;
-    fin.open(*path, fstream::in); // Opens the classified-data file.
+vector<Classifiable> ClassifierKnn::setupDatabase(std::string data) {
     vector<Classifiable> classifiableObjectsVector;
-    string line;
-    while(getline(fin, line)){
-        classifiableObjectsVector.push_back(ClassifierKnn::stringToClassifiable(&line));
+    std::string delimiter = "\n";
+    size_t pos;
+    std::string token = data.substr(0, data.find(delimiter));
+    while ((pos = data.find(delimiter)) != std::string::npos) {
+        token = data.substr(0, data.find(delimiter));
+        data.erase(0, pos + delimiter.length());
+        classifiableObjectsVector.push_back(ClassifierKnn::stringToClassifiable(&token));
     }
-    fin.close();
     return classifiableObjectsVector;
 }

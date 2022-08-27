@@ -8,8 +8,8 @@
 #include "Command.hpp"
 
 class UploadCmd : public Command {
-    std::string classifiedData;
-    std::string unclassifiedData;
+    std::string classifiedDataAddress;
+    std::string unclassifiedDataAddress;
 public:
     void execute() override;
     UploadCmd(std::string& classifiedData, std::string& unclassifiedData, DefaultIO* dio);
