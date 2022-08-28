@@ -2,7 +2,6 @@
 // Created by ariel on 8/18/2022.
 //
 
-#include <fstream>
 #include "Commands/DownloadResCmd.hpp"
 
 // A constructor for DownloadResCmd Command.

@@ -2,7 +2,6 @@
 // Created by Ariel Houri on 8/18/2022.
 //
 
-#include <fstream>
 #include "Commands/DisplayResCmd.hpp"
 
 // A constructor for the Display-Results-Command.

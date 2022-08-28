@@ -10,13 +10,13 @@
 #include <vector>
 
 class ConfusionMatrixCmd : public Command {
-    std::string classifiedPath;
-    std::string unclassifiedPath;
+    std::string classified;
+    std::string unclassified;
     std::vector<std::string> types;
     ClassifierParameters classParams;
 public:
     void execute() override;
-    ConfusionMatrixCmd(std::string& classifiedPath, std::string& unclassifiedPath, ClassifierParameters& newClassParams, DefaultIO* dio);
+    ConfusionMatrixCmd(std::string& classified, std::string& unclassified, ClassifierParameters& newClassParams, DefaultIO* dio);
 };
 
 
