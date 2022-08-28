@@ -1,6 +1,7 @@
 //
 // Created by Yonatan Semidubersky on 8/16/2022.
 //
+#include <string>
 #include "Commands/Command.hpp"
 #include "Commands/ClassifyCmd.hpp"
 #include "Commands/AlgoSettingsCmd.hpp"
@@ -17,22 +18,15 @@ CLI::CLI(DefaultIO* sio){
     this->shouldStop = false;
     ClassifierParameters cp;
     this->sio = sio;
-    // Creating the actual commands-objects.
-    UploadCmd cmd1(classifiedData, unclassifiedData, sio);
-    AlgoSettingsCmd cmd2(cp, sio);
-    ClassifyCmd cmd3(results, classifiedData, unclassifiedData, cp, sio);
-    DisplayResCmd cmd4(results, sio);
-    DownloadResCmd cmd5(results, sio);
-    ConfusionMatrixCmd cmd6(classifiedData, unclassifiedData, cp, sio);
-    ExitCmd cmd7(sio);
-    this->commands[0] = &cmd1; // Creating the commands-array:
-    this->commands[1] = &cmd2;
-    this->commands[2] = &cmd3;
-    this->commands[3] = &cmd4;
-    this->commands[4] = &cmd5;
-    this->commands[5] = &cmd6;
-    this->commands[6] = &cmd7;
-
+    Command** pCommands = new Command*[7];
+    pCommands[0] = new UploadCmd(classifiedData, unclassifiedData, sio);
+    pCommands[1] = new AlgoSettingsCmd(cp, sio); // algorithm settings
+    pCommands[2] = new ClassifyCmd(results, classifiedData, unclassifiedData, cp, sio); // classify data
+    pCommands[3] = new DisplayResCmd(results, sio);// display Results
+    pCommands[4] = new DownloadResCmd(results, sio); // download results
+    pCommands[5] = new ConfusionMatrixCmd(classifiedData, unclassifiedData, cp, sio);// display Results
+    pCommands[6] = new ExitCmd(sio); // download results
+    this->commands = pCommands;
 }
 
 // Initializing the CLI and starting the communication.
@@ -42,15 +36,17 @@ void CLI::start() {
     string menu = "";
     for (int i = 0; i < 7; i++){
         menu += (to_string(i+1) + ". " +(this->commands)[i]->getDescription());
+        if (i == 6) {
+            break;
+        }
+        menu += "\n";
     }
-    while(!this->shouldStop){
+    while(!shouldStop){
         // printing the menu
-        (this->sio)->write("$print&num$"); // print and read option to Choose
-        (this->sio)->write(menu);
+        (this->sio)->write("$print&num$" + menu); // print and read option to Choose
         commandPick = stoi((this->sio)->read());
         if (commandPick < 1 || commandPick > 8){
-            this->sio->write("$print$");
-            this->sio->write("invalid input");
+            this->sio->write("$print$invalid input");
             continue;
         }
         commands[commandPick - 1]->execute();

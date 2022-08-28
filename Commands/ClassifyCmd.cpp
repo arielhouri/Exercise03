@@ -27,8 +27,7 @@ void ClassifyCmd::execute() {
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
-    dio->write("$print$");
-    this->dio->write("Classifying data complete!"); // Notifying that the classification is over.
+    dio->write("$print$Classifying data complete!"); // Notifying that the classification is over.
 }
 
 
