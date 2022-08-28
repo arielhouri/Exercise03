@@ -78,7 +78,7 @@ using namespace std;
     void ClassificationClient::communicateServer() {
         // connecting to a socket
         const char *ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
-        const int port_no = 40003; // The port number.
+        const int port_no = 40690; // The port number.
         int sock = socket(AF_INET, SOCK_STREAM, 0); // Creating the socket.
         if (sock < 0) {
             cout << "Error creating socket" << endl;
@@ -114,6 +114,7 @@ using namespace std;
             }
             if (messageCommand == "$print$"){
                 cout << message << endl;
+                write(sock, "$sent$");
             }
             // choosing an option.
             if (messageCommand == "$print&num$"){
@@ -130,20 +131,13 @@ using namespace std;
             // changing the parameter (command 2)
             if (messageCommand == "$print&string$"){
                 cout << message << endl;
-                cout << ":" << toServer << ":" << endl;
-                getline(cin, toServer);
-                if (toServer.empty()) {
-                    getline(cin, toServer);
-                    if (toServer.empty()) {
-                        toServer = "$empty$";
-                    }
-                }
-                cout << ":" << toServer << ":" << endl;
+                cin >> toServer;
                 write(sock, toServer);
             }
             // download a file (command 5)
             if (messageCommand == "$print&download$"){
                 cout << message << endl;
+                write(sock, "$sent$");
                 cin >> pathToWrite;
                 fstream fileout;
                 fileout.open(pathToWrite, fstream::out | ofstream::trunc);
