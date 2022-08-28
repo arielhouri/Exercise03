@@ -8,6 +8,7 @@
 #include "Classifier/ClassifierKnn.hpp"
 
 void ClassifyCmd::execute() {
+    std::cout << "LOL:" << classifiedData << std::endl;
     currentResults = ""; // Empties the results-string.
     vector<Classifiable> database = ClassifierKnn::setupDatabase(classifiedData); // Creates the database.
     int i = 1;

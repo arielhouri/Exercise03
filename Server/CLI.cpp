@@ -2,6 +2,7 @@
 // Created by Yonatan Semidubersky on 8/16/2022.
 //
 #include <string>
+#include <iostream>
 #include "Commands/Command.hpp"
 #include "Commands/ClassifyCmd.hpp"
 #include "Commands/AlgoSettingsCmd.hpp"
@@ -44,7 +45,9 @@ void CLI::start() {
     while(!shouldStop){
         // printing the menu
         (this->sio)->write("$print&num$" + menu); // print and read option to Choose
-        commandPick = stoi((this->sio)->read());
+        string str = (this->sio)->read();
+        std::cout << str << std::endl;
+        commandPick = stoi(str);
         commands[commandPick - 1]->execute();
     }
     delete(this->commands);
