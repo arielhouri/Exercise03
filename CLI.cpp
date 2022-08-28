@@ -8,26 +8,35 @@
 #include "Commands/DownloadResCmd.hpp"
 #include "ClassifierParameters.hpp"
 #include "CLI.hpp"
+#include "SocketIO.h"
+#include "Commands/UploadCmd.hpp"
+#include "Commands/ConfusionMatrixCmd.hpp"
+#include "Commands/ExitCmd.hpp"
+#include <array>
 
-CLI::CLI(DefaultIO io, string classifiedPath){
-    // initialize the fields (empty string stands for uninitialized field)
-    this->pathFile = "";
-    this->pathClassified = classifiedPath;
-    this->parameters = ClassifierParameters();
-    this-> results = "";
-    this-> shouldStop = false;
-    this->io = &io;
-    Command** pCommands = new Command*[7];
-    pCommands[0] = // upload an unclassified csv data file
-    pCommands[1] = new AlgoSettingsCmd(this->parameters,this->io); // algorithm settings
-    commands[2] = new ClassifyCmd(this->pathClassified,this->pathFile, this->parameters, this->io); // classify data
-    commands[3] = new DisplayResCmd(this->results, this->io);// display Results
-    commands[4] = new DownloadResCmd(this->results, this->pathFile, this->io); // download results
-    // Waiting for finish of the Commands...
-    this->commands = pCommands;
+// A constructor for the CLI.
+CLI::CLI(DefaultIO* sio){
+    this->shouldStop = false;
+    ClassifierParameters cp;
+    this->sio = sio;
+    UploadCmd cmd1(classifiedData, unclassifiedData, sio);
+    AlgoSettingsCmd cmd2(cp, sio);
+    ClassifyCmd cmd3(results, classifiedData, unclassifiedData, cp, sio);
+    DisplayResCmd cmd4(results, sio);
+    DownloadResCmd cmd5(results, sio);
+    ConfusionMatrixCmd cmd6(classifiedData, unclassifiedData, cp, sio);
+    ExitCmd cmd7(sio);
+    this->commands[0] = &cmd1; // Creating the commands-array:
+    this->commands[1] = &cmd2;
+    this->commands[2] = &cmd3;
+    this->commands[3] = &cmd4;
+    this->commands[4] = &cmd5;
+    this->commands[5] = &cmd6;
+    this->commands[6] = &cmd7;
+
 }
 void CLI::start() {
-    int commandChoose;
+    int commandPick;
     // menu to print
     string menu = "";
     for (int i = 0; i < 7; i++){
@@ -35,15 +44,15 @@ void CLI::start() {
     }
     while(!this->shouldStop){
         // printing the menu
-        (this->io)->write("$print&num$"); // print and read option to Choose
-        (this->io)->write(menu);
-        commandChoose = stoi((this->io)->read());
-        if (commandChoose < 1 || commandChoose > 8){
-            this->io->write("$print$");
-            this->io->write("invalid input");
+        (this->sio)->write("$print&num$"); // print and read option to Choose
+        (this->sio)->write(menu);
+        commandPick = stoi((this->sio)->read());
+        if (commandPick < 1 || commandPick > 8){
+            this->sio->write("$print$");
+            this->sio->write("invalid input");
             continue;
         }
-        commands[commandChoose - 1]->execute();
+        commands[commandPick - 1]->execute();
     }
     delete(this->commands);
 }
