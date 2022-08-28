@@ -28,6 +28,7 @@ void ClassifyCmd::execute() {
         i++; // Adds one to the counter.
     }
     dio->write("$print$Classifying data complete!"); // Notifying that the classification is over.
+    dio->read();
 }
 
 // A constructor for the Classify Command.

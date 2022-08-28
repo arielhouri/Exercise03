@@ -16,8 +16,10 @@ void UploadCmd::execute() {
     inputStr = dio->read(); // Gets the classified objects file.
     classifiedData = inputStr; // Saves the classified-data in a variable.
     dio->write("$print$Upload complete."); // Notifies that the first part of the upload is over.
+    dio->read();
     dio->write("$print&upload$Please upload your local test csv file.");
     inputStr = dio->read(); // Gets the unclassified objects file.
     this->unclassifiedData = inputStr; // Saves unclassified-data in a variable.
     dio->write("$print$Upload complete."); // Notifies that the whole upload is over.
+    dio->read();
 }

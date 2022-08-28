@@ -19,17 +19,21 @@ void AlgoSettingsCmd::execute() {
     std::cout << "metric:" << ans << ans.length() << std::endl;
     if (classParams.setK(stoi(token)) != 1 && classParams.setMetric(ans) != 1) {
         dio->write("$print$Both arguments are invalid!");
+        dio->read();
         return;
     }
     if (classParams.setK(stoi(token)) != 1) { // Setting the new value of K.
         dio->write("$print$Invalid value of K, The new metric was set.");
+        dio->read();
         return;
     }
     if (classParams.setMetric(ans) != 1) { // Setting the new Metric.
         dio->write("$print$Invalid metric, The new value of K was set.");
+        dio->read();
         return;
     }
     dio->write("$print$The new values were set.");
+    dio->read();
 }
 
 AlgoSettingsCmd::AlgoSettingsCmd(ClassifierParameters& newCP, DefaultIO* dio) : classParams(newCP) {
