@@ -21,7 +21,7 @@ int main() {
 }
 
 // A constructor for a ClassificationServer.
-ClassificationServer::ClassificationServer() : sizeBuffer(4096), server_port(40003), socketInt(socket(AF_INET,
+ClassificationServer::ClassificationServer() : sizeBuffer(4096), server_port(40690), socketInt(socket(AF_INET,
                                                                                                   SOCK_STREAM, 0)) {
     if (socketInt < 0) {
         cout << "Error creating socket";
