@@ -7,8 +7,8 @@
 
 #include <vector>
 #include "Commands/Command.hpp"
-#include "ClassifierParameters.hpp"
-#include "Classifiable.hpp"
+#include "Classifier/ClassifierParameters.hpp"
+#include "Classifier/Classifiable.hpp"
 
 class ClassifyCmd : public Command {
     ClassifierParameters cp;

@@ -1,5 +1,5 @@
 //
-// Created by yonat on 12/08/2022.
+// Created by Yonatan Semidubersky on 12/08/2022.
 //
 
 #ifndef EXERCISE02_CLASSIFICATIONCLIENT_H

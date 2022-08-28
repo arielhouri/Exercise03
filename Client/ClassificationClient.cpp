@@ -23,8 +23,12 @@ using namespace std;
     string ClassificationClient::read(int sock) {
         // if there is problem with communication - printing the error and exit.
         char buffer[4096];
+        std::fill(buffer, buffer + 4096, 0);
         int expected_data_len = sizeof(buffer);
         int read_bytes = recv(sock, buffer, expected_data_len, 0); // Receiving data from the Server.
+        cout << "BUFFER" << endl;
+        cout << buffer << endl;
+        cout << "BUFFER" << endl;
         if (read_bytes == 0) {
             cout << "Connection is closed." << endl;
             close(sock);
@@ -73,7 +77,7 @@ using namespace std;
     void ClassificationClient::communicateServer() {
         // connecting to a socket
         const char *ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
-        const int port_no = 56789; // The port number.
+        const int port_no = 40004; // The port number.
         int sock = socket(AF_INET, SOCK_STREAM, 0); // Creating the socket.
         if (sock < 0) {
             cout << "Error creating socket" << endl;
@@ -141,9 +145,7 @@ using namespace std;
         }
         close(sock);
     }
-    int main(int argc, char *argv[]) {
-        string path = argv[argc - 2]; // The path for the unclassified data.
-        string path2 = argv[argc - 1]; // The path for the destination for the data.
+    int main() {
         ClassificationClient cc;
         cc.communicateServer();
     }

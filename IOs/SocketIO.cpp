@@ -6,9 +6,11 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 SocketIO::SocketIO(int sock){
     this->sock = sock;
 }
+
 std::string SocketIO:: read() {
     char buffer[4096];
     int expected_data_len = sizeof(buffer);
@@ -26,6 +28,7 @@ std::string SocketIO:: read() {
         return buffer;
     }
 }
+
 void SocketIO:: write(string toWrite){
     char data_addr[toWrite.length() + 1];
     strcpy(data_addr, toWrite.c_str()); // Copies the data to an array.

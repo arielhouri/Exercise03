@@ -2,20 +2,19 @@
 // Created by Ariel Houri on 8/17/2022.
 //
 
-#include <fstream>
-#include <sstream>
 #include <algorithm>
 #include "Commands/ClassifyCmd.hpp"
-#include "ClassifierParameters.hpp"
-#include "ClassifierKnn.hpp"
+#include "Classifier/ClassifierParameters.hpp"
+#include "Classifier/ClassifierKnn.hpp"
 
 void ClassifyCmd::execute() {
     currentResults = ""; // Empties the results-string.
-    vector<Classifiable> database = ClassifierKnn::setupDatabase(classifiedData);
+    vector<Classifiable> database = ClassifierKnn::setupDatabase(classifiedData); // Creates the database.
     int i = 1;
     std::string delimiter = "\n";
     size_t pos = 0;
     std::string token = unclassifiedData.substr(pos, unclassifiedData.find(delimiter));
+    // splits the str to objects according to a delimiter, and classifies every object.
     while ((pos = unclassifiedData.find(delimiter)) != std::string::npos) {
         token = unclassifiedData.substr(0, unclassifiedData.find(delimiter));
         unclassifiedData.erase(0, pos + delimiter.length());
@@ -28,8 +27,7 @@ void ClassifyCmd::execute() {
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
-    dio->write("$print$");
-    this->dio->write("Classifying data complete!"); // Notifying that the classification is over.
+    dio->write("$print$Classifying data complete!"); // Notifying that the classification is over.
 }
 
 

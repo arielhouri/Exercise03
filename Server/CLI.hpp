@@ -6,17 +6,17 @@
 #define IRIS_CPP_CLI_HPP
 
 #include "Commands/Command.hpp"
-#include "ClassifierParameters.hpp"
+#include "Classifier/ClassifierParameters.hpp"
 class CLI {
     Command** commands;
-    DefaultIO* io;
-    std::string pathFile;
-    std::string pathClassified;
+    DefaultIO* sio;
     ClassifierParameters parameters;
     std::string results;
+    std::string classifiedData;
+    std::string unclassifiedData;
     bool shouldStop;
 public:
-    CLI(DefaultIO io,std::string classifiedPath);
+    CLI(DefaultIO* sio);
     void start();
 };
 
