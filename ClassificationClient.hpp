@@ -17,6 +17,8 @@ class ClassificationClient {
     static std::string readingFromFile(const std::string& path);
     static std::string read(int sock);
     static void write(int sock, const std::string& toWrite);
+    static std::string commandSplit(std::string message);
+    static std::string messageSplit(std::string message);
 public:
     static void communicateServer();
 };

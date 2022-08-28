@@ -39,6 +39,25 @@ using namespace std;
             return buffer;
         }
     }
+    string ClassificationClient::commandSplit(string message){
+        string dollar = "$";
+        size_t pos = 0;
+        for (int i = 1; i <= 2; i++){
+            pos = message.find(dollar);
+        }
+        string token = message.substr(0, pos);
+        return token;
+    }
+    string ClassificationClient::messageSplit(string message){
+        string dollar = "$";
+        size_t pos = 0;
+        string token;
+        for (int i = 1; i <= 2; i++){
+            pos = message.find(dollar);
+        }
+        message.erase(0, pos + 1);
+        return message;
+    }
     void ClassificationClient::write(int sock, const string& toWrite) {
         // if there is problem with communication - printing the error and exit.
         char data_addr[toWrite.length() + 1];
@@ -77,10 +96,12 @@ using namespace std;
         string pathToWrite; // for download a file
         bool shouldStop = false;
         while (!shouldStop){
-            messageCommand = read(sock);
+            message = read(sock);
             // in order to support working with files,
             // input and output - The server send 2 messages each time,
             // the first is instruction.
+            messageCommand = commandSplit(message);
+            message = messageSplit(message);
             // classify the command:
             if (messageCommand == "$exit$"){
                 shouldStop = true;
