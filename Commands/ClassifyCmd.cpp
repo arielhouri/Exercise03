@@ -30,7 +30,6 @@ void ClassifyCmd::execute() {
     dio->write("$print$Classifying data complete!"); // Notifying that the classification is over.
 }
 
-
 // A constructor for the Classify Command.
 ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string unclassifiedData,
                          ClassifierParameters& cp, DefaultIO* dio) : classifiedData(classifiedData),

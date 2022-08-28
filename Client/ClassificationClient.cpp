@@ -6,6 +6,8 @@
 #include "ClassificationClient.hpp"
 #include <fstream>
 #include <string>
+#include <limits>
+#include <iomanip>
 
 using namespace std;
     // reading from file in given path
@@ -26,9 +28,6 @@ using namespace std;
         std::fill(buffer, buffer + 4096, 0);
         int expected_data_len = sizeof(buffer);
         int read_bytes = recv(sock, buffer, expected_data_len, 0); // Receiving data from the Server.
-        cout << "BUFFER" << endl;
-        cout << buffer << endl;
-        cout << "BUFFER" << endl;
         if (read_bytes == 0) {
             cout << "Connection is closed." << endl;
             close(sock);
@@ -43,25 +42,26 @@ using namespace std;
             return buffer;
         }
     }
+
     string ClassificationClient::commandSplit(string message){
         string dollar = "$";
         size_t pos = 0;
-        for (int i = 1; i <= 2; i++){
-            pos = message.find(dollar);
-        }
+        message.erase(0, pos + dollar.length());
+        pos = message.find(dollar);
         string token = message.substr(0, pos);
-        return token;
+        return "$" + token + "$";
     }
+
     string ClassificationClient::messageSplit(string message){
         string dollar = "$";
         size_t pos = 0;
         string token;
-        for (int i = 1; i <= 2; i++){
-            pos = message.find(dollar);
-        }
-        message.erase(0, pos + 1);
+        message.erase(0, pos + dollar.length());
+        pos = message.find(dollar);
+        message.erase(0, pos + dollar.length());
         return message;
     }
+
     void ClassificationClient::write(int sock, const string& toWrite) {
         // if there is problem with communication - printing the error and exit.
         char data_addr[toWrite.length() + 1];
@@ -74,10 +74,11 @@ using namespace std;
             exit(1);
         }
     }
+
     void ClassificationClient::communicateServer() {
         // connecting to a socket
         const char *ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
-        const int port_no = 40004; // The port number.
+        const int port_no = 40003; // The port number.
         int sock = socket(AF_INET, SOCK_STREAM, 0); // Creating the socket.
         if (sock < 0) {
             cout << "Error creating socket" << endl;
@@ -111,7 +112,6 @@ using namespace std;
                 shouldStop = true;
                 continue;
             }
-            message = read(sock);
             if (messageCommand == "$print$"){
                 cout << message << endl;
             }
@@ -130,7 +130,15 @@ using namespace std;
             // changing the parameter (command 2)
             if (messageCommand == "$print&string$"){
                 cout << message << endl;
-                cin >> toServer;
+                cout << ":" << toServer << ":" << endl;
+                getline(cin, toServer);
+                if (toServer.empty()) {
+                    getline(cin, toServer);
+                    if (toServer.empty()) {
+                        toServer = "$empty$";
+                    }
+                }
+                cout << ":" << toServer << ":" << endl;
                 write(sock, toServer);
             }
             // download a file (command 5)
@@ -139,12 +147,12 @@ using namespace std;
                 cin >> pathToWrite;
                 fstream fileout;
                 fileout.open(pathToWrite, fstream::out | ofstream::trunc);
-                fileout << message << endl;
                 fileout.close();
             }
         }
         close(sock);
     }
+
     int main() {
         ClassificationClient cc;
         cc.communicateServer();

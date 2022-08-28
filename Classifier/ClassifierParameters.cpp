@@ -2,6 +2,7 @@
 // Created by Ariel Houri on 8/17/2022.
 //
 
+#include <iostream>
 #include "ClassifierParameters.hpp"
 
 
@@ -15,7 +16,7 @@ int ClassifierParameters::setK(int num) {
         return -1;
     }
     this->k = num; // Setting the new value.
-    return 0;
+    return 1;
 }
 
 int ClassifierParameters::getK() {
@@ -25,7 +26,7 @@ int ClassifierParameters::getK() {
 int ClassifierParameters::setMetric(std::string newMetric) {
     if (newMetric == "EUC" || newMetric == "MAN" || newMetric == "CHE") {
         this->metric = newMetric;
-        return 0;
+        return 1;
     }
     return -1;
 }
