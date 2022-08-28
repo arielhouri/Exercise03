@@ -131,7 +131,12 @@ using namespace std;
             // changing the parameter (command 2)
             if (messageCommand == "$print&string$"){
                 cout << message << endl;
-                cin >> toServer;
+                toServer = "";
+                cin.ignore();
+                getline(cin, toServer);
+                if (toServer.empty()){
+                    toServer = "$empty$";
+                }
                 write(sock, toServer);
             }
             // download a file (command 5)

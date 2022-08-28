@@ -45,10 +45,6 @@ void CLI::start() {
         // printing the menu
         (this->sio)->write("$print&num$" + menu); // print and read option to Choose
         commandPick = stoi((this->sio)->read());
-        if (commandPick < 1 || commandPick > 8){
-            this->sio->write("$print$invalid input");
-            continue;
-        }
         commands[commandPick - 1]->execute();
     }
     delete(this->commands);
