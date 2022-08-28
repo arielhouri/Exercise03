@@ -6,7 +6,7 @@
 #define CLASSIFIABLE_CPP_CONFUSIONMATRIXCMD_HPP
 
 #include "Command.hpp"
-#include "ClassifierParameters.hpp"
+#include "Classifier/ClassifierParameters.hpp"
 #include <vector>
 
 class ConfusionMatrixCmd : public Command {

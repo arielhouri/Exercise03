@@ -4,7 +4,7 @@
 
 #include <fstream>
 #include "ConfusionMatrixCmd.hpp"
-#include "ClassifierKnn.hpp"
+#include "Classifier/ClassifierKnn.hpp"
 #include <algorithm>
 
 ConfusionMatrixCmd::ConfusionMatrixCmd(std::string& classified, std::string& unclassified,

@@ -6,7 +6,7 @@
 #define IRIS_CPP_CLI_HPP
 
 #include "Commands/Command.hpp"
-#include "ClassifierParameters.hpp"
+#include "Classifier/ClassifierParameters.hpp"
 class CLI {
     Command** commands;
     DefaultIO* sio;

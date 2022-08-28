@@ -6,19 +6,18 @@
 #include "Commands/AlgoSettingsCmd.hpp"
 #include "Commands/DisplayResCmd.hpp"
 #include "Commands/DownloadResCmd.hpp"
-#include "ClassifierParameters.hpp"
+#include "Classifier/ClassifierParameters.hpp"
 #include "CLI.hpp"
-#include "SocketIO.h"
 #include "Commands/UploadCmd.hpp"
 #include "Commands/ConfusionMatrixCmd.hpp"
 #include "Commands/ExitCmd.hpp"
-#include <array>
 
 // A constructor for the CLI.
 CLI::CLI(DefaultIO* sio){
     this->shouldStop = false;
     ClassifierParameters cp;
     this->sio = sio;
+    // Creating the actual commands-objects.
     UploadCmd cmd1(classifiedData, unclassifiedData, sio);
     AlgoSettingsCmd cmd2(cp, sio);
     ClassifyCmd cmd3(results, classifiedData, unclassifiedData, cp, sio);
@@ -35,6 +34,8 @@ CLI::CLI(DefaultIO* sio){
     this->commands[6] = &cmd7;
 
 }
+
+// Initializing the CLI and starting the communication.
 void CLI::start() {
     int commandPick;
     // menu to print

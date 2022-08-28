@@ -4,8 +4,8 @@
 
 #include <algorithm>
 #include "Commands/ClassifyCmd.hpp"
-#include "ClassifierParameters.hpp"
-#include "ClassifierKnn.hpp"
+#include "Classifier/ClassifierParameters.hpp"
+#include "Classifier/ClassifierKnn.hpp"
 
 void ClassifyCmd::execute() {
     currentResults = ""; // Empties the results-string.

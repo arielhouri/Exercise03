@@ -6,7 +6,7 @@
 #define IRIS_CPP_ALGOSETTINGSCMD_HPP
 
 #include "Command.hpp"
-#include "ClassifierParameters.hpp"
+#include "Classifier/ClassifierParameters.hpp"
 
 class AlgoSettingsCmd : public Command {
     ClassifierParameters& classParams;

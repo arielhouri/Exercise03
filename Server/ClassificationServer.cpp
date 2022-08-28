@@ -5,18 +5,10 @@
 #include "ClassificationServer.hpp"
 #include <sstream>
 #include "Commands/Command.hpp"
-#include "Commands/AlgoSettingsCmd.hpp"
-#include "Commands/ClassifyCmd.hpp"
-#include "Commands/UploadCmd.hpp"
-#include "Commands/DisplayResCmd.hpp"
-#include "Commands/DownloadResCmd.hpp"
-#include "Commands/ConfusionMatrixCmd.hpp"
-#include "Commands/ExitCmd.hpp"
-#include "SocketIO.h"
+#include "IOs/SocketIO.h"
 #include "CLI.hpp"
 #include <cstring>
 #include <algorithm>
-#include <array>
 
 using namespace std;
 
@@ -46,7 +38,7 @@ ClassificationServer::ClassificationServer() : sizeBuffer(4096), server_port(567
 
 // A function that receives data from a given socket.
 int ClassificationServer::receiveData(int clientSock) {
-    int read_bytes = recv(clientSock, buffer, sizeBuffer, 0); // Receiving data from the Client.
+    long read_bytes = recv(clientSock, buffer, sizeBuffer, 0); // Receiving data from the Client.
     if (read_bytes == 0) { // Checking for errors.
         cout << "The connection is closed." << endl;
         return -1;

@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <vector>
-#include "Classifiable.hpp"
+#include "Classifier/Classifiable.hpp"
 
 
 class ClassificationServer {
