@@ -1,7 +1,7 @@
 //
 // Created by Yonatan Semidubersky on 21/07/2022.
 //
-
+#include <iostream>
 #include "ClassifierKnn.hpp"
 #include <algorithm>
 #include <sstream>
@@ -92,8 +92,11 @@ vector<Classifiable> ClassifierKnn::setupDatabase(std::string data) {
     std::string token = data.substr(0, data.find(delimiter));
     while ((pos = data.find(delimiter)) != std::string::npos) {
         token = data.substr(0, data.find(delimiter));
+        std::cout<<token<<std::endl;
         data.erase(0, pos + delimiter.length());
+        std::cout<<data<<std::endl;
         classifiableObjectsVector.push_back(ClassifierKnn::stringToClassifiable(&token));
     }
+    std::cout<<classifiableObjectsVector.size()<<std::endl;
     return classifiableObjectsVector;
 }

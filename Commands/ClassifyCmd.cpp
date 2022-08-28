@@ -1,7 +1,7 @@
 //
 // Created by Ariel Houri on 8/17/2022.
 //
-
+#include <iostream>
 #include <algorithm>
 #include "Commands/ClassifyCmd.hpp"
 #include "Classifier/ClassifierParameters.hpp"

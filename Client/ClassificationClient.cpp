@@ -78,7 +78,7 @@ using namespace std;
     void ClassificationClient::communicateServer() {
         // connecting to a socket
         const char *ip_address = "127.0.0.1"; // The IP address that returns the sockets the same computer.
-        const int port_no = 40690; // The port number.
+        const int port_no = 40069; // The port number.
         int sock = socket(AF_INET, SOCK_STREAM, 0); // Creating the socket.
         if (sock < 0) {
             cout << "Error creating socket" << endl;
@@ -109,6 +109,7 @@ using namespace std;
             message = messageSplit(message);
             // classify the command:
             if (messageCommand == "$exit$"){
+                // free memory - TO DO!!!!!!!!!!!!!!!!!
                 shouldStop = true;
                 continue;
             }

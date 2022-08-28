@@ -18,7 +18,7 @@ class ClassificationServer {
     int const socketInt; // Const because the Server uses a single socket.
     int sizeBuffer;
     struct sockaddr_in sin;
-    char buffer[4096];
+    char buffer[8192];
     int receiveData(int clientSocket);
     int listenToSocket();
 public:
