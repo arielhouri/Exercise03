@@ -8,7 +8,7 @@
 #include <algorithm>
 
 ConfusionMatrixCmd::ConfusionMatrixCmd(ClassificationFiles* files,
-                                       ClassifierParameters& newClassParams, DefaultIO* dio) :
+                                       ClassifierParameters* newClassParams, DefaultIO* dio) :
         classParams(newClassParams) {
     this->files = files;
     this->description = "display algorithm confusion matrix";

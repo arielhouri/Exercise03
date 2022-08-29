@@ -2,6 +2,7 @@
 // Created by Ariel Houri on 8/17/2022.
 //
 #include <algorithm>
+#include <iostream>
 #include "Commands/ClassifyCmd.hpp"
 #include "Classifier/ClassifierParameters.hpp"
 #include "Classifier/ClassifierKnn.hpp"
@@ -21,12 +22,13 @@ void ClassifyCmd::execute() {
     while ((pos = unclassifiedData.find(delimiter)) != std::string::npos) {
         token = unclassifiedData.substr(0, unclassifiedData.find(delimiter));
         unclassifiedData.erase(0, pos + delimiter.length());
-        Classifiable obj = ClassifierKnn::stringToClassifiable(&token); // Gets the object to classify,
-        ClassifierKnn classifier(database, obj, this->cp.getK()); // Creates its classifier.
+        Classifiable obj = ClassifierKnn::stringToClassifiable(&token, false); // Gets the object to classify,
+        std::cout << "the value fo k is: " << cp->getK() << std::endl;
+        ClassifierKnn classifier(database, obj, this->cp->getK()); // Creates its classifier.
         // Prints the number, and then the type of the object, from the result the classifier gave.
         currentResults += to_string(i);
         currentResults += "   ";
-        currentResults += classifier.classify(this->cp);
+        currentResults += classifier.classify(*(this->cp));
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
@@ -40,7 +42,8 @@ void ClassifyCmd::execute() {
 
 // A constructor for the Classify Command.
 ClassifyCmd::ClassifyCmd(ClassificationFiles* files,
-                         ClassifierParameters& cp, DefaultIO* dio) {
+                         ClassifierParameters* cp, DefaultIO* dio) {
+    this->cp = cp;
     this->files = files;
     this->description = "classify data";
     this->dio = dio;

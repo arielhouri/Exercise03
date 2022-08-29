@@ -12,12 +12,12 @@
 #include "Server/ClassificationFiles.h"
 
 class ClassifyCmd : public Command {
-    ClassifierParameters cp;
+    ClassifierParameters* cp;
     ClassificationFiles* files;
 public:
     void execute() override;
     ClassifyCmd(ClassificationFiles* files,
-                ClassifierParameters& cp, DefaultIO* dio);
+                ClassifierParameters* cp, DefaultIO* dio);
 };
 
 

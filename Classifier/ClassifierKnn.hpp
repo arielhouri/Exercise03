@@ -23,7 +23,7 @@ public:
     string classifierChebyshev();
     string classify(ClassifierParameters cp);
     static vector<Classifiable> setupDatabase(std::string data);
-    static Classifiable stringToClassifiable(std::string* line);
+    static Classifiable stringToClassifiable(std::string* line, bool containsType);
 };
 
 #endif //EX1_CLASSIFIERKNN_H

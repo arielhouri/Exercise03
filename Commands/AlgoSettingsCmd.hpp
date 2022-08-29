@@ -9,9 +9,9 @@
 #include "Classifier/ClassifierParameters.hpp"
 
 class AlgoSettingsCmd : public Command {
-    ClassifierParameters& classParams;
+    ClassifierParameters* classParams;
 public:
-    AlgoSettingsCmd(ClassifierParameters& newClassParams, DefaultIO* dio);
+    AlgoSettingsCmd(ClassifierParameters* newClassParams, DefaultIO* dio);
     void execute() override;
 };
 

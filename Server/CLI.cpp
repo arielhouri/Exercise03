@@ -18,16 +18,16 @@
 CLI::CLI(DefaultIO* sio){
     this->files = new ClassificationFiles();
     this->shouldStop = false;
-    ClassifierParameters* cp = new ClassifierParameters();
+    auto cp = new ClassifierParameters();
     this->sio = sio;
     Command** pCommands = new Command*[7];
     pCommands[0] = new UploadCmd(this->files, sio);
-    pCommands[1] = new AlgoSettingsCmd(*cp, sio); // algorithm settings
-    pCommands[2] = new ClassifyCmd(this->files, *cp, sio); // classify data
+    pCommands[1] = new AlgoSettingsCmd(cp, sio); // algorithm settings
+    pCommands[2] = new ClassifyCmd(this->files, cp, sio); // classify data
     pCommands[3] = new DisplayResCmd(this->files, sio);// display Results
     pCommands[4] = new DownloadResCmd(this->files, sio); // download results
     pCommands[5] = new ConfusionMatrixCmd(this->files,
-                                          *cp, sio);// display Results
+                                          cp, sio);// display Results
     pCommands[6] = new ExitCmd(sio, cp, this->files, pCommands, &shouldStop); // download results
     this->commands = pCommands;
 }

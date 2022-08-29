@@ -13,10 +13,10 @@
 class ConfusionMatrixCmd : public Command {
     ClassificationFiles* files;
     std::vector<std::string> types;
-    ClassifierParameters classParams;
+    ClassifierParameters* classParams;
 public:
     void execute() override;
-    ConfusionMatrixCmd(ClassificationFiles* files, ClassifierParameters& newClassParams, DefaultIO* dio);
+    ConfusionMatrixCmd(ClassificationFiles* files, ClassifierParameters* newClassParams, DefaultIO* dio);
 };
 
 

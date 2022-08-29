@@ -37,7 +37,7 @@ std::string ClassifierParameters::getMetric() {
 
 std::string ClassifierParameters::getStringRepresentation() {
     std::string str = "The current KNN parameters are: K = "; // Building the string-representation.
-    str += std::to_string(k);
+    str += std::to_string(this->k);
     str += ", distance metric = ";
     str += metric;
     return str;

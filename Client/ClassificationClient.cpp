@@ -109,7 +109,6 @@ using namespace std;
             message = messageSplit(message);
             // classify the command:
             if (messageCommand == "$exit$"){
-                // free memory - TO DO!!!!!!!!!!!!!!!!!
                 shouldStop = true;
                 continue;
             }

@@ -66,19 +66,25 @@ string ClassifierKnn::classify(ClassifierParameters cp) {
 }
 
 // A public static function that converts a string into a classifiable object.
-Classifiable ClassifierKnn::stringToClassifiable(std::string* line) {
+Classifiable ClassifierKnn::stringToClassifiable(std::string* line, bool containsType) {
     stringstream str(*line);
     string word;
     const char delimiter = ',';
-    string type; // The type of the classifiableObj-object.
+    string type = "NoType"; // The type of the classifiableObj-object.
     double traits[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int amountOfArgs = count(line->begin(), line->end(), delimiter);
-    for(int i = 0; i < amountOfArgs; i++) { // A loop that gathers the data about the object from a sting.
+    int i = 0;
+    for(; i < amountOfArgs; i++) { // A loop that gathers the data about the object from a sting.
         getline(str, word, ',');
         traits[i] = stod(word);
     }
-    getline(str, word, '\n');
-    type = word;
+    if (containsType) {
+        getline(str, word, '\n');
+        type = word;
+    } else {
+        getline(str, word, '\n');
+        traits[i] = stod(word);
+    }
     Classifiable cObj(type, traits); // The creation of the object.
     return cObj;
 }
@@ -92,7 +98,7 @@ vector<Classifiable> ClassifierKnn::setupDatabase(std::string data) {
     while ((pos = data.find(delimiter)) != std::string::npos) {
         token = data.substr(0, data.find(delimiter));
         data.erase(0, pos + delimiter.length());
-        classifiableObjectsVector.push_back(ClassifierKnn::stringToClassifiable(&token));
+        classifiableObjectsVector.push_back(ClassifierKnn::stringToClassifiable(&token, true));
     }
     return classifiableObjectsVector;
 }
