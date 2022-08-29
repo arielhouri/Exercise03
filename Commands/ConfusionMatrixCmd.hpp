@@ -8,15 +8,15 @@
 #include "Command.hpp"
 #include "Classifier/ClassifierParameters.hpp"
 #include <vector>
+#include "Server/ClassificationFiles.h"
 
 class ConfusionMatrixCmd : public Command {
-    std::string classified;
-    std::string unclassified;
+    ClassificationFiles* files;
     std::vector<std::string> types;
     ClassifierParameters classParams;
 public:
     void execute() override;
-    ConfusionMatrixCmd(std::string& classified, std::string& unclassified, ClassifierParameters& newClassParams, DefaultIO* dio);
+    ConfusionMatrixCmd(ClassificationFiles* files, ClassifierParameters& newClassParams, DefaultIO* dio);
 };
 
 

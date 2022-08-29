@@ -5,13 +5,14 @@
 #include "Commands/DisplayResCmd.hpp"
 
 // A constructor for the Display-Results-Command.
-DisplayResCmd::DisplayResCmd(std::string& results, DefaultIO* dio) : results(results) {
+DisplayResCmd::DisplayResCmd(ClassificationFiles* files, DefaultIO* dio){
+    this->files = files;
     this->description = "display results";
     this->dio = dio;
 }
 
 void DisplayResCmd::execute() {
-    dio->write("$print$" + results);
+    dio->write("$print$" + this->files->getResults());
     dio->read();
     dio->write("$print$Done.");
     dio->read();

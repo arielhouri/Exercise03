@@ -7,13 +7,11 @@
 
 #include "Commands/Command.hpp"
 #include "Classifier/ClassifierParameters.hpp"
+#include "ClassificationFiles.h"
 class CLI {
     Command** commands;
     DefaultIO* sio;
-    ClassifierParameters parameters;
-    std::string results;
-    std::string classifiedData;
-    std::string unclassifiedData;
+    ClassificationFiles* files;
     bool shouldStop;
 public:
     CLI(DefaultIO* sio);

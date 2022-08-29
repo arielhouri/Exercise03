@@ -6,13 +6,12 @@
 #define CLASSIFIABLE_CPP_UPLOADCMD_HPP
 
 #include "Command.hpp"
-
+#include "Server/ClassificationFiles.h"
 class UploadCmd : public Command {
-    std::string classifiedData;
-    std::string unclassifiedData;
+    ClassificationFiles* files;
 public:
     void execute() override;
-    UploadCmd(std::string& classifiedData, std::string& unclassifiedData, DefaultIO* dio);
+    UploadCmd(ClassificationFiles* files, DefaultIO* dio);
 };
 
 

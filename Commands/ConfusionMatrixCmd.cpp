@@ -7,9 +7,10 @@
 #include "Classifier/ClassifierKnn.hpp"
 #include <algorithm>
 
-ConfusionMatrixCmd::ConfusionMatrixCmd(std::string& classified, std::string& unclassified,
+ConfusionMatrixCmd::ConfusionMatrixCmd(ClassificationFiles* files,
                                        ClassifierParameters& newClassParams, DefaultIO* dio) :
-        classified(classified), unclassified(unclassified), classParams(newClassParams) {
+        classParams(newClassParams) {
+    this->files = files;
     this->description = "display algorithm confusion matrix";
     this->dio = dio;
 }

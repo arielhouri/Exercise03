@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iterator>
 #include <map>
+#include <iostream>
 
 using namespace std;
 // constructor
@@ -83,6 +84,8 @@ string ClassifiableAndDistance::kNearest(vector<ClassifiableAndDistance> v, int 
         for (itr = types.begin(); itr != types.end(); ++itr) {
             if (itr->first == v[i].getClassifiableObj().getType()){
                 itr->second = itr->second + 1; // increasing num shows of this type
+            }
+            else{
             }
         }
     }

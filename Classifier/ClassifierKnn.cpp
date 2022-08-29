@@ -54,13 +54,13 @@ string ClassifierKnn::classifierChebyshev(){
 string ClassifierKnn::classify(ClassifierParameters cp) {
     this->k = cp.getK();
     if (cp.getMetric() == "EUC") {
-        return classifierEuclidean();
+        return this->classifierEuclidean();
     }
     if (cp.getMetric() == "MAN") {
-        return classifierManhattan();
+        return this->classifierManhattan();
     }
     if (cp.getMetric() == "CHE") {
-        return classifierChebyshev();
+        return this->classifierChebyshev();
     }
 }
 
@@ -74,12 +74,10 @@ Classifiable ClassifierKnn::stringToClassifiable(std::string* line) {
     int amountOfArgs = count(line->begin(), line->end(), delimiter);
     for(int i = 0; i < amountOfArgs; i++) { // A loop that gathers the data about the object from a sting.
         getline(str, word, ',');
-        if (i <= amountOfArgs) {
-            traits[i] = stod(word);
-        } else {
-            type = word;
-        }
+        traits[i] = stod(word);
     }
+    getline(str, word, '\n');
+    type = word;
     Classifiable cObj(type, traits); // The creation of the object.
     return cObj;
 }
@@ -92,11 +90,8 @@ vector<Classifiable> ClassifierKnn::setupDatabase(std::string data) {
     std::string token = data.substr(0, data.find(delimiter));
     while ((pos = data.find(delimiter)) != std::string::npos) {
         token = data.substr(0, data.find(delimiter));
-        std::cout<<token<<std::endl;
         data.erase(0, pos + delimiter.length());
-        std::cout<<data<<std::endl;
         classifiableObjectsVector.push_back(ClassifierKnn::stringToClassifiable(&token));
     }
-    std::cout<<classifiableObjectsVector.size()<<std::endl;
     return classifiableObjectsVector;
 }

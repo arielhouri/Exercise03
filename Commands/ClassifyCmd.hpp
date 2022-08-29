@@ -9,15 +9,14 @@
 #include "Commands/Command.hpp"
 #include "Classifier/ClassifierParameters.hpp"
 #include "Classifier/Classifiable.hpp"
+#include "Server/ClassificationFiles.h"
 
 class ClassifyCmd : public Command {
     ClassifierParameters cp;
-    std::string classifiedData;
-    std::string currentResults;
-    std::string unclassifiedData;
+    ClassificationFiles* files;
 public:
     void execute() override;
-    ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string unclassifiedData,
+    ClassifyCmd(ClassificationFiles* files,
                 ClassifierParameters& cp, DefaultIO* dio);
 };
 

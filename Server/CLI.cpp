@@ -2,7 +2,6 @@
 // Created by Yonatan Semidubersky on 8/16/2022.
 //
 #include <string>
-#include <iostream>
 #include "Commands/Command.hpp"
 #include "Commands/ClassifyCmd.hpp"
 #include "Commands/AlgoSettingsCmd.hpp"
@@ -16,16 +15,18 @@
 
 // A constructor for the CLI.
 CLI::CLI(DefaultIO* sio){
+    this->files = new ClassificationFiles();
     this->shouldStop = false;
     ClassifierParameters* cp = new ClassifierParameters();
     this->sio = sio;
     Command** pCommands = new Command*[7];
-    pCommands[0] = new UploadCmd(classifiedData, unclassifiedData, sio);
+    pCommands[0] = new UploadCmd(this->files, sio);
     pCommands[1] = new AlgoSettingsCmd(*cp, sio); // algorithm settings
-    pCommands[2] = new ClassifyCmd(results, classifiedData, unclassifiedData, *cp, sio); // classify data
-    pCommands[3] = new DisplayResCmd(results, sio);// display Results
-    pCommands[4] = new DownloadResCmd(results, sio); // download results
-    pCommands[5] = new ConfusionMatrixCmd(classifiedData, unclassifiedData, *cp, sio);// display Results
+    pCommands[2] = new ClassifyCmd(this->files, *cp, sio); // classify data
+    pCommands[3] = new DisplayResCmd(this->files, sio);// display Results
+    pCommands[4] = new DownloadResCmd(this->files, sio); // download results
+    pCommands[5] = new ConfusionMatrixCmd(this->files,
+                                          *cp, sio);// display Results
     pCommands[6] = new ExitCmd(sio); // download results
     this->commands = pCommands;
 }
@@ -46,7 +47,6 @@ void CLI::start() {
         // printing the menu
         (this->sio)->write("$print&num$" + menu); // print and read option to Choose
         string str = (this->sio)->read();
-        std::cout << str << std::endl;
         commandPick = stoi(str);
         commands[commandPick - 1]->execute();
     }

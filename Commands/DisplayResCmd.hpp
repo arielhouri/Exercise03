@@ -6,12 +6,12 @@
 #define IRIS_CPP_DISPLAYRESCMD_HPP
 
 #include "Command.hpp"
-
+#include "Server/ClassificationFiles.h"
 class DisplayResCmd : public Command{
-    std::string results;
+    ClassificationFiles* files;
 public:
     void execute() override;
-    DisplayResCmd(std::string& results, DefaultIO* dio);
+    DisplayResCmd(ClassificationFiles* files, DefaultIO* dio);
 };
 
 

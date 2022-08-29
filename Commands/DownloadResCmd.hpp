@@ -7,11 +7,11 @@
 
 
 #include "Command.hpp"
-
+#include "Server/ClassificationFiles.h"
 class DownloadResCmd : public Command {
-    std::string results;
+    ClassificationFiles* files;
 public:
-    DownloadResCmd(std::string& results, DefaultIO* dio);
+    DownloadResCmd(ClassificationFiles* files, DefaultIO* dio);
     void execute() override;
 };
 

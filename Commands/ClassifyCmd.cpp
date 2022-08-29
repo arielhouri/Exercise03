@@ -1,15 +1,16 @@
 //
 // Created by Ariel Houri on 8/17/2022.
 //
-#include <iostream>
 #include <algorithm>
 #include "Commands/ClassifyCmd.hpp"
 #include "Classifier/ClassifierParameters.hpp"
 #include "Classifier/ClassifierKnn.hpp"
-
+#include <iostream>
 void ClassifyCmd::execute() {
-    std::cout << "LOL:" << classifiedData << std::endl;
-    currentResults = ""; // Empties the results-string.
+    this->files->setResults(""); // Empties the results-string.
+    std::string classifiedData = this->files->getClassified();
+    std::string unclassifiedData = this->files->getUnClassified();
+    std::string currentResults = "";
     vector<Classifiable> database = ClassifierKnn::setupDatabase(classifiedData); // Creates the database.
     int i = 1;
     std::string delimiter = "\n";
@@ -20,7 +21,7 @@ void ClassifyCmd::execute() {
         token = unclassifiedData.substr(0, unclassifiedData.find(delimiter));
         unclassifiedData.erase(0, pos + delimiter.length());
         Classifiable obj = ClassifierKnn::stringToClassifiable(&token); // Gets the object to classify,
-        ClassifierKnn classifier(database, obj, 1); // Creates its classifier.
+        ClassifierKnn classifier(database, obj, this->cp.getK()); // Creates its classifier.
         // Prints the number, and then the type of the object, from the result the classifier gave.
         currentResults += to_string(i);
         currentResults += "   ";
@@ -28,14 +29,15 @@ void ClassifyCmd::execute() {
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
+    this->files->setResults(currentResults);
     dio->write("$print$Classifying data complete!"); // Notifying that the classification is over.
     dio->read();
 }
 
 // A constructor for the Classify Command.
-ClassifyCmd::ClassifyCmd(std::string& currentResults, std::string& classifiedData, std::string unclassifiedData,
-                         ClassifierParameters& cp, DefaultIO* dio) : classifiedData(classifiedData),
-                         unclassifiedData(unclassifiedData), cp(cp), currentResults(currentResults) {
+ClassifyCmd::ClassifyCmd(ClassificationFiles* files,
+                         ClassifierParameters& cp, DefaultIO* dio) {
+    this->files = files;
     this->description = "classify data";
     this->dio = dio;
 }
