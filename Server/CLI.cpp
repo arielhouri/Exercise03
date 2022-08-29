@@ -54,5 +54,4 @@ void CLI::start() {
         }
         commands[commandPick - 1]->execute();
     }
-    delete(this->commands);
 }

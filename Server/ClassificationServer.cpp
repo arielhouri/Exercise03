@@ -77,17 +77,3 @@ int ClassificationServer::listenToSocket() {
     return 1;
 }
 
-
-// A function that gets a pointer to a character and converts into a string, it ends when it reaches a '\n'.
-string ClassificationServer::convertToString(char* txt) {
-    string s;
-    for (int i = 0; txt[i] != '\n'; i++) {
-        if(txt[i] == '^') {
-            continue;
-        } else if(txt[i] == '\n' || txt[i] == '\r' || txt[i] == '\0') {
-            break;
-        }
-        s += txt[i];
-    }
-    return s;
-}

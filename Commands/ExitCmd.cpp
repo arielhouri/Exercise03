@@ -19,7 +19,7 @@ void ExitCmd::execute() {
     for (int i = 0; i < 7; i++) { // Frees the actual commands.
         delete this->cmds[i];
     }
-//    delete[] this->cmds; // Frees the commands-arr
+    delete this->cmds; // Frees the commands-arr
     dio->write("$exit$");
     *(this->shouldStop) = true;
 }

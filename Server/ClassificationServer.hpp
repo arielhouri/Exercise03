@@ -22,7 +22,6 @@ class ClassificationServer {
     int receiveData(int clientSocket);
     int listenToSocket();
 public:
-    static string convertToString(char* txt);
     ClassificationServer();
     int start();
 };
