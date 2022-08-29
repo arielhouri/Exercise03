@@ -12,7 +12,9 @@ DownloadResCmd::DownloadResCmd(ClassificationFiles* files, DefaultIO* dio){
 }
 
 void DownloadResCmd::execute() {
-    dio->write("$print&download$" + this->files->getResults());
+    dio->write("$print$Please download the csv file.");
+    dio->read();
+    dio->write("$download$" + this->files->getResults());
     dio->read();
     dio->write("$print$Done.");
     dio->read();

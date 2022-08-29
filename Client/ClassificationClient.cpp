@@ -141,12 +141,12 @@ using namespace std;
                 write(sock, toServer);
             }
             // download a file (command 5)
-            if (messageCommand == "$print&download$"){
-                cout << message << endl;
+            if (messageCommand == "$download$"){
                 write(sock, "$sent$");
                 cin >> pathToWrite;
                 fstream fileout;
                 fileout.open(pathToWrite, fstream::out | ofstream::trunc);
+                fileout << message << endl;
                 fileout.close();
             }
         }

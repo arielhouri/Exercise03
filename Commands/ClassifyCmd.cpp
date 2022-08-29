@@ -29,6 +29,9 @@ void ClassifyCmd::execute() {
         currentResults += "\n";
         i++; // Adds one to the counter.
     }
+    if (!currentResults.empty()) {
+        currentResults.erase(std::prev(currentResults.end()));
+    }
     this->files->setResults(currentResults);
     dio->write("$print$Classifying data complete!"); // Notifying that the classification is over.
     dio->read();
