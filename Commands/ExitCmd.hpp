@@ -13,9 +13,10 @@ class ExitCmd : public Command {
     ClassifierParameters* cp;
     ClassificationFiles* cf;
     Command** cmds;
+    bool* shouldStop;
 public:
     void execute() override;
-    ExitCmd(DefaultIO* dio, ClassifierParameters* cp, ClassificationFiles* cf, Command** cmds);
+    ExitCmd(DefaultIO* dio, ClassifierParameters* cp, ClassificationFiles* cf, Command** cmds, bool* shouldStop);
 };
 
 
