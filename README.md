@@ -37,7 +37,7 @@ The first one is instruction and the other is the message.
 * `$download$` - download the message to file (given path from the user).
 ### notes: - Need to be updated.
 - The sizes of the buffers for the transferred data is `4096 bytes`.
-- The port that is being used in the program is `56789`. (If you stop the code and want to re-start you have to wait a 
+- The port that is being used in the program is `40022`. (If you stop the code and want to re-start you have to wait a 
   few moments so the data of the port and socket will be cleared by the kernel).
 - The Communication Protocol that we used is [`TCP`](https://he.wikipedia.org/wiki/Transmission_Control_Protocol).
 - The value that we chose for the KNN-classifier is `k=7` (because it's efficient and also good enough statistical estimate that KNN is based of).

@@ -12,6 +12,7 @@
 #include "Commands/UploadCmd.hpp"
 #include "Commands/ConfusionMatrixCmd.hpp"
 #include "Commands/ExitCmd.hpp"
+#include "Server/ClassificationFiles.h"
 
 // A constructor for the CLI.
 CLI::CLI(DefaultIO* sio){
@@ -27,7 +28,7 @@ CLI::CLI(DefaultIO* sio){
     pCommands[4] = new DownloadResCmd(this->files, sio); // download results
     pCommands[5] = new ConfusionMatrixCmd(this->files,
                                           *cp, sio);// display Results
-    pCommands[6] = new ExitCmd(sio); // download results
+    pCommands[6] = new ExitCmd(sio, cp, this->files, pCommands); // download results
     this->commands = pCommands;
 }
 
@@ -48,6 +49,9 @@ void CLI::start() {
         (this->sio)->write("$print&num$" + menu); // print and read option to Choose
         string str = (this->sio)->read();
         commandPick = stoi(str);
+//        if (commandPick < 1 || commandPick > 7) {
+//            commandPick = 7;
+//        }
         commands[commandPick - 1]->execute();
     }
     delete(this->commands);

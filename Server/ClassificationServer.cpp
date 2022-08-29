@@ -21,7 +21,7 @@ int main() {
 }
 
 // A constructor for a ClassificationServer.
-ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(40069), socketInt(socket(AF_INET,
+ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(40022), socketInt(socket(AF_INET,
                                                                                                   SOCK_STREAM, 0)) {
     if (socketInt < 0) {
         cout << "Error creating socket";
@@ -65,6 +65,7 @@ int ClassificationServer::start() {
     SocketIO sio(client_sock);
     CLI cli(&sio); // Creating the CLI.
     cli.start();
+    return 1;
 }
 
 // A function that listens to a socket.

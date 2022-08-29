@@ -13,6 +13,7 @@ protected:
     std::string description;
     DefaultIO* dio;
 public:
+    virtual ~Command() = default;
     std::string getDescription();
     DefaultIO* getDefaultIO();
     virtual void execute() = 0; // An abstract function.

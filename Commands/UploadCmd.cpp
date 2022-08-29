@@ -3,6 +3,7 @@
 //
 
 #include "UploadCmd.hpp"
+#include "Server/ClassificationFiles.h"
 #include <iostream>
 UploadCmd::UploadCmd(ClassificationFiles* files, DefaultIO* dio) {
     this->files = files;

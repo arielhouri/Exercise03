@@ -6,6 +6,7 @@
 #define EXERCISE03_CLASSIFICATIONFILES_H
 
 #include "string"
+// This class saves the classified-data, unclassified-data and the results string.
 class ClassificationFiles {
 private:
     std::string classified;
