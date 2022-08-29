@@ -34,7 +34,7 @@ The first one is instruction and the other is the message.
 * `$print&Num$` - printing the message and receiving a number from the client.
 * `$print&upload$` - printing the message and upload a file (the client receive path from the user and send the data).
 * `$print&string$` - printing the message and sending string from user.
-* `$print&download$` - printing the message to download to file (given path from the user).
+* `$download$` - download the message to file (given path from the user).
 ### notes: - Need to be updated.
 - The sizes of the buffers for the transferred data is `4096 bytes`.
 - The port that is being used in the program is `56789`. (If you stop the code and want to re-start you have to wait a 
