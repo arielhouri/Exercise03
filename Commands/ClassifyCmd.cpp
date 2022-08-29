@@ -5,7 +5,8 @@
 #include "Commands/ClassifyCmd.hpp"
 #include "Classifier/ClassifierParameters.hpp"
 #include "Classifier/ClassifierKnn.hpp"
-#include <iostream>
+#include "Server/ClassificationFiles.h"
+
 void ClassifyCmd::execute() {
     this->files->setResults(""); // Empties the results-string.
     std::string classifiedData = this->files->getClassified();

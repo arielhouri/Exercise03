@@ -6,11 +6,16 @@
 #define CLASSIFIABLE_CPP_EXITCMD_HPP
 
 #include "Command.hpp"
+#include "Classifier/ClassifierParameters.hpp"
+#include "Server/ClassificationFiles.h"
 
 class ExitCmd : public Command {
+    ClassifierParameters* cp;
+    ClassificationFiles* cf;
+    Command** cmds;
 public:
     void execute() override;
-    ExitCmd(DefaultIO* dio);
+    ExitCmd(DefaultIO* dio, ClassifierParameters* cp, ClassificationFiles* cf, Command** cmds);
 };
 
 

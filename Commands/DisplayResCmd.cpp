@@ -12,8 +12,8 @@ DisplayResCmd::DisplayResCmd(ClassificationFiles* files, DefaultIO* dio){
 }
 
 void DisplayResCmd::execute() {
-    dio->write("$print$" + this->files->getResults());
-    dio->read();
-    dio->write("$print$Done.");
-    dio->read();
+    dio->write("$print$" + this->files->getResults()); // Prints the results to the client.
+    dio->read(); // Used for the flow of the program, no use to the value recieved.
+    dio->write("$print$Done."); // Prints that the process finished.
+    dio->read(); // Used for the flow of the program, no use to the value recieved.
 }

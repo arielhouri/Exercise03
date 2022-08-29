@@ -3,6 +3,7 @@
 //
 
 #include "Commands/DownloadResCmd.hpp"
+#include "Server/ClassificationFiles.h"
 
 // A constructor for DownloadResCmd Command.
 DownloadResCmd::DownloadResCmd(ClassificationFiles* files, DefaultIO* dio){

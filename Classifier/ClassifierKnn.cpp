@@ -62,6 +62,7 @@ string ClassifierKnn::classify(ClassifierParameters cp) {
     if (cp.getMetric() == "CHE") {
         return this->classifierChebyshev();
     }
+    return "";
 }
 
 // A public static function that converts a string into a classifiable object.
