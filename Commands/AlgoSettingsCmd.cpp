@@ -15,8 +15,6 @@ void AlgoSettingsCmd::execute() {
     size_t pos = ans.find(' '); // Cutting their answer to the new K and the new metric.
     std::string token = ans.substr(0, pos);
     ans.erase(0, pos + 1);
-    std::cout << "Token:" << token << std::endl;
-    std::cout << "metric:" << ans << ans.length() << std::endl;
     if (classParams.setK(stoi(token)) != 1 && classParams.setMetric(ans) != 1) {
         dio->write("$print$Both arguments are invalid!");
         dio->read();
