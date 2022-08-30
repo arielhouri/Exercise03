@@ -69,7 +69,6 @@ int kElement(vector<ClassifiableAndDistance> *v, int l, int r, int k)
 // classifier by kNearest objects.
 string ClassifiableAndDistance::kNearest(vector<ClassifiableAndDistance> v, int k) {
     // we search for the k-1 element in V[0,...,n] (easier to understand)
-    cout << "the value fo k is: " << k << endl;
     int index = kElement(&v, 0, v.size() - 1, k - 1);
     // create map of all the types and num of shows.
     map<string, int> types;
@@ -91,7 +90,6 @@ string ClassifiableAndDistance::kNearest(vector<ClassifiableAndDistance> v, int 
     int maxShows = 0; // the maximum shows of type
     string type = ""; // the type
     for (itr = types.begin(); itr != types.end(); ++itr) {
-        cout << ",type: " << itr->first << ", amount: " << itr->second << endl;
         if (itr -> second > maxShows){
             maxShows = itr -> second;
             type = itr -> first;
