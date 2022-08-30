@@ -33,10 +33,3 @@ ClassContainer::ClassContainer(NotifyTimeOut* nt, ThreadContainer* tc, Classific
     this->tc = tc;
     this->cs = cs;
 }
-
-void ClassContainer::notify() {
-    ThreadPair *tp = cc.getTC()->getAvailableThread();
-    tp->runMainThread(ClassificationServer::startFunc, cc.getCS());
-    cc.getNT()->listenAccepted();
-    ((ClassificationServer*)(cc.getCS()))->start(); // Function isn't being executed.
-}

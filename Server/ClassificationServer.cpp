@@ -4,6 +4,7 @@
 
 #include "ClassificationServer.hpp"
 #include <sstream>
+#include "Commands/Command.hpp"
 #include "IOs/SocketIO.h"
 #include "CLI.hpp"
 #include "Threads/ThreadContainer.hpp"
@@ -19,19 +20,19 @@ int main() {
     ClassificationServer cs;
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
-    auto nt = new NotifyTimeOut(15 * 1000000);
+    auto nt = new NotifyTimeOut(10 * 1000000);
     ClassContainer cc(nt, &tc, ptr);
     // Creating a new thread:
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_t thread1;
-    pthread_create(&thread1, &attr, ClassificationServer::listenFunc, &cc);
+    pthread_create(&thread1, &attr, ClassificationServer::listenFunc1, &cc);
     pthread_join(thread1, NULL);
 
     while (!(nt->shouldStop()) && !tc.anyRunning()) {
-        delete nt;
-        return 1;
+        continue;
     }
+    return 0;
 }
 
 // A function used for the multi-threading.
@@ -41,16 +42,33 @@ void *ClassificationServer::startFunc(void *cs1)  {
 }
 
 // A function used for the multi-threading.
-void *ClassificationServer::listenFunc(void *cc1)  {
+void *ClassificationServer::listenFunc1(void *cc1) {
     ClassContainer cc = *((ClassContainer*)cc1);
-    while (!(cc.getNT()->shouldStop())) {
-        if (cc.getCS()->listenToSocket() < 0) { // Listening to socket.
-            return nullptr;
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_t thread1;
+    pthread_create(&thread1, &attr, ClassificationServer::listenFunc2, &cc);
+    while (true) {
+        if (cc.getNT()->shouldStop()) {
+            delete cc.getNT();
+            std::abort();
         }
+    }
+}
+
+// A function used for the multi-threading.
+void *ClassificationServer::listenFunc2(void *cc1) {
+    ClassContainer cc = *((ClassContainer*)cc1);
+    if (cc.getCS()->listenToSocket() < 0) { // Listening to socket.
+        return nullptr;
+    }
+    if (!(cc.getNT()->shouldStop())) {
         ThreadPair *tp = cc.getTC()->getAvailableThread();
         tp->runMainThread(ClassificationServer::startFunc, cc.getCS());
         cc.getNT()->listenAccepted();
-        ((ClassificationServer*)(cc.getCS()))->start(); // Function isn't being executed.
+        ((ClassificationServer*)(cc.getCS()))->start();
+    } else {
+        return nullptr;
     }
     std::terminate();
 }

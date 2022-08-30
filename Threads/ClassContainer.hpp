@@ -22,7 +22,6 @@ public:
     void setNT(NotifyTimeOut* nt);
     void setTC(ThreadContainer* tc);
     void stcCS(ClassificationServer* cs);
-    void notify();
 };
 
 
