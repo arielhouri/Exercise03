@@ -12,7 +12,7 @@ class NotifyTimeOut {
     float secondsTimeOut;
 public:
     NotifyTimeOut(float secondsTimeOut);
-    void ListenAccepted();
+    void listenAccepted();
     bool shouldStop();
 };
 
