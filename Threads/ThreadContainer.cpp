@@ -17,6 +17,7 @@ ThreadContainer::ThreadContainer() {
     this->threadsVector = threadsVector1;
 }
 
+// A private function that gets the amount of nopt-running threads.
 int ThreadContainer::getAmountOfAvailableThreads() {
     int amount = 0;
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
