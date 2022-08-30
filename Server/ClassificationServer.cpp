@@ -19,10 +19,8 @@ int main() {
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
     cout << "running" << endl;
-    if (tc.existsAvailableThreads()) {
-        ThreadPair* tp = tc.getAvailableThread();
-        tp->runMainThread(ClassificationServer::startFunc, &cs);
-    }
+    ThreadPair* tp = tc.getAvailableThread();
+    tp->runMainThread(ClassificationServer::startFunc, &cs);
 }
 
 // A function used for the multi-threading.

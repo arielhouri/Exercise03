@@ -17,7 +17,6 @@ class ThreadContainer {
 public:
     ThreadContainer();
     ThreadPair* getAvailableThread();
-    bool existsAvailableThreads();
     bool anyRunning();
 };
 

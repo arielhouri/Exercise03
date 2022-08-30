@@ -47,12 +47,6 @@ ThreadPair* ThreadContainer::getAvailableThread() {
     return this->getAvailableThread();
 }
 
-// Returns true if there are available threads, false otherwise.
-bool ThreadContainer::existsAvailableThreads() {
-    this->updateThreadContainer();
-    return (this->getAmountOfAvailableThreads() != 0);
-}
-
 // A private function that Updates the Thread-Container's data about running and not threads.
 void ThreadContainer::updateThreadContainer() {
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
