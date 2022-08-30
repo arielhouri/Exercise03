@@ -15,7 +15,7 @@ class ThreadContainer {
     int getAmountOfAvailableThreads();
 public:
     ThreadContainer();
-    ThreadPair getAvailableThreads();
+    ThreadPair* getAvailableThreads();
     void updateThreadContainer();
     bool existsAvailableThreads();
 };

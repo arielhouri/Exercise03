@@ -28,11 +28,11 @@ int ThreadContainer::getAmountOfAvailableThreads() {
 }
 
 // Returns an available ThreadPair that can be used by the server.
-ThreadPair ThreadContainer::getAvailableThreads() {
+ThreadPair* ThreadContainer::getAvailableThreads() {
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
         if (!itr->second) { // Checks for available thread.
             itr->second = true;
-            return itr->first;
+            return &(itr->first);
         }
     }
 }
