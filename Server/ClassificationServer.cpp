@@ -7,17 +7,29 @@
 #include "Commands/Command.hpp"
 #include "IOs/SocketIO.h"
 #include "CLI.hpp"
+#include "Threads/ThreadContainer.hpp"
 #include <cstring>
 #include <algorithm>
+#include <functional>
 
 using namespace std;
 
 int main() {
     ClassificationServer cs;
-    // Should use Threading HERE!, when a client connects, starts a new thread with the start() method.
-    if(cs.start() < 0) { // Starts the server, returns a negative value if there is an error.
-        return -1;
+    ClassificationServer* ptr = &cs;
+    ThreadContainer tc;
+    tc.updateThreadContainer();
+    cout << "running" << endl;
+    if (tc.existsAvailableThreads()) {
+        ThreadPair* tp = tc.getAvailableThreads();
+        tp->runMainThread(ClassificationServer::startFunc, &cs);
     }
+}
+
+// A function used for the multi-threading.
+void *ClassificationServer::startFunc(void *cs1)  {
+    ((ClassificationServer*)cs1)->start(); // Function isn't being executed.
+    return nullptr;
 }
 
 // A constructor for a ClassificationServer.
@@ -57,7 +69,7 @@ int ClassificationServer::start() {
     if (listenToSocket() < 0) { // Listening to socket.
         return -1;
     }
-    int client_sock = accept(socketInt, (struct sockaddr *) &client_sin, &addr_len);
+    int client_sock = accept(this->socketInt, (struct sockaddr *) &client_sin, &addr_len);
     if (client_sock < 0) { // Checking for errors in the connection.
         cout << "Error accepting client" << endl;
         return -1;

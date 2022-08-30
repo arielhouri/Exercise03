@@ -24,10 +24,8 @@ int ThreadPair::runMainThread(void* (*routine)(void*), void* args) {
     if (pthread_create(&this->mainThread, &this->attr, routine, args) != 0) {
         return -1;
     }
-    if (this->isSubActive) {
-        pthread_join(this->subThread, NULL); // Waits for the sub-thread to end.
-    }
-    isMainActive = false;
+    pthread_join(this->mainThread, NULL);
+    isMainActive = false; // Marks the thread as running.
     return 0;
 }
 
@@ -41,11 +39,12 @@ int ThreadPair::runSubThread(void* (*routine)(void*), void* args) {
     if (pthread_create(&this->subThread, &this->attr, routine, args) != 0) {
         return -1;
     }
-    isSubActive = false;
+    pthread_join(this->subThread, NULL);
+    isSubActive = false; // Marks the thread as running.
     return 0;
 }
 
-// Returns true if the mani thread is running, and false otherwise.
+// Returns true if the main thread is running, false otherwise.
 bool ThreadPair::isRunning() {
     return this->isMainActive;
 }

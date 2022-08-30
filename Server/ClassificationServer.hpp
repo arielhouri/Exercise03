@@ -22,6 +22,7 @@ class ClassificationServer {
     int receiveData(int clientSocket);
     int listenToSocket();
 public:
+    static void* startFunc(void *cs1);
     ClassificationServer();
     int start();
 };
