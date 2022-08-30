@@ -13,10 +13,10 @@
 class ThreadContainer {
     std::vector<std::pair<ThreadPair, bool>> threadsVector;
     int getAmountOfAvailableThreads();
+    void updateThreadContainer();
 public:
     ThreadContainer();
-    ThreadPair* getAvailableThreads();
-    void updateThreadContainer();
+    ThreadPair* getAvailableThread();
     bool existsAvailableThreads();
     bool anyRunning();
 };

@@ -18,10 +18,9 @@ int main() {
     ClassificationServer cs;
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
-    tc.updateThreadContainer();
     cout << "running" << endl;
     if (tc.existsAvailableThreads()) {
-        ThreadPair* tp = tc.getAvailableThreads();
+        ThreadPair* tp = tc.getAvailableThread();
         tp->runMainThread(ClassificationServer::startFunc, &cs);
     }
 }

@@ -7,7 +7,7 @@
 
 ThreadContainer::ThreadContainer() {
     std::vector<std::pair<ThreadPair, bool>> threadsVector1;
-    for (int i = 0; i < 10; i++) { // Creates 10 ThreadPairs and adds them to the container.
+    for (int i = 0; i < 2; i++) { // Creates 2 ThreadPairs and adds them to the container.
         ThreadPair tPair;
         std::pair<ThreadPair, bool> pair1;
         pair1.first = tPair;
@@ -19,6 +19,7 @@ ThreadContainer::ThreadContainer() {
 
 // A private function that gets the amount of nopt-running threads.
 int ThreadContainer::getAmountOfAvailableThreads() {
+    this->updateThreadContainer();
     int amount = 0;
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
         if (!itr->second) {
@@ -28,23 +29,31 @@ int ThreadContainer::getAmountOfAvailableThreads() {
     return amount;
 }
 
-// Returns an available ThreadPair that can be used by the server.
-ThreadPair* ThreadContainer::getAvailableThreads() {
+// Returns an available ThreadPair that can be used by the server, function is recursive but will stop after a single call.
+ThreadPair* ThreadContainer::getAvailableThread() {
+    this->updateThreadContainer();
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
         if (!itr->second) { // Checks for available thread.
             itr->second = true;
             return &(itr->first);
         }
     }
-    return nullptr;
+    // In case where all the Tread-Pair are not available, creates a new Tread-Pair and adds it to the container.
+    ThreadPair tp;
+    std::pair<ThreadPair, bool> pair1;
+    pair1.first = tp;
+    pair1.second = false;
+    this->threadsVector.push_back(pair1);
+    return this->getAvailableThread();
 }
 
 // Returns true if there are available threads, false otherwise.
 bool ThreadContainer::existsAvailableThreads() {
+    this->updateThreadContainer();
     return (this->getAmountOfAvailableThreads() != 0);
 }
 
-// Updates the Thread-Container's data about running and not threads.
+// A private function that Updates the Thread-Container's data about running and not threads.
 void ThreadContainer::updateThreadContainer() {
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
         if (!(itr->first.isRunning())) { // Checks if the thread is running or not.
@@ -55,6 +64,7 @@ void ThreadContainer::updateThreadContainer() {
 
 // Returns true if there is a thread that is currently running, false otherwise.
 bool ThreadContainer::anyRunning() {
+    this->updateThreadContainer();
     for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
         if (itr->first.isRunning()) { // Checks if the thread is running or not.
             return true;
