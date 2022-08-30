@@ -18,6 +18,7 @@ public:
     ThreadPair* getAvailableThreads();
     void updateThreadContainer();
     bool existsAvailableThreads();
+    bool anyRunning();
 };
 
 

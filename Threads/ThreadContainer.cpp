@@ -36,6 +36,7 @@ ThreadPair* ThreadContainer::getAvailableThreads() {
             return &(itr->first);
         }
     }
+    return nullptr;
 }
 
 // Returns true if there are available threads, false otherwise.
@@ -50,4 +51,14 @@ void ThreadContainer::updateThreadContainer() {
             itr->second = false;
         }
     }
+}
+
+// Returns true if there is a thread that is currently running, false otherwise.
+bool ThreadContainer::anyRunning() {
+    for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
+        if (itr->first.isRunning()) { // Checks if the thread is running or not.
+            return true;
+        }
+    }
+    return false;
 }
