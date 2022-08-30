@@ -18,9 +18,15 @@ int main() {
     ClassificationServer cs;
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
-    cout << "running" << endl;
-    ThreadPair* tp = tc.getAvailableThread();
-    tp->runMainThread(ClassificationServer::startFunc, &cs);
+    NotifyTimeout nt = new NotifyTimeout();
+    while (!(nt.shouldStop())) {
+        if (cs.listenToSocket() < 0) { // Listening to socket.
+            return -1;
+        }
+        ThreadPair *tp = tc.getAvailableThread();
+        tp->runMainThread(ClassificationServer::startFunc, &cs);
+        nt.accepted();
+    }
 }
 
 // A function used for the multi-threading.
@@ -63,9 +69,6 @@ int ClassificationServer::receiveData(int clientSock) {
 int ClassificationServer::start() {
     struct sockaddr_in client_sin;
     unsigned int addr_len = sizeof(client_sin);
-    if (listenToSocket() < 0) { // Listening to socket.
-        return -1;
-    }
     int client_sock = accept(this->socketInt, (struct sockaddr *) &client_sin, &addr_len);
     if (client_sock < 0) { // Checking for errors in the connection.
         cout << "Error accepting client" << endl;

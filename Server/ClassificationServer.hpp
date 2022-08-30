@@ -20,9 +20,9 @@ class ClassificationServer {
     struct sockaddr_in sin;
     char buffer[8192];
     int receiveData(int clientSocket);
-    int listenToSocket();
 public:
     static void* startFunc(void *cs1);
+    int listenToSocket();
     ClassificationServer();
     int start();
 };
