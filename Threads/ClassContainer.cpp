@@ -24,31 +24,12 @@ void ClassContainer::setTC(ThreadContainer* tc) {
     this->tc = tc;
 }
 
-void ClassContainer::setCS(ClassificationServer* cs) {
+void ClassContainer::stcCS(ClassificationServer* cs) {
     this->cs = cs;
-}
-
-int* ClassContainer::getNumAddress() {
-    return num;
-}
-
-void ClassContainer::setNum(int newNum) {
-    *(num) = newNum;
 }
 
 ClassContainer::ClassContainer(NotifyTimeOut* nt, ThreadContainer* tc, ClassificationServer* cs) {
-    this->num = new int();
-    *num = 0;
     this->nt = nt;
     this->tc = tc;
     this->cs = cs;
-    this->listening = false;
-}
-
-void ClassContainer::setListening(bool val) {
-    this->listening = val;
-}
-
-bool ClassContainer::isListening() const {
-    return this->listening;
 }

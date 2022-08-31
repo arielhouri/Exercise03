@@ -11,7 +11,6 @@
 #include <unistd.h>
 #include <vector>
 #include "Classifier/Classifiable.hpp"
-#include "NotifyTimeOut.h"
 
 
 class ClassificationServer {
@@ -23,12 +22,11 @@ class ClassificationServer {
     int receiveData(int clientSocket);
 public:
     static void* startFunc(void *cs1);
-    static void* listenAndAcceptFunc(void *cs1);
-    static void* listenFunc(void *cs1);
-    static void* acceptFunc(void *cs1);
+    static void* listenFunc1(void *cs1);
+    static void* listenFunc2(void *cs1);
     int listenToSocket();
     ClassificationServer();
-    int start(NotifyTimeOut* nt, int* num);
+    int start();
 };
 
 
