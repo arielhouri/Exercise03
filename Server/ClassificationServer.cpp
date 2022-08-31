@@ -19,7 +19,7 @@ int main() {
     ClassificationServer cs;
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
-    auto nt = new NotifyTimeOut(10 * 1000000);
+    auto nt = new NotifyTimeOut(60 * 1000000);
     ClassContainer cc(nt, &tc, ptr);
     // Creating a new thread:
     pthread_attr_t attr;
