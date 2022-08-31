@@ -12,7 +12,7 @@ NotifyTimeOut::NotifyTimeOut(float secondsTimeOut) {
 }
 
 bool NotifyTimeOut::shouldStop(){
-    std::cout << float(clock() - begin_time) << std::endl;
+//    std::cout << float(clock() - begin_time) << std::endl;
     return float( clock() - begin_time ) > secondsTimeOut; // if time over
 }
 
