@@ -10,7 +10,7 @@
 
 void ClassifyCmd::execute() {
     if (this->files->getClassified() == "" || this->files->getUnClassified() == ""){
-        this->dio->write("$please upload files before classifying.$");
+        this->dio->write("$print$please upload files before classifying.");
         this->dio->read();
         return;
     }
