@@ -9,6 +9,11 @@
 #include "Server/ClassificationFiles.h"
 
 void ClassifyCmd::execute() {
+    if (this->files->getClassified() == "" || this->files->getUnClassified() == ""){
+        this->dio->write("$please upload files before classifying.$")
+        this->dio->read();
+        returnl
+    }
     this->files->setResults(""); // Empties the results-string.
     std::string classifiedData = this->files->getClassified();
     std::string unclassifiedData = this->files->getUnClassified();
