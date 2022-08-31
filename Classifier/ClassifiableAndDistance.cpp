@@ -81,7 +81,7 @@ string ClassifiableAndDistance::kNearest(vector<ClassifiableAndDistance> v, int 
         if (v[i].getDistance() > v[index].getDistance()) {
             continue; // not in range
         }
-        for (itr = types.begin(); itr != types.end(); ++itr) {
+        for (itr = types.begin(); itr != types.end(); itr++) {
             if (itr->first == v[i].getClassifiableObj().getType()){
                 itr->second = itr->second + 1; // increasing num shows of this type
             }
