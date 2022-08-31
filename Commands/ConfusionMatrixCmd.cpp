@@ -132,7 +132,8 @@ void ConfusionMatrixCmd::execute() {
         int col = get(classType, realTypes);
         mat[row][col] += 1;
     }
-    string matrixPrint = "\t";
+    string matrixPrint = "";
+    matrixPrint += "\t";
     for (itr = realTypes.begin(); itr != realTypes.end(); itr++) {
         matrixPrint += itr->first;
         matrixPrint += "\t";
