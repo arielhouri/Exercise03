@@ -2,25 +2,22 @@
 // Created by Ariel Houri on 8/30/2022.
 //
 
-#ifndef COMMAND_CPP_THREADPAIR_HPP
-#define COMMAND_CPP_THREADPAIR_HPP
+#ifndef COMMAND_CPP_CLIENTTHREAD_HPP
+#define COMMAND_CPP_CLIENTTHREAD_HPP
 
 
 #include <pthread.h>
 
-class ThreadPair {
+class ClientThread {
     bool withClient;
-    bool isMainActive;
-    bool isSubActive;
+    bool isThreadActive;
     pthread_attr_t attr;
     pthread_t mainThread;
-    pthread_t subThread;
 public:
-    ThreadPair();
+    ClientThread();
     // Runs the main-thread with a given function.
-    int runMainThread(void* (*routine)(void*), void* args);
+    int runThread(void* (*routine)(void*), void* args);
     // Runs the sub-thread with a given function.
-    int runSubThread(void* (*routine)(void*), void* args);
     bool isRunning();
     void setWithCliet(bool val);
     bool getWithClient();
@@ -29,4 +26,4 @@ public:
 };
 
 
-#endif //COMMAND_CPP_THREADPAIR_HPP
+#endif //COMMAND_CPP_CLIENTTHREAD_HPP

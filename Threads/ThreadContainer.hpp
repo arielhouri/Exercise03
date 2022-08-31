@@ -8,16 +8,16 @@
 #include <pthread.h>
 #include <utility>
 #include <vector>
-#include "ThreadPair.hpp"
+#include "ClientThread.hpp"
 
 class ThreadContainer {
-    std::vector<std::pair<ThreadPair, bool>> threadsVector;
+    std::vector<ClientThread> threadsVector;
     int getAmountOfAvailableThreads();
     void updateThreadContainer();
 public:
     ThreadContainer();
-    ThreadPair* getAvailableThread();
-    void joinAllThreads();
+    ClientThread* getAvailableThread();
+    void joinAllClientThreads();
     bool anyRunning();
 };
 

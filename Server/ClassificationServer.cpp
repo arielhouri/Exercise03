@@ -4,7 +4,6 @@
 
 #include "ClassificationServer.hpp"
 #include <sstream>
-#include "Commands/Command.hpp"
 #include "IOs/SocketIO.h"
 #include "CLI.hpp"
 #include "Threads/ThreadContainer.hpp"
@@ -20,7 +19,7 @@ int main() {
     ClassificationServer cs;
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
-    auto nt = new NotifyTimeOut(60 * 1000000);
+    auto nt = new NotifyTimeOut(10 * 1000000);
     ClassContainer cc(nt, &tc, ptr);
     // Creating a new thread:
     pthread_attr_t attr;
@@ -36,6 +35,7 @@ int main() {
 
 // A function used for the multi-threading.
 void *ClassificationServer::startFunc(void *cc1)  {
+//    cout << "startfunc" << endl;
     ((ClassContainer*)cc1)->getCS()->start(((ClassContainer*)cc1)->getNT(), ((ClassContainer*)cc1)->getNumAddress());
     return nullptr;
 }
@@ -64,6 +64,7 @@ void *ClassificationServer::listenAndAcceptFunc(void *cc1) {
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_t thread1;
+    ClientThread *lastTP;
     pthread_create(&thread1, &attr, ClassificationServer::listenFunc, &cc);
     while (true) {
         if (cc.getNT()->shouldStop()) {
@@ -71,20 +72,25 @@ void *ClassificationServer::listenAndAcceptFunc(void *cc1) {
             break;
         } else {
             if (cc.isListening() && *(cc.getNumAddress()) == 0) {
-                cout << "accepting" << endl;
-                ThreadPair *tp = cc.getTC()->getAvailableThread();
+                if (lastTP != nullptr) {
+                    lastTP->setWithCliet(true);
+                }
+//                cout << "accepting" << endl;
+                ClientThread *tp = cc.getTC()->getAvailableThread();
+                lastTP = tp;
+//                cout << "got" << endl;
                 *(cc.getNumAddress()) = 1;
-                tp->runMainThread(ClassificationServer::startFunc, &cc);
+//                cout << *(cc.getNumAddress()) << endl;
+                tp->runThread(ClassificationServer::startFunc, &cc);
 //                pthread_join(tp->getMainThread(), NULL);
             }
         }
     }
-//    while (true) { // Need to be running, causes a bug that two can't join together.
-//        if (*(cc.getNumAddress()) == 2) {
-//            cc.getTC()->joinAllThreads();
-//            break;
-//        }
-//    }
+    pthread_cancel(lastTP->getMainThread());
+    while (true) { // Need to be running, causes a bug that causes two clients to not be able to join together.
+            cc.getTC()->joinAllClientThreads();
+            break;
+    }
     return nullptr;
 }
 
@@ -96,7 +102,7 @@ void *ClassificationServer::listenFunc(void *cc1) {
     }
     cc->setListening(true);
     if (cc->getNT()->shouldStop()) {
-        *(cc->getNumAddress()) = 2;
+//        *(cc->getNumAddress()) = 2;
         cc->setListening(false);
         std::terminate();
     }
@@ -104,7 +110,7 @@ void *ClassificationServer::listenFunc(void *cc1) {
 }
 
 // A constructor for a ClassificationServer.
-ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(40022), socketInt(socket(AF_INET,
+ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(40023), socketInt(socket(AF_INET,
                                                                                                       SOCK_STREAM, 0)) {
     if (socketInt < 0) {
         cout << "Error creating socket";
@@ -115,7 +121,9 @@ ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(400
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(server_port);
     if (bind(socketInt, (struct sockaddr *) &sin, sizeof(sin)) < 0) { // Binding the socket.
-        cout << "Error binding socket" << endl;
+        while (true) {
+            cout << "Error binding socket" << endl;
+        }
     }
 }
 
@@ -133,7 +141,7 @@ int ClassificationServer::receiveData(int clientSock) {
     return 1;
 }
 
-// A function that listens to a socket.
+// A function that listens to a socket./
 int ClassificationServer::listenToSocket() {
     if (listen(socketInt, 5) < 0) { // Listening to the socket.
         cout << "Error listening to a socket" << endl;
