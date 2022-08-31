@@ -9,7 +9,6 @@
 #include "Classifier/Classifiable.hpp"
 #include <map>
 #include <sstream>
-#include "Server/TypesCollection.h"
 #include <iostream>
 #include <cmath>
 #include "cstring"
@@ -73,6 +72,17 @@ map<string, int> ConfusionMatrixCmd::mapTypes(string classified){
     }
     return realTypes;
 }
+int ConfusionMatrixCmd::get(const string& key, map<string, int> types){
+    int index = 0;
+    std::map<std::string, int>::iterator itr;
+    for (itr = types.begin(); itr != types.end(); ++itr){
+        if (itr->first == key){
+            return index;
+        }
+        index++;
+    }
+    return -1;
+}
 void ConfusionMatrixCmd::execute() {
     string classified = this->files->getClassified(); // copy the classified
     if (classified.empty()) {
@@ -98,7 +108,6 @@ void ConfusionMatrixCmd::execute() {
         }
     }
     classified = this->files->getClassified();
-    TypesCollection tc(realTypes);
     vector<Classifiable> database = ClassifierKnn::setupDatabase(classified); // Creates the database.
     while ((pos = classified.find(delimiter)) != std::string::npos) {
         token = classified.substr(0, classified.find(delimiter));
@@ -112,7 +121,7 @@ void ConfusionMatrixCmd::execute() {
             line = token;
         }
         type = getType(line);
-        int row = tc.get(type);
+        int row = get(type,realTypes);
         Classifiable toClass = ClassifierKnn::stringToClassifiable(&line, true);
         ClassifierKnn classifier(database, toClass, this->classParams->getK()); // Creates its classifier.
         string classType = classifier.classify(*(this->classParams));
@@ -120,14 +129,15 @@ void ConfusionMatrixCmd::execute() {
         if (classType.find("\r") != std::string::npos){
             classType = classType.substr(0, classType.find("\r"));
         }
-        int col = tc.get(classType);
+        int col = get(classType, realTypes);
         mat[row][col] += 1;
     }
-    string matrixPrint = "";
+    string matrixPrint = "\t";
     for (itr = realTypes.begin(); itr != realTypes.end(); itr++) {
         matrixPrint += itr->first;
         matrixPrint += "\t";
     }
+    matrixPrint += "\n";
     itr = realTypes.begin();
     for (int i = 0; i < realTypes.size(); i++) {
         matrixPrint += itr->first;

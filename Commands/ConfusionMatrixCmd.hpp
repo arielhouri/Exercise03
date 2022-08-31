@@ -15,6 +15,7 @@ class ConfusionMatrixCmd : public Command {
     std::vector<std::string> types;
     ClassifierParameters* classParams;
 public:
+    static int get(const std::string& key, std::map<std::string, int> types);
     static std::map<std::string, int> mapTypes(std::string classified);
     void execute() override;
     ConfusionMatrixCmd(ClassificationFiles* files, ClassifierParameters* newClassParams, DefaultIO* dio);
