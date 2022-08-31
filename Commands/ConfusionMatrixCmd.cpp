@@ -35,7 +35,6 @@ string ConfusionMatrixCmd::getType(const string &line) {
     string type = word;
     return type;
 }
-
 map<string, int> ConfusionMatrixCmd::mapTypes(string classified){
     std::string delimiter = "\n";
     size_t pos = 0;
@@ -73,7 +72,6 @@ map<string, int> ConfusionMatrixCmd::mapTypes(string classified){
     }
     return realTypes;
 }
-
 int ConfusionMatrixCmd::get(const string& key, map<string, int> types){
     int index = 0;
     std::map<std::string, int>::iterator itr;
@@ -85,7 +83,6 @@ int ConfusionMatrixCmd::get(const string& key, map<string, int> types){
     }
     return -1;
 }
-
 void ConfusionMatrixCmd::execute() {
     string classified = this->files->getClassified(); // copy the classified
     if (classified.empty()) {
