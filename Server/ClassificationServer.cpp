@@ -87,7 +87,7 @@ void *ClassificationServer::listenAndAcceptFunc(void *cc1) {
         }
     }
     pthread_cancel(lastTP->getMainThread());
-    while (true) { // Need to be running, causes a bug that causes two clients to not be able to join together.
+    while (true) {
             cc.getTC()->joinAllClientThreads();
             break;
     }
