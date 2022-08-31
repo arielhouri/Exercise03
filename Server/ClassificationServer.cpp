@@ -20,57 +20,87 @@ int main() {
     ClassificationServer cs;
     ClassificationServer* ptr = &cs;
     ThreadContainer tc;
-    auto nt = new NotifyTimeOut(10 * 1000000);
+    auto nt = new NotifyTimeOut(60 * 1000000);
     ClassContainer cc(nt, &tc, ptr);
     // Creating a new thread:
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_t thread1;
-    pthread_create(&thread1, &attr, ClassificationServer::listenFunc1, &cc);
-    pthread_join(thread1, NULL);
-
+    pthread_create(&thread1, &attr, ClassificationServer::listenAndAcceptFunc, &cc);
     while (!(nt->shouldStop()) && !tc.anyRunning()) {
         continue;
     }
+    pthread_join(thread1, NULL);
     return 0;
 }
 
 // A function used for the multi-threading.
-void *ClassificationServer::startFunc(void *cs1)  {
-    ((ClassificationServer*)cs1)->start(); // Function isn't being executed.
+void *ClassificationServer::startFunc(void *cc1)  {
+    ((ClassContainer*)cc1)->getCS()->start(((ClassContainer*)cc1)->getNT(), ((ClassContainer*)cc1)->getNumAddress());
     return nullptr;
 }
 
+// The function that runs the program.
+int ClassificationServer::start(NotifyTimeOut* nt1, int* num) {
+    NotifyTimeOut* nt = nt1;
+    struct sockaddr_in client_sin;
+    unsigned int addr_len = sizeof(client_sin);
+    int client_sock = accept(this->socketInt, (struct sockaddr *) &client_sin, &addr_len);
+    if (client_sock < 0) { // Checking for errors in the connection.
+        cout << "Error accepting client" << endl;
+        return -1;
+    }
+    *(num) = 0;
+    nt->listenAccepted();
+    SocketIO sio(client_sock);
+    CLI cli(&sio); // Creating the CLI.
+    cli.start();
+    return 1;
+}
+
 // A function used for the multi-threading.
-void *ClassificationServer::listenFunc1(void *cc1) {
+void *ClassificationServer::listenAndAcceptFunc(void *cc1) {
     ClassContainer cc = *((ClassContainer*)cc1);
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_t thread1;
-    pthread_create(&thread1, &attr, ClassificationServer::listenFunc2, &cc);
+    pthread_create(&thread1, &attr, ClassificationServer::listenFunc, &cc);
     while (true) {
         if (cc.getNT()->shouldStop()) {
             delete cc.getNT();
-            std::abort();
+            break;
+        } else {
+            if (cc.isListening() && *(cc.getNumAddress()) == 0) {
+                cout << "accepting" << endl;
+                ThreadPair *tp = cc.getTC()->getAvailableThread();
+                *(cc.getNumAddress()) = 1;
+                tp->runMainThread(ClassificationServer::startFunc, &cc);
+//                pthread_join(tp->getMainThread(), NULL);
+            }
         }
     }
+//    while (true) { // Need to be running, causes a bug that two can't join together.
+//        if (*(cc.getNumAddress()) == 2) {
+//            cc.getTC()->joinAllThreads();
+//            break;
+//        }
+//    }
+    return nullptr;
 }
 
 // A function used for the multi-threading.
-void *ClassificationServer::listenFunc2(void *cc1) {
-    ClassContainer cc = *((ClassContainer*)cc1);
-    if (cc.getCS()->listenToSocket() < 0) { // Listening to socket.
+void *ClassificationServer::listenFunc(void *cc1) {
+    ClassContainer* cc = (ClassContainer*)cc1;
+    if (cc->getCS()->listenToSocket() < 0) { // Listening to socket.
         return nullptr;
     }
-    if (!(cc.getNT()->shouldStop())) {
-        ThreadPair *tp = cc.getTC()->getAvailableThread();
-        tp->runMainThread(ClassificationServer::startFunc, cc.getCS());
-        cc.getNT()->listenAccepted();
-        ((ClassificationServer*)(cc.getCS()))->start();
-    } else {
-        return nullptr;
+    cc->setListening(true);
+    if (cc->getNT()->shouldStop()) {
+        *(cc->getNumAddress()) = 2;
+        cc->setListening(false);
+        std::terminate();
     }
-    std::terminate();
+    return nullptr;
 }
 
 // A constructor for a ClassificationServer.
@@ -100,21 +130,6 @@ int ClassificationServer::receiveData(int clientSock) {
         cout << "Error reading input." << endl;
         return -1;
     }
-    return 1;
-}
-
-// The function that runs the program.
-int ClassificationServer::start() {
-    struct sockaddr_in client_sin;
-    unsigned int addr_len = sizeof(client_sin);
-    int client_sock = accept(this->socketInt, (struct sockaddr *) &client_sin, &addr_len);
-    if (client_sock < 0) { // Checking for errors in the connection.
-        cout << "Error accepting client" << endl;
-        return -1;
-    }
-    SocketIO sio(client_sock);
-    CLI cli(&sio); // Creating the CLI.
-    cli.start();
     return 1;
 }
 

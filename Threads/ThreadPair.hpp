@@ -9,6 +9,7 @@
 #include <pthread.h>
 
 class ThreadPair {
+    bool withClient;
     bool isMainActive;
     bool isSubActive;
     pthread_attr_t attr;
@@ -21,6 +22,10 @@ public:
     // Runs the sub-thread with a given function.
     int runSubThread(void* (*routine)(void*), void* args);
     bool isRunning();
+    void setWithCliet(bool val);
+    bool getWithClient();
+    void setIsRunning(bool val);
+    pthread_t getMainThread();
 };
 
 

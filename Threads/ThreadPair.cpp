@@ -13,6 +13,7 @@ ThreadPair::ThreadPair() {
     pthread_t mainT, subT;
     this->mainThread = mainT;
     this->subThread = subT;
+    this->withClient = false;
 }
 
 // Runs the main-thread with a given routine and args.
@@ -24,8 +25,8 @@ int ThreadPair::runMainThread(void* (*routine)(void*), void* args) {
     if (pthread_create(&this->mainThread, &this->attr, routine, args) != 0) {
         return -1;
     }
-    pthread_join(this->mainThread, NULL);
-    isMainActive = false; // Marks the thread as running.
+    isMainActive = true; // Marks the thread as running.
+    this->withClient = true;
     return 0;
 }
 
@@ -39,12 +40,27 @@ int ThreadPair::runSubThread(void* (*routine)(void*), void* args) {
     if (pthread_create(&this->subThread, &this->attr, routine, args) != 0) {
         return -1;
     }
-    pthread_join(this->subThread, NULL);
-    isSubActive = false; // Marks the thread as running.
+    isSubActive = true; // Marks the thread as running.
     return 0;
 }
 
 // Returns true if the main thread is running, false otherwise.
 bool ThreadPair::isRunning() {
     return this->isMainActive;
+}
+
+pthread_t ThreadPair::getMainThread() {
+    return this->mainThread;
+}
+
+void ThreadPair::setWithCliet(bool val) {
+    this->withClient = val;
+}
+
+void ThreadPair::setIsRunning(bool val) {
+    this->isMainActive = val;
+}
+
+bool ThreadPair::getWithClient() {
+    return this->withClient;
 }

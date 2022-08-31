@@ -17,6 +17,7 @@ class ThreadContainer {
 public:
     ThreadContainer();
     ThreadPair* getAvailableThread();
+    void joinAllThreads();
     bool anyRunning();
 };
 

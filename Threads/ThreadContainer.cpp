@@ -3,6 +3,8 @@
 //
 
 #include "ThreadContainer.hpp"
+#include <pthread.h>
+#include <iostream>
 
 
 ThreadContainer::ThreadContainer() {
@@ -65,4 +67,14 @@ bool ThreadContainer::anyRunning() {
         }
     }
     return false;
+}
+
+void ThreadContainer::joinAllThreads() {
+    this->updateThreadContainer();
+    for (auto itr = threadsVector.begin(); itr < threadsVector.end(); itr++) {
+        if (itr->first.isRunning() && itr->first.getWithClient()) {
+            std::cout << "running" << std::endl;
+            pthread_join(itr->first.getMainThread(), NULL);
+        }
+    }
 }
