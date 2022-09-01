@@ -15,13 +15,14 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 
 
 ## Running Instruction: - Need to be updated.
-This program is separated into two parts, The Server and the Client. You need to start them separately and simultaneously.
-1. Compile the code using the following command: `g++ -std=c++11 *.cpp`
+This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously.
+1. Compile the code using the following command: `g++ CLassifier/*.cpp Client/*.cpp Commands/*.cpp IOs/*.cpp Server/*.cpp Threads/*.cpp -std=c++11`. You can also compile every folder separately with the following command: `g++ `folder`/*.cpp -std=c++11`.
 2. Run the Server, The server does not get any arguments.
-3. Run the Client. You need to send two arguments, The first is the address of the file that contains the Irises' data that need to be classified and the second is the address of the file that you want to output to be in.
-4. The output of the program will be in the given file (That was given in the arguments of the Client).
-5. After the Client disconnects from the Server, the Server waits for a new Client. In order to start a new Client on the same Server, You need to Run the Client (with the two arguments, like in step no. 3) again.
-- If an error occurs while working with the sockets, an error message will be printed into the console.
+3. Run the client. The client does not get any arguments as well.
+  - You can run the client program as much as you want because the server supports more than one client at a time. the server does have a timeout, after 1 minute (60 seconds) from the last time that a client connected to the server, the server won't accept and serve new clients.
+4. Then, as a client, you can use the server with your console. The list of available functions are shawn in the console and were mentioned above.
+5. After you finished using the server, in order to disconnect, you should choose option number 7 (also shawn in the console). If you pick a number that isn't on the list, 9 for example, the connection will be closed automatically (like if you were to pick the number 7).
+- If an error occurs while working with the sockets, an error message will be printed into the *server's* console or into the *client's* console, depends on where the error occured.
 ## The Algorithm: - Need to be updated.
 The classification process itself and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01#readme). In this section we will explain only how the Server and the Client work and the relationship between them.
 When the Server initializes, it creates its database (from a file named `classified.csv`) and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-classifiableObjectsVector from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the classifiableObjectsVector using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. After the Client disconnects, the Server waits for another Client to connect.
