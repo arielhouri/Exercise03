@@ -28,6 +28,7 @@ public:
     void setListening(bool val);
     void setNum(int newNum);
     int* getNumAddress();
+    ~ClassContainer();
 };
 
 
