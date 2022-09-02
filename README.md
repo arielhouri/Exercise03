@@ -24,7 +24,7 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 7. Exit the program.
 <div id="header" align="center">
   <img src="https://user-images.githubusercontent.com/109608321/188070477-124147f3-f3fa-4380-baf9-4cab8e0e3690.png" width="500"/>
-  <div><b>menu</b></div>
+  <div><b>Classifier KNN</b></div>
 </div>
 
 
