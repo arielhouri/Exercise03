@@ -6,6 +6,7 @@ first assignment. The server is based of "Classifier KNN" algorithm:
 <div id="header" align="center">
   <img src="http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final_a1mrv9.png" width="500"/>
 </div>
+<div>"Classifier KNN"</div>
 
 The server has a Command-Line Interface and can classify data using the KNN algorithm with to given data and 3 
 different metrics. The server supports any king of objects and data that has 10 or less features (which are 
@@ -21,7 +22,8 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
 7. Exit the program.
 <div id="header" align="center">
-  <img src="https://user-images.githubusercontent.com/109608321/188070477-124147f3-f3fa-4380-baf9-4cab8e0e3690.png" width="500" title = "menu"/>
+  <img src="https://user-images.githubusercontent.com/109608321/188070477-124147f3-f3fa-4380-baf9-4cab8e0e3690.png" width="500"/>
+  <div>"menu"</div>
 </div>
 ## Running Instruction:
 This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously (we also support multithreading so few clients can run concurrently).
