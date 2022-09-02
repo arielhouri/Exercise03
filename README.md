@@ -10,6 +10,9 @@ first assignment. The server is based of "Classifier KNN" algorithm:
 The server has a Command-Line Interface and can classify data using the KNN algorithm with to given data and 3 
 different metrics. The server supports any king of objects and data that has 10 or less features (which are 
 arguments from type Double). As mentioned earlier, the server contains a CLI and supports the following operations:
+<div id="header" align="center">
+  <img src="https://user-images.githubusercontent.com/109608321/188070467-ca79c692-66de-48b5-9e98-dde1e6f1919e.png" width="500"/>
+</div>
 1. Uploading data (train and test files) to the server.
 2. Print the current values that are used for the KNN algorithm (the value of K and the metric) and change them.
 3. Classify the data.
@@ -18,7 +21,7 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
 7. Exit the program.
 <div id="header" align="center">
-  <img src="https://user-images.githubusercontent.com/109608321/188070467-ca79c692-66de-48b5-9e98-dde1e6f1919e.png" width="500"/>
+  <img src="https://user-images.githubusercontent.com/109608321/188070477-124147f3-f3fa-4380-baf9-4cab8e0e3690.png" width="500" title = "menu"/>
 </div>
 ## Running Instruction:
 This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously (we also support multithreading so few clients can run concurrently).
