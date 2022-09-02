@@ -31,8 +31,8 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 
 ## Running Instruction:
 This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously (we also support multithreading so few clients can run concurrently).
-1. Compile the code using the following command: `g++ CLassifier/*.cpp Client/*.cpp Commands/*.cpp IOs/*.cpp Server/*.cpp Threads/*.cpp -std=c++11`. You can also compile every folder separately with the following command: `g++ `folder`/*.cpp -std=c++11`.
-2. Run the Server, The server does not get any arguments.
+1. Compile the code using the following command: `g++ -std=c++11 Server/.cpp Server/.hpp Classifier/.hpp Classifier/.cpp Commands/.hpp Commands/.cpp IOs/.hpp IOs/.cpp Threads/.hpp Threads/.cpp -pthread -o ./bin/Server.out`. Then run with `./bin/Server.out`.
+2. For the client compile with `g++ -std=c++11 Client/.cpp Client/.hpp -o ./bin/Client.out`. Then run with `g++ -std=c++11 Client/.cpp Client/.hpp -o ./bin/Client.out`
 3. Within `60 seconds (timeout)`,Run the client. The client does not get any arguments as well.
    - You can run the client program as much as you want because the server supports more than one client at a time. the server does have a timeout, after 1 minute (60 seconds) from the last time that a client connected to the server, the server won't accept and serve new clients.
 4. Then, as a client, you can use the server with your console. The list of available functions are shawn in the console and were mentioned above.
