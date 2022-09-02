@@ -17,8 +17,9 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 5. Save the classified objects' types in a file on the client's computer.
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
 7. Exit the program.
-
-
+<div id="header" align="center">
+  <img src="https://user-images.githubusercontent.com/109608321/188070467-ca79c692-66de-48b5-9e98-dde1e6f1919e.png" width="500"/>
+</div>
 ## Running Instruction:
 This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously (we also support multithreading so few clients can run concurrently).
 1. Compile the code using the following command: `g++ CLassifier/*.cpp Client/*.cpp Commands/*.cpp IOs/*.cpp Server/*.cpp Threads/*.cpp -std=c++11`. You can also compile every folder separately with the following command: `g++ `folder`/*.cpp -std=c++11`.
