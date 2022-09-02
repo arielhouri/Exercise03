@@ -2,10 +2,11 @@
 ### by Ariel Houri & Yonatan Semidubersky
 
 In this assignment we implemented a server and a Client programs and combined them with the Classifier that we created in the 
-first assignment. The server is based of "Classifier KNN" algorithm
+first assignment. The server is based of "Classifier KNN" algorithm:
 <div id="header" align="center">
   <img src="http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final_a1mrv9.png" width="500"/>
 </div>
+
 The server has a Command-Line Interface and can classify data using the KNN algorithm with to given data and 3 
 different metrics. The server supports any king of objects and data that has 10 or less features (which are 
 arguments from type Double). As mentioned earlier, the server contains a CLI and supports the following operations:
@@ -15,7 +16,10 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 4. Print the classified objects' types to the screen.
 5. Save the classified objects' types in a file on the client's computer.
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
-7. Exit the program.
+7. <div id="header" align="center">
+  <img src= "https://www.researchgate.net/figure/Confusion-matrix-of-decision-tree-classification-with-branching-limit-100_fig5_329559026" width="500"/>
+</div>
+8. Exit the program.
 
 
 ## Running Instruction: - Need to be updated.
