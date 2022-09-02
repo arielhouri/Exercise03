@@ -116,9 +116,8 @@ ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(400
     sin.sin_addr.s_addr = INADDR_ANY;
     sin.sin_port = htons(server_port);
     if (bind(socketInt, (struct sockaddr *) &sin, sizeof(sin)) < 0) { // Binding the socket.
-        while (true) {
-            cout << "Error binding socket" << endl;
-        }
+        cout << "Error binding socket" << endl;
+        exit(1);
     }
 }
 

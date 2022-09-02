@@ -5,7 +5,7 @@
 #ifndef IRIS_CPP_COMMAND_HPP
 #define IRIS_CPP_COMMAND_HPP
 #include <string>
-#include "IOs/DefaultIO.hpp"
+#include "../IOs/DefaultIO.hpp"
 
 
 class Command {
