@@ -12,7 +12,7 @@ different metrics. The server supports any king of objects and data that has 10 
 arguments from type Double). As mentioned earlier, the server contains a CLI and supports the following operations:
 <div id="header" align="center">
   <img src="https://user-images.githubusercontent.com/109608321/188070467-ca79c692-66de-48b5-9e98-dde1e6f1919e.png" width="500"/>
-  <div><b>menu</b></div>
+  <div><b>The menu</b></div>
 </div>
 
 ##
@@ -43,14 +43,14 @@ This program is separated into two parts, The Server and the clients. You need t
 <div>
   <div id="header" align="center">
     <img src="https://user-images.githubusercontent.com/109608321/188070470-f435e01d-2fbb-4c3f-bfe4-b3e4106c9bd7.png" width="200"/>
-    <div><b>classified.csv (train)</b></div>
+    <div><b>Classified.csv (train)</b></div>
     <img src="https://user-images.githubusercontent.com/109608321/188070475-d2093734-937e-404d-8f98-225df694f7b2.png" width="200"/>
-    <div><b>unclassified.csv (test)</b></div>
+    <div><b>Unclassified.csv (test)</b></div>
 </div>
 
   
-## The Algorithm: 
-The classification process itself and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01#readme). In this section we will explain only how the Server and the Client work and the relationship between them.
+## The Algorithm: ** Need to be updated!
+The classification process itself and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01#readme). In this section we will explain only how the Server and the Client work and the relation between them.
 When the Server initializes, it creates its database (from a file named `classified.csv` given to the server as a "train") and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-classifiableObjectsVector from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the classifiableObjectsVector using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. After the Client disconnects, the Server waits for another Client to connect.
 
 ## Sending and Receiving data:
