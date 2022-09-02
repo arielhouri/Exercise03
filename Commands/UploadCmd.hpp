@@ -6,7 +6,7 @@
 #define CLASSIFIABLE_CPP_UPLOADCMD_HPP
 
 #include "Command.hpp"
-#include "Server/ClassificationFiles.h"
+#include "../Server/ClassificationFiles.hpp"
 class UploadCmd : public Command {
     ClassificationFiles* files;
 public:

@@ -2,8 +2,8 @@
 // Created by yonat on 29/08/2022.
 //
 
-#ifndef EXERCISE03_CLASSIFICATIONFILES_H
-#define EXERCISE03_CLASSIFICATIONFILES_H
+#ifndef EXERCISE03_CLASSIFICATIONFILES_HPP
+#define EXERCISE03_CLASSIFICATIONFILES_HPP
 
 #include "string"
 // This class saves the classified-data, unclassified-data and the results string.
@@ -23,4 +23,4 @@ public:
 };
 
 
-#endif //EXERCISE03_CLASSIFICATIONFILES_H
+#endif //EXERCISE03_CLASSIFICATIONFILES_HPP

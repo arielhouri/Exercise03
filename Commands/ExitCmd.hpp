@@ -6,8 +6,8 @@
 #define CLASSIFIABLE_CPP_EXITCMD_HPP
 
 #include "Command.hpp"
-#include "Classifier/ClassifierParameters.hpp"
-#include "Server/ClassificationFiles.h"
+#include "../Classifier/ClassifierParameters.hpp"
+#include "../Server/ClassificationFiles.hpp"
 
 class ExitCmd : public Command {
     ClassifierParameters* cp;

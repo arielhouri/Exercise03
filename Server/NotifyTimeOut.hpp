@@ -2,8 +2,8 @@
 // Created by yonat on 30/08/2022.
 //
 
-#ifndef EXERCISE03_NOTIFYTIMEOUT_H
-#define EXERCISE03_NOTIFYTIMEOUT_H
+#ifndef EXERCISE03_NOTIFYTIMEOUT_HPP
+#define EXERCISE03_NOTIFYTIMEOUT_HPP
 
 #include <time.h>
 
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //EXERCISE03_NOTIFYTIMEOUT_H
+#endif //EXERCISE03_NOTIFYTIMEOUT_HPP

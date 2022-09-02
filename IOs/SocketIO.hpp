@@ -2,8 +2,8 @@
 // Created by Yonatan Semidubersky on 25/08/2022.
 //
 
-#ifndef EXERCISE03_SOCKETIO_H
-#define EXERCISE03_SOCKETIO_H
+#ifndef EXERCISE03_SOCKETIO_HPP
+#define EXERCISE03_SOCKETIO_HPP
 #include <fstream>
 #include <string>
 #include "DefaultIO.hpp"
@@ -23,4 +23,4 @@ public:
 };
 
 
-#endif //EXERCISE03_SOCKETIO_H
+#endif //EXERCISE03_SOCKETIO_HPP

@@ -5,9 +5,9 @@
 #ifndef IRIS_CPP_CLI_HPP
 #define IRIS_CPP_CLI_HPP
 
-#include "Commands/Command.hpp"
-#include "Classifier/ClassifierParameters.hpp"
-#include "ClassificationFiles.h"
+#include "../Commands/Command.hpp"
+#include "../Classifier/ClassifierParameters.hpp"
+#include "ClassificationFiles.hpp"
 class CLI {
     Command** commands;
     DefaultIO* sio;

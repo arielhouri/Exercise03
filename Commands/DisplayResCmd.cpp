@@ -2,7 +2,7 @@
 // Created by Ariel Houri on 8/18/2022.
 //
 
-#include "Commands/DisplayResCmd.hpp"
+#include "DisplayResCmd.hpp"
 
 // A constructor for the Display-Results-Command.
 DisplayResCmd::DisplayResCmd(ClassificationFiles* files, DefaultIO* dio){
