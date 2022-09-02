@@ -62,7 +62,7 @@ The first one is instruction and the other is the message.
 * `$print&upload$` - printing the message and upload a file (the client receive path from the user and send the data).
 * `$print&string$` - printing the message and sending string from user.
 * `$download$` - download the message to file (given path from the user).
-* Because of the protocol that we used, the communication of the server and the client are implemented as a "send-recive" protocol (in order to avoid merging messages and weird opeartions of sockets), that means that after each send from one to another you have to send back a message or "$sent" (by client) to separte between messages.
+* Because of the protocol that we used, the communication of the server and the client are implemented as a "send-recive" protocol (in order to avoid merging messages and weird opeartions of sockets), that means that after each send from one to another you have to send back a message or "$sent$" (by client) to separte between messages.
 ### notes:
 - The size of the server's buffer for the transferred data is `8192 bytes`.
 - The size of the client's buffer for the transferred data is `4096 bytes`.
