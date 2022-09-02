@@ -13,14 +13,14 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 <div id="header" align="center">
   <img src="https://user-images.githubusercontent.com/109608321/188070467-ca79c692-66de-48b5-9e98-dde1e6f1919e.png" width="500"/>
   <div><b>menu</b></div>
-1. Uploading data (train and test files) to the server.
+</div>
+1. Uploading data (train and test files) to the server./n
 2. Print the current values that are used for the KNN algorithm (the value of K and the metric) and change them.
 3. Classify the data.
 4. Print the classified objects' types to the screen.
 5. Save the classified objects' types in a file on the client's computer.
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
 7. Exit the program.
-</div>
 <div id="header" align="center">
   <img src="https://user-images.githubusercontent.com/109608321/188070477-124147f3-f3fa-4380-baf9-4cab8e0e3690.png" width="500"/>
   <div><b>Confusion Matrix</b></div>
