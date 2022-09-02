@@ -16,7 +16,7 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 4. Print the classified objects' types to the screen.
 5. Save the classified objects' types in a file on the client's computer.
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
-7. <div id="header" align="center">
+<div id="header" align="center">
   <img src= "https://www.researchgate.net/figure/Confusion-matrix-for-a-Fine-KNN-b-Medium-KNN-c-Coarse-KNN-d-Cosine-KNN-e-Cubic_fig1_304526301" width="500"/>
 </div>
 8. Exit the program.
