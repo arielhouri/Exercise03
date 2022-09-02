@@ -10,6 +10,7 @@
 
 class AlgoSettingsCmd : public Command {
     ClassifierParameters* classParams;
+    bool isNumber(std::string s);
 public:
     AlgoSettingsCmd(ClassifierParameters* newClassParams, DefaultIO* dio);
     void execute() override;

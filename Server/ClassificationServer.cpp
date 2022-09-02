@@ -30,12 +30,12 @@ int main() {
         continue;
     }
     pthread_join(thread1, NULL);
+    cc.~ClassContainer(); // Releasing memory used by the class-container.
     return 0;
 }
 
 // A function used for the multi-threading.
 void *ClassificationServer::startFunc(void *cc1)  {
-//    cout << "startfunc" << endl;
     ((ClassContainer*)cc1)->getCS()->start(((ClassContainer*)cc1)->getNT(), ((ClassContainer*)cc1)->getNumAddress());
     return nullptr;
 }
@@ -75,14 +75,10 @@ void *ClassificationServer::listenAndAcceptFunc(void *cc1) {
                 if (lastTP != nullptr) {
                     lastTP->setWithCliet(true);
                 }
-//                cout << "accepting" << endl;
                 ClientThread *tp = cc.getTC()->getAvailableThread();
                 lastTP = tp;
-//                cout << "got" << endl;
                 *(cc.getNumAddress()) = 1;
-//                cout << *(cc.getNumAddress()) << endl;
                 tp->runThread(ClassificationServer::startFunc, &cc);
-//                pthread_join(tp->getMainThread(), NULL);
             }
         }
     }
@@ -102,7 +98,6 @@ void *ClassificationServer::listenFunc(void *cc1) {
     }
     cc->setListening(true);
     if (cc->getNT()->shouldStop()) {
-//        *(cc->getNumAddress()) = 2;
         cc->setListening(false);
         std::terminate();
     }
@@ -141,7 +136,7 @@ int ClassificationServer::receiveData(int clientSock) {
     return 1;
 }
 
-// A function that listens to a socket./
+// A function that listens to a socket.
 int ClassificationServer::listenToSocket() {
     if (listen(socketInt, 5) < 0) { // Listening to the socket.
         cout << "Error listening to a socket" << endl;
