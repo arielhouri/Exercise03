@@ -2,7 +2,7 @@
 // Created by yonat on 30/08/2022.
 //
 
-#include "NotifyTimeOut.h"
+#include "NotifyTimeOut.hpp"
 #include <time.h>
 #include <iostream>
 

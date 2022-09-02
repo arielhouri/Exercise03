@@ -6,7 +6,7 @@
 #define IRIS_CPP_DISPLAYRESCMD_HPP
 
 #include "Command.hpp"
-#include "Server/ClassificationFiles.h"
+#include "../Server/ClassificationFiles.hpp"
 class DisplayResCmd : public Command{
     ClassificationFiles* files;
 public:

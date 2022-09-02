@@ -4,11 +4,11 @@
 
 #include "ClassificationServer.hpp"
 #include <sstream>
-#include "IOs/SocketIO.h"
+#include "../IOs/SocketIO.hpp"
 #include "CLI.hpp"
-#include "Threads/ThreadContainer.hpp"
-#include "Threads/ClassContainer.hpp"
-#include "NotifyTimeOut.h"
+#include "../Threads/ThreadContainer.hpp"
+#include "../Threads/ClassContainer.hpp"
+#include "NotifyTimeOut.hpp"
 #include <cstring>
 #include <algorithm>
 #include <functional>

@@ -2,8 +2,8 @@
 // Created by ariel on 8/18/2022.
 //
 
-#include "Commands/DownloadResCmd.hpp"
-#include "Server/ClassificationFiles.h"
+#include "DownloadResCmd.hpp"
+#include "../Server/ClassificationFiles.hpp"
 
 // A constructor for DownloadResCmd Command.
 DownloadResCmd::DownloadResCmd(ClassificationFiles* files, DefaultIO* dio){
@@ -15,7 +15,6 @@ DownloadResCmd::DownloadResCmd(ClassificationFiles* files, DefaultIO* dio){
 void DownloadResCmd::execute() {
     if (this->files->getResults() == ""){
         this->dio->write("$print$please upload files and classify.");
-        this->dio->read();
         return;
     }
     dio->write("$print$Please download the csv file.");

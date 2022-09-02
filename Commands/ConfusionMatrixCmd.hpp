@@ -6,9 +6,9 @@
 #define CLASSIFIABLE_CPP_CONFUSIONMATRIXCMD_HPP
 
 #include "Command.hpp"
-#include "Classifier/ClassifierParameters.hpp"
+#include "../Classifier/ClassifierParameters.hpp"
 #include <vector>
-#include "Server/ClassificationFiles.h"
+#include "../Server/ClassificationFiles.hpp"
 #include "map"
 class ConfusionMatrixCmd : public Command {
     ClassificationFiles* files;

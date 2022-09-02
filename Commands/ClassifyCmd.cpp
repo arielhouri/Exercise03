@@ -3,10 +3,10 @@
 //
 #include <algorithm>
 #include <iostream>
-#include "Commands/ClassifyCmd.hpp"
-#include "Classifier/ClassifierParameters.hpp"
-#include "Classifier/ClassifierKnn.hpp"
-#include "Server/ClassificationFiles.h"
+#include "ClassifyCmd.hpp"
+#include "../Classifier/ClassifierParameters.hpp"
+#include "../Classifier/ClassifierKnn.hpp"
+#include "../Server/ClassificationFiles.hpp"
 
 void ClassifyCmd::execute() {
     if (this->files->getClassified() == "" || this->files->getUnClassified() == ""){

@@ -6,9 +6,9 @@
 #define COMMAND_CPP_CLASSCONTAINER_HPP
 
 
-#include "Server/ClassificationServer.hpp"
+#include "../Server/ClassificationServer.hpp"
 #include "ThreadContainer.hpp"
-#include "Server/NotifyTimeOut.h"
+#include "../Server/NotifyTimeOut.hpp"
 
 class ClassContainer {
     int* num;

@@ -4,9 +4,9 @@
 
 #include <fstream>
 #include "ConfusionMatrixCmd.hpp"
-#include "Classifier/ClassifierKnn.hpp"
+#include "../Classifier/ClassifierKnn.hpp"
 #include <algorithm>
-#include "Classifier/Classifiable.hpp"
+#include "../Classifier/Classifiable.hpp"
 #include <map>
 #include <sstream>
 #include <iostream>

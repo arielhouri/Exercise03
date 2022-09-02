@@ -2,17 +2,17 @@
 // Created by Yonatan Semidubersky on 8/16/2022.
 //
 #include <string>
-#include "Commands/Command.hpp"
-#include "Commands/ClassifyCmd.hpp"
-#include "Commands/AlgoSettingsCmd.hpp"
-#include "Commands/DisplayResCmd.hpp"
-#include "Commands/DownloadResCmd.hpp"
-#include "Classifier/ClassifierParameters.hpp"
+#include "../Commands/Command.hpp"
+#include "../Commands/ClassifyCmd.hpp"
+#include "../Commands/AlgoSettingsCmd.hpp"
+#include "../Commands/DisplayResCmd.hpp"
+#include "../Commands/DownloadResCmd.hpp"
+#include "../Classifier/ClassifierParameters.hpp"
 #include "CLI.hpp"
-#include "Commands/UploadCmd.hpp"
-#include "Commands/ConfusionMatrixCmd.hpp"
-#include "Commands/ExitCmd.hpp"
-#include "Server/ClassificationFiles.h"
+#include "../Commands/UploadCmd.hpp"
+#include "../Commands/ConfusionMatrixCmd.hpp"
+#include "../Commands/ExitCmd.hpp"
+#include "../Server/ClassificationFiles.hpp"
 
 // A constructor for the CLI.
 CLI::CLI(DefaultIO* sio){

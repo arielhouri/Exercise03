@@ -6,10 +6,10 @@
 #define IRIS_CPP_CLASSIFYCMD_HPP
 
 #include <vector>
-#include "Commands/Command.hpp"
-#include "Classifier/ClassifierParameters.hpp"
-#include "Classifier/Classifiable.hpp"
-#include "Server/ClassificationFiles.h"
+#include "Command.hpp"
+#include "../Classifier/ClassifierParameters.hpp"
+#include "../Classifier/Classifiable.hpp"
+#include "../Server/ClassificationFiles.hpp"
 
 class ClassifyCmd : public Command {
     ClassifierParameters* cp;

@@ -7,7 +7,7 @@
 
 
 #include "Command.hpp"
-#include "Server/ClassificationFiles.h"
+#include "../Server/ClassificationFiles.hpp"
 class DownloadResCmd : public Command {
     ClassificationFiles* files;
 public:

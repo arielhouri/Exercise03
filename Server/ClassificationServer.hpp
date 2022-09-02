@@ -10,8 +10,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <vector>
-#include "Classifier/Classifiable.hpp"
-#include "NotifyTimeOut.h"
+#include "../Classifier/Classifiable.hpp"
+#include "NotifyTimeOut.hpp"
 
 
 class ClassificationServer {

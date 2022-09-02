@@ -2,7 +2,7 @@
 // Created by yonat on 29/08/2022.
 //
 
-#include "ClassificationFiles.h"
+#include "ClassificationFiles.hpp"
 ClassificationFiles::ClassificationFiles() {
     this->classified = "";
     this->unclassified = "";
