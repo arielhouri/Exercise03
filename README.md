@@ -14,6 +14,7 @@ different metrics. The server supports any king of objects and data that has 10 
 arguments from type Double). As mentioned earlier, the server contains a CLI and supports the following operations:
 <div id="header" align="center">
   <img src="https://user-images.githubusercontent.com/109608321/188070467-ca79c692-66de-48b5-9e98-dde1e6f1919e.png" width="500"/>
+  <div><b>menu</b></div>
 </div>
 1. Uploading data (train and test files) to the server.
 2. Print the current values that are used for the KNN algorithm (the value of K and the metric) and change them.
@@ -24,7 +25,7 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 7. Exit the program.
 <div id="header" align="center">
   <img src="https://user-images.githubusercontent.com/109608321/188070477-124147f3-f3fa-4380-baf9-4cab8e0e3690.png" width="500"/>
-  <div><b>Classifier KNN</b></div>
+  <div><b>Confusion Matrix</b></div>
 </div>
 
 
