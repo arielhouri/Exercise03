@@ -25,7 +25,6 @@ public:
     static void* startFunc(void *cs1);
     static void* listenAndAcceptFunc(void *cs1);
     static void* listenFunc(void *cs1);
-    static void* acceptFunc(void *cs1);
     int listenToSocket();
     ClassificationServer();
     int start(NotifyTimeOut* nt, int* num);
