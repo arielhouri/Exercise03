@@ -28,9 +28,9 @@ This program is separated into two parts, The Server and the clients. You need t
 4. Then, as a client, you can use the server with your console. The list of available functions are shawn in the console and were mentioned above.
 5. After you finished using the server, in order to disconnect, you should choose option number 7 (also shawn in the console). If you pick a number that isn't on the list, 9 for example, the connection will be closed automatically (like if you were to pick the number 7).
 - If an error occurs while working with the sockets, an error message will be printed into the **server's** console or into the **client's** console, depends on where the error occured.
-## The Algorithm: - Need to be updated.
+## The Algorithm: 
 The classification process itself and how it works is written in the [last assignment](https://github.com/arielhouri/Exercise01#readme). In this section we will explain only how the Server and the Client work and the relationship between them.
-When the Server initializes, it creates its database (from a file named `classified.csv`) and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-classifiableObjectsVector from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the classifiableObjectsVector using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. After the Client disconnects, the Server waits for another Client to connect.
+When the Server initializes, it creates its database (from a file named `classified.csv` given to the server as a "train") and then creates a socket and starts listening. Once the Client program starts running and the connection with the Server is established, The Client gets the data about the unclassified-classifiableObjectsVector from the given address and sends the data to the Server and waits. Then, the Server processes the data and classifies the classifiableObjectsVector using the classifier that we made in the last assignment. After the Irises are classified, the server sends the types of the Irises back to the Client. Then, the Client prints the types to the given address. After the Client disconnects, the Server waits for another Client to connect.
 
 ## Sending and Receiving data:
 In order to support reading from files, writing to file and standard input and output, we send two messages from the server each time.
@@ -41,11 +41,11 @@ The first one is instruction and the other is the message.
 * `$print&upload$` - printing the message and upload a file (the client receive path from the user and send the data).
 * `$print&string$` - printing the message and sending string from user.
 * `$download$` - download the message to file (given path from the user).
-### notes: - Need to be updated.
+### notes:
 - The size of the server's buffer for the transferred data is `8192 bytes`.
 - The size of the client's buffer for the transferred data is `4096 bytes`.
 - The port that is being used in the program is `40023`. (If you stop the code and want to re-start you have to wait a 
   few moments so the data of the port and socket will be cleared by the kernel, otherwise, the error: `Error binding socket` will be printed to the server's console).
 - The Communication Protocol that we used is [`TCP`](https://he.wikipedia.org/wiki/Transmission_Control_Protocol).
-- The value that we chose for the KNN-classifier is `k=7` (because it's efficient and also good enough statistical estimate that KNN is based of).
 - The timeout time of the server is `60 seconds`. The timer resets everytime a new client connects to the server.
+- We builded the server using a uniqe threads structure in order to support the features above (timeout for stop listening to new clients but still running the already existing clients).
