@@ -26,11 +26,11 @@ int main() {
     pthread_attr_init(&attr);
     pthread_t thread1;
     pthread_create(&thread1, &attr, ClassificationServer::listenAndAcceptFunc, &cc);
-    while (!(nt->shouldStop()) && !tc.anyRunning()) {
-        continue;
-    }
+//    while (!(nt->shouldStop()) && !tc.anyRunning()) {
+//        continue;
+//    }
     pthread_join(thread1, NULL);
-    cc.~ClassContainer(); // Releasing memory used by the class-container.
+    delete cc.getNT();
     return 0;
 }
 
@@ -68,7 +68,6 @@ void *ClassificationServer::listenAndAcceptFunc(void *cc1) {
     pthread_create(&thread1, &attr, ClassificationServer::listenFunc, &cc);
     while (true) {
         if (cc.getNT()->shouldStop()) {
-            delete cc.getNT();
             break;
         } else {
             if (cc.isListening() && *(cc.getNumAddress()) == 0) {

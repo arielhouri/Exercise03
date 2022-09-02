@@ -13,6 +13,7 @@
 #include "../Commands/ConfusionMatrixCmd.hpp"
 #include "../Commands/ExitCmd.hpp"
 #include "../Server/ClassificationFiles.hpp"
+#include <memory>
 
 // A constructor for the CLI.
 CLI::CLI(DefaultIO* sio){

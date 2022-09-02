@@ -37,7 +37,7 @@ void ClassContainer::setNum(int newNum) {
 }
 
 ClassContainer::~ClassContainer() {
-    delete &num;
+    delete num;
 }
 
 ClassContainer::ClassContainer(NotifyTimeOut* nt, ThreadContainer* tc, ClassificationServer* cs) {
