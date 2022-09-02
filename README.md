@@ -16,17 +16,14 @@ arguments from type Double). As mentioned earlier, the server contains a CLI and
 4. Print the classified objects' types to the screen.
 5. Save the classified objects' types in a file on the client's computer.
 6. Print the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) of the classifier according to  the given data.
-<div id="header" align="center">
-  <img src= "[https://www.researchgate.net/figure/Confusion-matrix-for-a-Fine-KNN-b-Medium-KNN-c-Coarse-KNN-d-Cosine-KNN-e-Cubic_fig1_304526301](https://www.researchgate.net/profile/Anamika-Yadav-5/publication/304526301/figure/fig1/AS:398138637602817@1471935056873/Confusion-matrix-for-a-Fine-KNN-b-Medium-KNN-c-Coarse-KNN-d-Cosine-KNN-e-Cubic.png)" width="500"/>
-</div>
-8. Exit the program.
+7. Exit the program.
 
 
-## Running Instruction: - Need to be updated.
-This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously.
+## Running Instruction:
+This program is separated into two parts, The Server and the clients. You need to run them separately and simultaneously (we also support multithreading so few clients can run concurrently).
 1. Compile the code using the following command: `g++ CLassifier/*.cpp Client/*.cpp Commands/*.cpp IOs/*.cpp Server/*.cpp Threads/*.cpp -std=c++11`. You can also compile every folder separately with the following command: `g++ `folder`/*.cpp -std=c++11`.
 2. Run the Server, The server does not get any arguments.
-3. Run the client. The client does not get any arguments as well.
+3. Within `60 seconds (timeout)`,Run the client. The client does not get any arguments as well.
   - You can run the client program as much as you want because the server supports more than one client at a time. the server does have a timeout, after 1 minute (60 seconds) from the last time that a client connected to the server, the server won't accept and serve new clients.
 4. Then, as a client, you can use the server with your console. The list of available functions are shawn in the console and were mentioned above.
 5. After you finished using the server, in order to disconnect, you should choose option number 7 (also shawn in the console). If you pick a number that isn't on the list, 9 for example, the connection will be closed automatically (like if you were to pick the number 7).
