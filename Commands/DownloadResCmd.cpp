@@ -21,6 +21,6 @@ void DownloadResCmd::execute() {
     dio->read();
     dio->write("$download$" + this->files->getResults());
     dio->read();
-    dio->write("$print$Done.");
+    dio->write("$print&enter$Done.");
     dio->read();
 }

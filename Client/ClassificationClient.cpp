@@ -116,6 +116,19 @@ using namespace std;
                 cout << message << endl;
                 write(sock, "$sent$");
             }
+            if (messageCommand == "$print&enter$"){
+                cout << message << endl; // prints the message
+                toServer = "";
+                // waiting to read "enter"
+                while(toServer != "\n"){
+                    cin.ignore();
+                    getline(cin, toServer);
+                    if (toServer.empty()){
+                        toServer = "\n";
+                    }
+                }
+                write(sock, "$sent$");
+            }
             // choosing an option.
             if (messageCommand == "$print&num$"){
                 cout << message << endl;
