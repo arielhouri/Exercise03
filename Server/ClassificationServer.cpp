@@ -101,7 +101,7 @@ void *ClassificationServer::listenFunc(void *cc1) {
 }
 
 // A constructor for a ClassificationServer.
-ClassificationServer::ClassificationServer() : sizeBuffer(8192), server_port(40023), socketInt(socket(AF_INET,
+ClassificationServer::ClassificationServer() : sizeBuffer(16384), server_port(40023), socketInt(socket(AF_INET,
                                                                                                       SOCK_STREAM, 0)) {
     if (socketInt < 0) {
         cout << "Error creating socket";

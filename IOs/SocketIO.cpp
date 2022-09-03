@@ -12,7 +12,7 @@ SocketIO::SocketIO(int sock){
 }
 
 std::string SocketIO:: read() {
-    char buffer[8192] = {0};
+    char buffer[16384] = {0};
     int expected_data_len = sizeof(buffer);
     int read_bytes = recv(this->sock, buffer, expected_data_len, 0); // Receiving data from the Server.
     if (read_bytes == 0) {

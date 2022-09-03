@@ -24,8 +24,8 @@ using namespace std;
     }
     string ClassificationClient::read(int sock) {
         // if there is problem with communication - printing the error and exit.
-        char buffer[4096];
-        std::fill(buffer, buffer + 4096, 0);
+        char buffer[16384];
+        std::fill(buffer, buffer + 16384, 0);
         int expected_data_len = sizeof(buffer);
         int read_bytes = recv(sock, buffer, expected_data_len, 0); // Receiving data from the Server.
         if (read_bytes == 0) {
