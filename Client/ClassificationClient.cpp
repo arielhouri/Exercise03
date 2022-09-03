@@ -97,14 +97,13 @@ using namespace std;
         string message; // message after command
         int num; // choosing an option
         string toServer; // send to server
-        string pathReadFrom; // for upload a file
-        string pathToWrite; // for download a file
+        string pathReadFrom, pathToWrite; // for uploading and downloading a file
         bool shouldStop = false;
         while (!shouldStop){
             message = read(sock);
             // in order to support working with files,
-            // input and output - The server send 2 messages each time,
-            // the first is instruction.
+            // input and output - The server sends 2 messages each time,
+            // the first are instructions.
             messageCommand = commandSplit(message);
             message = messageSplit(message);
             // classify the command:
@@ -146,6 +145,16 @@ using namespace std;
                 cout << message << endl;
                 toServer = "";
                 cin.ignore();
+                getline(cin, toServer);
+                if (toServer.empty()){
+                    toServer = "$empty$";
+                }
+                write(sock, toServer);
+            }
+            // changing the parameter (command 2)
+            if (messageCommand == "$print&string2$"){
+                cout << message << endl;
+                toServer = "";
                 getline(cin, toServer);
                 if (toServer.empty()){
                     toServer = "$empty$";

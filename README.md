@@ -79,7 +79,8 @@ The first one is instruction and the other is the message.
 * `$print$` - print the message.
 * `$print&Num$` - printing the message and receiving a number from the client.
 * `$print&upload$` - printing the message and upload a file (the client receive path from the user and send the data).
-* `$print&string$` - printing the message and sending string from user.
+* `$print&string$` - printing the message and sending a string from client to the server.
+* `$print&string2$`- like the function above, doesn't remove whitespaces from the start of the string.
 * `$download$` - download the message to file (given path from the user).
 *  `$print&enter$` - printing the message and then waiting for the client to press Enter.
 * Because of the protocol that we used, the communication of the server and the client are implemented as a 

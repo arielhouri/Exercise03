@@ -17,5 +17,5 @@ bool NotifyTimeOut::shouldStop(){
 }
 
 void NotifyTimeOut::listenAccepted() {
-    this->begin_time = clock(); // reset the timer
+    this->begin_time = clock(); // resets the timer
 }

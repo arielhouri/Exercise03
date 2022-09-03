@@ -26,9 +26,6 @@ int main() {
     pthread_attr_init(&attr);
     pthread_t thread1;
     pthread_create(&thread1, &attr, ClassificationServer::listenAndAcceptFunc, &cc);
-//    while (!(nt->shouldStop()) && !tc.anyRunning()) {
-//        continue;
-//    }
     pthread_join(thread1, NULL);
     delete cc.getNT();
     return 0;
