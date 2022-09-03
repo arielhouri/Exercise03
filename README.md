@@ -90,6 +90,7 @@ The first one is instruction and the other is the message.
 ### notes:
 - The size of the server's buffer for the transferred data is `8192 bytes`.
 - The size of the client's buffer for the transferred data is `4096 bytes`.
+- The classification is generic, get the types in runtime. The limitation is only size of the buffer and up to 10 features.
 - The port that is being used in the program is `40023`. (If you stop the code and want to re-start you have to wait a 
   few moments so the data of the port and socket will be cleared by the kernel, otherwise, the error: `Error binding 
   socket` will be printed to the server's console).
