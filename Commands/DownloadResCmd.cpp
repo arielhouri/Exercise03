@@ -15,6 +15,7 @@ DownloadResCmd::DownloadResCmd(ClassificationFiles* files, DefaultIO* dio){
 void DownloadResCmd::execute() {
     if (this->files->getResults() == ""){
         this->dio->write("$print$please upload files and classify.");
+        this->dio->read();
         return;
     }
     dio->write("$print$Please download the csv file.");
