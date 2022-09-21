@@ -99,3 +99,4 @@ The first one is instruction and the other is the message.
 - The timeout time of the server is `60 seconds`. The timer resets everytime a new client connects to the server.
 - We built the server using a unique threads structure in order to support the features above (e.g., a timeout to stop 
   accepting new clients while still serving the already existing clients).
+  -We updated the destructor in order to fix memory leak.(Approved)
